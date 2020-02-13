@@ -1,0 +1,71 @@
+﻿@model Call.Cloud.Mvc.Models.DashBoard.Elements
+@{
+    ViewBag.Title = "Mantenimiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    <head>
+
+    </head>
+}
+
+<div class="panel-body">
+    <br /><br />
+    <div class="col-sm-12"> 
+        <div class="col-sm-4">
+            <div style="width:400px; height:250px; text-align:center">                            
+                <button type="button" class="btn-lg btn-default disabled" style="width:100px; height:75px;">
+                    <img src="~/Content/images/adminis.gif" style="width:50px; height:50px;" />
+                </button>
+                <h5 style="font-family:'Times New Roman'">ENTERPRISE</h5>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div style="width:400px; height:250px; text-align:center">
+                <button type="button" class="btn-lg btn-default active"  onclick="window.location = '@Url.Action("Index","Office")';" style="width:100px; height:75px;">
+                    <img src="~/Content/images/ejecutivos-01.gif" style="width:80px; height:50px;" />
+                </button>
+                <h5 style="font-family:'Times New Roman'">OFFICE</h5>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div style="width:400px; height:250px; text-align:center">
+                <button type="button" class="btn-lg btn-default active" style="width:100px; height:75px;"> @*onclick="window.location = '@Url.Action("Index","SubOffice")';" *@
+                    <img src="~/Content/images/ka61ia.jpg" style="width:50px; height:50px;" />
+                </button>
+                <h5 style="font-family:'Times New Roman'">SUBOFFICE</h5>
+            </div>
+        </div>
+    </div>           
+
+    <div class="col-sm-12">
+        <br />
+        <div class="col-sm-4">
+            <div style="width:400px; height:250px; text-align:center" >
+                @*onclick="window.location = '@Url.Action("Index","Business")';"*@
+                <button type="button" class="btn-lg btn-default active"   style="width:100px; height:75px;">
+                    <img src="~/Content/images/servicios-internet-2-296x300.jpg" style="width:60px; height:50px;" />     
+                </button>
+                <h5 style="font-family:'Times New Roman'">BUSINESS</h5>              
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div style="width:400px; height:250px; text-align:center">
+                <button type="button" class="btn-lg btn-default active" onclick="window.location = '@Url.Action("Index","Speech")';" style="width:100px; height:75px;">
+                    <img src="~/Content/images/rapport-5101.gif" style="width:60px; height:50px;"/>
+                </button>
+                <h5 style="font-family:'Times New Roman'">SPEECH</h5>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div style="width:400px; height:250px; text-align:center">
+                <button type="button" class="btn-lg btn-default active"  onclick="window.location = '@Url.Action("Index","Agent")';" style="width:100px; height:75px;">
+                    <img src="~/Content/images/b38080d5c31b648565f90bf9e789718f_90x90.gif" style="width:50px; height:50px;" />
+                </button>
+                <h5 style="font-family:'Times New Roman'">STAFF</h5>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,126 @@
+﻿@using System.Threading.Tasks;
+@model Call.Cloud.Mvc.Models.RuleVM.ListaRuleVm
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Theme.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Mantenimiento</a></li>
+    <li class="breadcrumb-item">Registrar</li>
+    <li class="breadcrumb-item active">Registrar Regla</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<head>
+    <script type="text/javascript">
+        var rule = rule || {};
+        rule.Urls = rule.Urls || {};
+        rule.Urls.baseUrl = '@Url.Action("~")';
+        rule.Urls.deleteRule = '@Url.Action("Eliminar","Rule")';
+    </script>
+</head>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Regla
+        <small>
+            Regla
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Regla
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="form-row">
+                        <div class="col-md-3 mb-1">
+                            @Html.Label("PkSection", "Section", htmlAttributes: new { @class = "form-label" })
+
+                            @Html.DropDownListFor(model => model.Filtro.PkSection, Model.Secciones, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            @Html.Label("Name", "Name", htmlAttributes: new { @class = "form-label" })
+
+                            @Html.EditorFor(model => model.Filtro.NameRule, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name", @maxlength = "300" } })
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button id="btnBuscar" class="btn btn-primary form-control" type="button" onclick="">Buscar</button>
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button id="btnLimpiar" class="btn btn-default form-control" type="button" onclick="">Limpiar</button>
+                        </div>
+
+                        <div class="col-md-2 ml-auto">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="button" data-toggle="modal" data-target="#ModalRule" data-id="-1">Nuevo</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-content border-faded align-items-center">
+                    <div class="table-responsive-lg" style="overflow-x:auto;">
+                        @Html.Partial("Grid")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="ModalRule" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Rules</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="divModalRule">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/usados/rules.js"></script>
+    <script>
+        (function () {
+            iniciar();
+        })();
+        function eliminar(id) {
+            var urlEliminarReglas = rule.Urls.deleteRule;
+            if (confirm("¿Está seguro de realizar esta acción?")) {
+                if (id > 0)
+                    window.location.href = urlEliminarReglas + '/' + id;
+            }
+        }
+    </script>
+}

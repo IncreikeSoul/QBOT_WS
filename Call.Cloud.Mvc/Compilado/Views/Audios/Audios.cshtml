@@ -1,0 +1,219 @@
+﻿@model Call.Cloud.Mvc.Models.AudioVM.ListasAudios
+@{
+    ViewBag.Title = "Audios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    string respuesta = (string)Session["mensaje"];
+
+    respuesta = ViewBag.Mensaje;
+}
+
+<head>
+    @{
+        <script type="text/javascript">
+            
+            var agent = agent || {};
+            agent.Urls = agent.Urls || {};
+            agent.Urls.baseUrl = '@Url.Action("~")';
+            agent.Urls.editarAgentUrl = '@Url.Action("Detalle_Audio", "Audios")';
+            agent.Urls.searchAgentUrl = '@Url.Action("Audios_Listar", "Audios")';
+            agent.Urls.findAgentUrl = '@Url.Action("Buscar", "Audios")';
+            agent.Urls.findByBusinesstUrl = '@Url.Action("GetElements", "Audios")';
+            agent.Urls.findByBosstUrl = '@Url.Action("GetElementsByBoss", "Audios")';
+        </script>
+    }
+
+</head>
+@Html.Hidden("hdnPathAudio")
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+
+@Html.AntiForgeryToken()
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">Audios</h1>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <form id="formAusenciaFiltro" role="form" method="post">
+                    <div class="col-sm-12">
+                        <div class="form-group form-material">
+                            @Html.Label("PkBusiness", "Business", htmlAttributes: new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.Filtro.PK_Business, Model.Business, new { @class = "form-control" })
+                            </div>
+
+                            @Html.Label("PkBoss", "Boss", htmlAttributes: new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.Filtro.Fk_Boss, Model.Boss, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group form-material">
+                            @Html.Label("PkAgent", "Agent", htmlAttributes: new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.Filtro.PkAgent, Model.Agent, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="col-sm-12">
+                    <div class="text-center">
+                        <button id="btnLimpiar" class="btn btn-default" type="button">Clean</button>
+                        <button id="btnBuscar" class="btn btn-primary" type="button">Find</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div id="divGrid" class=" col-sm-12">
+                @Html.Partial("Grid")
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="ModalAgent" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" >×</span>
+                </button>
+                <h4 class="modal-title">Audios</h4>
+            </div>
+            <div class="modal-body" id="divModalAudio">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/usados/Audios.js"></script>
+<script type="text/javascript">
+            (function () {
+                iniciar();
+            })();
+
+</script>
+
+<!--combo por negocio-->
+<script type="text/javascript">
+            // Inicialización
+            $(document).ready(function () {
+
+                //alert("mensaje");
+
+                $("#Filtro_PK_Business").change(function () {
+                    cambiaElementosByBusi($("#Filtro_PK_Business").val());
+                });
+                cambiaElementosByBusi($("#Filtro_PK_Business").val());
+            });
+            // Carga el desplegable de elementos en función
+            // de la categoría que le llega como parámetro.
+            function cambiaElementosByBusi(pk) {
+                var dd = document.getElementById("Filtro_Fk_Boss");
+                
+                dd.options.length = 0;
+                dd.options[0] = new Option("TODOS");
+                dd.selectedIndex = 0;
+                // Control de errores
+                $("#Filtro_Fk_Boss").ajaxError(function (event, request, settings) {
+                    dd.options[0] = new Option("Business incorrecta");
+                });
+
+                var urlsupervisor = agent.Urls.findByBusinesstUrl;
+                // Obtenemos los datos...
+
+                $.getJSON(
+                    urlsupervisor, // URL a la acción
+                    {
+                        pkbusiness: pk
+                    },
+
+                    // Objeto JSON con parámetros
+                    function (data) {                    // Función de retorno exitoso
+                        $.each(data, function (i, item) {
+                            
+                            dd.options[0] = new Option("TODOS");
+                            for (var i = 0; i < data.length; i++) {
+                                if (data.length >= 0) {
+                                    dd.options[0] = new Option("TODOS");
+                                    dd.selectedIndex = 0;
+                                    dd.options[i + 1] = new Option(data[i].FirstName, data[i].PkAgent);
+                                    
+                                }
+                            }
+                        });
+                        dd.disabled = false;
+                        
+                    });
+            }
+</script>
+
+<!--combo por suppervisor-->
+<script type="text/javascript">
+            // Inicialización
+            $(document).ready(function () {
+                $("#Filtro_Fk_Boss").change(function () {
+                    
+                    cambiaElementosBySup($("#Filtro_Fk_Boss").val());
+                    
+                });
+                cambiaElementosBySup($("#Filtro_Fk_Boss").val());
+                
+            });
+
+            // Carga el desplegable de elementos en función
+            // de la categoría que le llega como parámetro.
+
+            function cambiaElementosBySup(pkb) {
+                var di = document.getElementById("Filtro_PkAgent");
+                di.options.length = 0;
+                di.options[0] = new Option("TODOS");
+                di.selectedIndex = 0;
+                
+                // Control de errores
+
+                $("#Filtro_PkAgent").ajaxError(function (event, request, settings) {
+                    di.options[0] = new Option("Boss incorrecta");
+                    
+                });
+
+                var urlagent = agent.Urls.findByBosstUrl;
+                // Obtenemos los datos...
+
+                $.getJSON(
+                    urlagent, // URL a la acción
+                    {
+                        pkboss: pkb
+                    },
+                    // Objeto JSON con parámetros
+                    function (data) {                    // Función de retorno exitoso
+                        $.each(data, function (i, item) {
+                            di.options[0] = new Option("TODOS");
+                            for (var i = 0; i < data.length; i++) {
+                                if (data.length >= 0) {
+                                    di.options[0] = new Option("TODOS");
+                                    di.selectedIndex = 0;
+                                    di.options[i + 1] = new Option(data[i].FirstName, data[i].PkAgent);
+                                    
+                                }
+                            }
+                        });
+                        di.disabled = false;
+                        
+                    });
+            }
+</script>

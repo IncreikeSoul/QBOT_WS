@@ -1,0 +1,249 @@
+﻿@model Call.Cloud.Mvc.Models.SectionVM.ListaWordRuleSectionVm
+@{
+    ViewBag.Title = "Reglas";
+    string name = string.Empty;
+
+    string name2 = (string)Session["SectionName"];
+
+    int pksection=0;
+    pksection = (int)Session["pkSection"];
+
+    int pkspeech = 0;
+    pkspeech = (int)Session["pkSpeech"];
+
+    string namespeech = (string)Session["SpeechName"];
+    
+    bool status = false;
+    status = (bool)Session["Estado"];
+
+
+}
+<head>
+    <script type="text/javascript" src="~/Scripts/usados/nuevaWordRule.js"></script>
+    <script type="text/javascript" src="~/Scripts/usados/nuevaRulecrear.js"></script>
+
+    @{
+        <script type="text/javascript">
+            debugger;
+            var rule = rule || {};
+            rule.Urls = rule.Urls || {};
+            rule.Urls.baseUrl = '@Url.Content("~")';
+            rule.Urls.editarReglasUrl = '@Url.Action("EditarRuleBySection", "Rule")';
+            rule.Urls.deleteReglasUrl = '@Url.Action("EliminarRule", "Rule")';
+            rule.Urls.editarWordReglasUrl = '@Url.Action("EditarByRegla", "WordRule")';
+        </script>
+        
+    }
+
+</head>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+            <div class="text-center">
+                <h4>Section : @name2 </h4>
+            </div>
+
+            <!--Botón "Nuevo" de Regla-->
+            <div class="text-right">
+                <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="modal"
+                        data-original-title="Nuevo" title="Nuevo" data-target="#ModalRule" data-id="-1"  data-section="@pksection" 
+                                   data-speech="@pkspeech" data-namespeech="@namespeech" data-namesection="@name2">
+                    <i class="icon md-sign-in" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <!--Form que contiene todo-->
+            <form class="col-sm-12" id="formAusenciaFiltro" role="form">
+
+                @for (int i = 0; i < Model.Reglas.Count(); i++)
+                {
+                    var item = Model.Reglas.ToList()[i];
+                    int variablePk = item.PkRule;
+                    name = Convert.ToString(variablePk);
+                    int pk = Int32.Parse(name);
+                    Session["SessionPkRule"] = pk;
+
+                <div class="form-group">
+                    <div class="col-sm-12 inline-block" style="padding-bottom: 10px;">
+                        <div class="text-left col-sm-12">
+                            <h5>Rule : </h5>
+                            <br />
+
+                            <div class="text-right col-sm-6">
+                                @Html.TextBox("Word", Model.Reglas.ToList()[i].NameRule, htmlAttributes: new { @class = "form-control round text-lefth", @placeholder = "Word", @disabled = "disabled" })
+                            </div>
+                            <div class="text-right col-sm-2">
+                                @Html.Label("", "Weight", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="text-right col-sm-4">
+                                @Html.TextBox("Weight", Model.Reglas.ToList()[i].wieght, htmlAttributes: new { @class = "form-control round text-right", @placeholder = "Weight", @disabled = "disabled" })
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="text-right col-sm-12">
+                                <a class="btn btn-sm btn-icon btn-primary btn-round" title="Editar" data-toggle="modal" data-original-title="Editar" data-target="#ModalRule"
+                                   data-id="@Model.Reglas.ToList()[i].PkRule" data-section="@Model.Reglas.ToList()[i].PkSection" 
+                                   data-speech="@Model.Reglas.ToList()[i].PkSpeech" data-namespeech="@Model.Reglas.ToList()[i].SpeechName" 
+                                   data-namesection="@Model.Reglas.ToList()[i].SectionName">
+                                    <i class="icon md-edit" aria-hidden="true"></i>
+                                </a>
+                                <a class="btn btn-sm btn-icon btn-primary btn-round " title="Eliminar" 
+                                   onclick="eliminar('@Model.Reglas.ToList()[i].PkRule','@Model.Reglas.ToList()[i].PkSection', '@Model.Reglas.ToList()[i].PkSpeech','@Model.Reglas.ToList()[i].SpeechName','@Model.Reglas.ToList()[i].SectionName')" 
+                                   data-toggle="tooltip" data-original-title="Eliminar">
+                                    <i class="icon md-delete" aria-hidden="true"></i>
+                                </a>
+                            </div> <br />
+                            <!--Botón "Nuevo" de Palabra Regla-->
+                            <h5>Word Rule:</h5>
+                            <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="modal" title="Nuevo"
+                                    data-original-title="Nuevo" data-target="#ModalWordRule" data-id="-1" data-rules="@Model.Reglas.ToList()[i].PkRule"
+                                    data-speech="@Model.Reglas.ToList()[i].PkSpeech" data-section="@Model.Reglas.ToList()[i].PkSection"
+                                    data-namespeech="@Model.Reglas.ToList()[i].SpeechName" data-namesection="@Model.Reglas.ToList()[i].SectionName">
+                                <i class="icon md-sign-in" aria-hidden="true"></i>
+                            </button>
+                            <br /><br />
+                            <!--Carga la Grilla con las palabras reglas-->
+                            <div id="divGrid" data-id="-1" class="col-sm-12">
+                                @Html.Partial("GridWordRule")
+                            </div>
+                            <!--////////////////////////////////////// -->
+                        </div>
+
+                    </div>
+                </div>
+                }
+            </form> <!--Término del Form-->
+
+<!--Empiezan las ventanas flotantes de Regla y Palabra Regla-->
+
+<!-- Modal Regla-->
+<div class="modal fade modal-3d-slit" id="ModalRule" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Rules</h4>
+            </div>
+            <div class="modal-body" id="divModalRule">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Palabra Regla-->
+<div class="modal fade modal-3d-slit" id="ModalWordRule" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Word Rule</h4>
+            </div>
+            <div class="modal-body" id="divModalWordRule">
+            </div>
+        </div>
+    </div>
+</div>
+<!--Término de Modal Palabra Regla-->
+
+<script>
+    (function () {
+        iniciarRule();
+    })();
+
+    (function () {
+        iniciarWordRule();
+    })();
+
+</script>
+
+<script type="text/javascript">
+    function listar(id, name, speech, namespeech) {
+        debugger;
+        var urlListarReglas = section.Urls.listarReglasWordUrl;
+
+        var nombrespeech = "@ViewBag.nombrespeech";
+        $("#" + nombrespeech).click();
+        debugger;
+
+        var nombre = "@ViewBag.nombreSection";
+        $("#" + nombre).click();
+        debugger;
+
+        if (id > 0)
+            $.ajax({
+                url: urlListarReglas,
+                data: {
+                    id: id,
+                    name: name,
+                    speech: speech,
+                    namespeech: namespeech
+                },
+                Type: 'GET'
+            }).done(function (data, textStatus, jqXhr) {
+                debugger;
+                $("#divGrid").html(data);
+
+            }).fail(function (data, textStatus, jqXhr) {
+                debugger;
+                console.log(data);
+            });
+        return false;
+
+    };
+</script>
+
+<script>
+    function eliminar(id, sec, speech, namespeech, namesection) {
+        debugger;
+
+        var urlEliminarRule = rule.Urls.deleteReglasUrl;
+
+        var nombre = "@ViewBag.nombreSection";
+        $("#" + nombre).click();
+        debugger;
+
+        var name = "@ViewBag.nombrespeech";
+        $("#" + name).click();
+        debugger;
+
+        if (confirm("¿Está seguro de realizar esta acción?")) {
+            if (id > 0)
+
+                $.ajax({
+                    url: urlEliminarRule,
+                    data: {
+                        id: id,
+                        sec: sec,
+                        speech: speech,
+                        namespeech: namespeech,
+                        namesection: namesection
+                    },
+                    type: 'GET'
+                }).done(function (data, textStatus, jqXhr) {
+                    debugger;
+                    listar("@pksection", "@name2", "@pkspeech", "@namespeech");
+                }).fail(function (data, textStatus, jqXhr) {
+                    debugger;
+                    console.log(data);
+                });
+
+            return false;
+
+        }
+    }
+</script>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="637b88dc-27ed-4313-a3ad-6ade22d235ac" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2169/BusinessService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BusinessService.xsd" MetadataType="Schema" ID="6da7ec54-b82d-4b8c-81cb-e56a09c9c6d3" SourceId="1" SourceUrl="http://localhost:2169/BusinessService.svc?xsd=xsd2" />
+    <MetadataFile FileName="BusinessService1.xsd" MetadataType="Schema" ID="f7808f2d-bb13-4ac4-b107-e3c7678e1959" SourceId="1" SourceUrl="http://localhost:2169/BusinessService.svc?xsd=xsd1" />
+    <MetadataFile FileName="BusinessService2.xsd" MetadataType="Schema" ID="596198e6-0e17-4e51-b0d3-08e1583b49b7" SourceId="1" SourceUrl="http://localhost:2169/BusinessService.svc?xsd=xsd0" />
+    <MetadataFile FileName="BusinessService.wsdl" MetadataType="Wsdl" ID="a264aab4-72cf-4362-9d23-59fe3456163b" SourceId="1" SourceUrl="http://localhost:2169/BusinessService.svc?wsdl" />
+    <MetadataFile FileName="BusinessService.disco" MetadataType="Disco" ID="8fcb549c-f2ad-4402-ba5b-f428e0a55273" SourceId="1" SourceUrl="http://localhost:2169/BusinessService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

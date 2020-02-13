@@ -1,0 +1,220 @@
+﻿@using Call.Cloud.Modelo
+
+@{
+    ViewBag.Title = "RegistrarFTP";
+    Layout = "~/Views/Shared/_Theme.cshtml";
+
+    List<Enterprise> lstEnterpriseBE = ViewData["lstEnterpriseBE"] as List<Enterprise>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Enterprise</a></li>
+    <li class="breadcrumb-item">Registrar</li>
+    <li class="breadcrumb-item active">Registrar FTP</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Registrar FTP
+        <small>
+            Registrar FTP
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Buscar Clientes
+                </h2>
+                <div class="panel-toolbar">
+                    <div class="custom-control d-flex custom-switch">
+                        <input id="chk_status" type="checkbox" class="custom-control-input" checked="checked">
+                        <label class="custom-control-label fw-500" for="eventlog-switch">Estado</label>
+                    </div>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="form-row">
+                        <div class="col-md-2 mb-1">
+                            @Html.LabelFor(m => lstEnterpriseBE, "Enterprise",
+                            new { @class = "form-label" })
+
+                            @Html.DropDownListFor(m => lstEnterpriseBE,
+                            new SelectList(lstEnterpriseBE, "PkenterPrise", "enterPrise"),
+                            new { @class = "form-control", @id = "slt_enterprise_buscar" })
+                        </div>
+                        <div class="col-md-1 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="button" id="btn_buscar"><i class="fal fa-search"></i></button>
+                        </div>
+                        <div class="col-md-1 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-default form-control" type="button" id="btn_limpiar"><i class="fal fa-eraser"></i></button>
+                        </div>
+
+                        <div class="col-md-1 ml-auto">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="button" onclick="limpiarPopup();" data-toggle="modal" data-target="#pop-up-ftp"><i class="fal fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-content border-faded align-items-center">
+                    <div class="table-responsive-lg" style="overflow-x:auto;">
+                        <table class="table table-bordered nowrap dt-tabla-sin-filtro m-0" id="dt-tabla-ftp">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Server</th>
+                                    <th>Port</th>
+                                    <th>Remote Folder</th>
+                                    <th>User</th>
+                                    <th>Password</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pop-up-ftp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar FTP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txt_codigo" value="0" />
+                <div class="form-group">
+                    @Html.LabelFor(m => lstEnterpriseBE, "Enterprise",
+                    new { @class = "form-label" })
+
+                    @Html.DropDownListFor(m => lstEnterpriseBE,
+                    new SelectList(lstEnterpriseBE, "PkenterPrise", "enterPrise"),
+                    new { @class = "form-control", @id = "slt_enterprise" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("txt_server", "Server",
+                    new { @class = "format-label" })
+
+                    @Html.TextBox("txt_server", "",
+                    new { @class = "form-control", @placeholder = "192.168.1.100" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("txt_port", "Port",
+                    new { @class = "format-label" })
+
+                    @Html.TextBox("txt_port", "",
+                    new { @class = "form-control", @placeholder = "21" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("txt_remote_folder", "Remote Folder",
+                    new { @class = "format-label" })
+
+                    @Html.TextBox("txt_remote_folder", "",
+                    new { @class = "form-control", @placeholder = "Folder" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("txt_user", "User",
+                    new { @class = "format-label" })
+
+                    @Html.TextBox("txt_user", "",
+                    new { @class = "form-control", @placeholder = "ftpUser" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("txt_password", "Password",
+                    new { @class = "format-label" })
+
+                    @Html.TextBox("txt_password", "",
+                    new { @class = "form-control", @placeholder = "123456" })
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-warning">Validar <i class="fal fa-check-square"></i></button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="txt_validacion">FTP sin validar</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="registrar();">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+            listar();
+        });
+
+        function listar() {
+            var objEnterpriseFTP = new Object();
+            objEnterpriseFTP.PK_Enterprise = $("#slt_enterprise_buscar").val();
+            console.log(objEnterpriseFTP);
+            $.ajax({
+                url: '/Enterprise/ListarFTP',
+                data: JSON.stringify(objEnterpriseFTP),
+                contentType: "application/json;",
+                type: 'POST'
+            }).done(function (data, textStatus, jqXhr) {
+                $("#dt-tabla-ftp tbody").empty();
+                $.each(data, function (i, obj) {
+                    $("#dt-tabla-ftp tbody").append("<tr>" +
+                        "<td>" + (i + 1) + "</td>" +
+                        "<td>" + obj.Server + "</td>" +
+                        "<td>" + obj.Port + "</td>" +
+                        "<td>" + obj.Folder + "</td>" +
+                        "<td>" + obj.Username + "</td>" +
+                        "<td>" + obj.Password + "</td>" +
+                        "<td></td>" +
+                        "</tr>");
+                });
+            }).fail(function (data, textStatus, jqXhr) {
+                console.log(data);
+            });
+        }
+
+        function registrar() {
+            var objEnterpriseFTP = new Object();
+            objEnterpriseFTP.PK_Enterprise = $("#slt_enterprise").val();
+            objEnterpriseFTP.Server = $("#txt_server").val();
+            objEnterpriseFTP.Port = $("#txt_port").val();
+            objEnterpriseFTP.Folder = $("#txt_remote_folder").val();
+            objEnterpriseFTP.Username = $("#txt_user").val();
+            objEnterpriseFTP.Password = $("#txt_password").val();
+            console.log(objEnterpriseFTP);
+            $.ajax({
+                url: '/Enterprise/GuardarFTP',
+                data: JSON.stringify(objEnterpriseFTP),
+                contentType: "application/json;",
+                type: 'POST'
+            }).done(function (data, textStatus, jqXhr) {
+                $('#pop-up-ftp').modal('hide');
+                listar();
+                alert("Registrado");
+            }).fail(function (data, textStatus, jqXhr) {
+                console.log(data);
+            });
+            return false;
+        };
+
+    </script>
+}

@@ -1,0 +1,475 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Listen To Me | Gestión de Calidad de Call Centers</title>
+    <meta name="description" content="Introduction">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+    <!-- Call App Mode on ios devices -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- base css -->
+    <link rel="stylesheet" media="screen, print" href="@Url.Content("~/assets/css/vendors.bundle.css")">
+    <link rel="stylesheet" media="screen, print" href="@Url.Content("~/assets/css/app.bundle.css")">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" sizes="180x180" href="@Url.Content("~/assets/img/favicon/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Content("~/assets/img/favicon/favicon-32x32.png")">
+    <link rel="mask-icon" href="@Url.Content("~/assets/img/favicon/safari-pinned-tab.svg")" color="#5bbad5">
+
+    <link rel="stylesheet" media="screen, print" href="@Url.Content("~/assets/css/datagrid/datatables/datatables.bundle.css")">
+    <link rel="stylesheet" media="screen, print" href="@Url.Content("~/assets/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css")">
+    <link rel="stylesheet" media="screen, print" href="@Url.Content("~/assets/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css")">
+    <link rel="stylesheet" media="screen, print" href="@Url.Content("~/assets/css/main.css")">
+
+    @*@RenderSection("styles", false)*@
+    <script>
+        var ruta_actual = 'https://localhost:53155/';
+    </script>
+</head>
+<body>
+    <!-- BEGIN Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="page-inner">
+            <!-- BEGIN Left Aside -->
+            <aside class="page-sidebar">
+                <div class="page-logo">
+                    <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
+                        <img src="@Url.Content("~/assets/img/logo.png")" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                        <span class="page-logo-text mr-1">SmartAdmin WebApp</span>
+                        <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
+                        <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+                    </a>
+                </div>
+                <!-- BEGIN PRIMARY NAVIGATION -->
+                <nav id="js-primary-nav" class="primary-nav" role="navigation">
+                    <div class="nav-filter">
+                        <div class="position-relative">
+                            <input type="text" id="nav_filter_input" placeholder="Filter menu" class="form-control" tabindex="0">
+                            <a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
+                                <i class="fal fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <img src="@Url.Content("~/assets/img/demo/avatars/avatar-admin.png")" class="profile-image rounded-circle" @*alt="@Html.Action("Usuario", "Navigation")"*@>
+                        <div class="info-card-text">
+                            <a href="#" class="d-flex align-items-center text-white">
+                                <span class="text-truncate text-truncate-sm d-inline-block">
+                                    @*@Html.Action("Usuario", "Navigation")*@
+                                </span>
+                            </a>
+                            <span class="d-inline-block text-truncate text-truncate-sm">@*@Html.Action("Perfil", "Navigation")*@</span>
+                        </div>
+                        <img src="@Url.Content("~/assets/img/card-backgrounds/cover-2-lg.png")" class="cover" alt="cover">
+                        <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
+                            <i class="fal fa-angle-down"></i>
+                        </a>
+                    </div>
+                    <ul id="js-nav-menu" class="nav-menu">
+                        <li>
+                            <a href="@Url.Action("Audios","Audios")" title="Application Intel" data-filter-tags="application intel">
+                                <i class="fal fa-home"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Audio</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../Enterprise/EjecutarFTP" title="Ejecutar FTP" class=" waves-effect waves-themed">
+                                <i class="fal fa-download"></i>
+                                <span class="nav-link-text">Ejecutar FTP</span>
+                            </a>
+                        </li>
+                        <li style="display:none;">
+                            <a href="#" title="Package Info" data-filter-tags="package info">
+                                <i class="fal fa-file-excel"></i>
+                                <span class="nav-link-text" data-i18n="nav.package_info">Maintenance</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="../Office/Index" title="Office" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Office</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Speech/Index" title="Speech" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Speech</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Section/Index" title="Seccion" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Seccion</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Rule/Index" title="Regla" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Regla</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Agent/Index" title="Agente" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Agente</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Enterprise/RegistrarFTP" title="Registrar FTP" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Registrar FTP</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" title="Package Info" data-filter-tags="package info">
+                                <i class="fal fa-file-excel"></i>
+                                <span class="nav-link-text" data-i18n="nav.package_info">Mantenimiento</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="../Mantenimiento/Empresa" title="Empresa" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Empresa</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Mantenimiento/Oficina" title="Oficina" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Oficina</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Mantenimiento/SubOficina" title="SubOficina" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">SubOficina</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Mantenimiento/Negocio" title="Negocio" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Negocio</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Mantenimiento/Speech" title="Speech" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Speech</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../Enterprise/RegistrarFTP" title="Registrar FTP" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Registrar FTP</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @*<li>
+            <a href="@Url.Action("Index", "WhiteList")" title="Package Info" data-filter-tags="package info">
+                <i class="fal fa-search"></i>
+                <span class="nav-link-text" data-i18n="nav.package_info">White List</span>
+            </a>
+        </li>*@
+                        <li>
+                            <a href="@Url.Action("Index", "BlackList")" title="Package Info" data-filter-tags="package info">
+                                <i class="fal fa-search"></i>
+                                <span class="nav-link-text" data-i18n="nav.package_info">Black List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="Package Info" data-filter-tags="package info">
+                                <i class="fal fa-file-excel"></i>
+                                <span class="nav-link-text" data-i18n="nav.package_info">Reports</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="@Url.Action("ReporteBusiness","Reporte")" title="Office" class=" waves-effect waves-themed">
+                                        <span class="nav-link-text">Reporte General</span>
+                                    </a>
+                                </li>
+                                @*<li>
+                    <a href="@Url.Action("Index","Reports")" title="Office" class=" waves-effect waves-themed">
+                        <span class="nav-link-text">Enterprise</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ReportOffice","Office")" title="Office" class=" waves-effect waves-themed">
+                        <span class="nav-link-text">Office</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action(" SubOffice","ReportSubOffice")" title="Office" class=" waves-effect waves-themed">
+                        <span class="nav-link-text">SubOficce</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ReportBusiness","ReportBusiness")" title="Office" class=" waves-effect waves-themed">
+                        <span class="nav-link-text">Business</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ReportBoss","ReportBoss")" title="Office" class=" waves-effect waves-themed">
+                        <span class="nav-link-text">Boss</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ReportAgent","ReportAgent")" title="Office" class=" waves-effect waves-themed">
+                        <span class="nav-link-text">Agent</span>
+                    </a>
+                </li>*@
+                            </ul>
+                        </li>
+                        @*@Html.Action("Menu", "Navigation")*@
+                    </ul>
+                    <div class="filter-message js-filter-message bg-success-600"></div>
+                </nav>
+                <!-- END PRIMARY NAVIGATION -->
+            </aside>
+            <!-- END Left Aside -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN Page Header -->
+                <header class="page-header" role="banner">
+                    <!-- we need this logo when user switches to nav-function-top -->
+                    <div class="page-logo">
+                        <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
+                            <img src="@Url.Content("~/assets/img/logo.png")" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                            <span class="page-logo-text mr-1">SmartAdmin WebApp</span>
+                            <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
+                            <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
+                        </a>
+                    </div>
+                    <!-- DOC: nav menu layout change shortcut -->
+                    <div class="hidden-md-down dropdown-icon-menu position-relative">
+                        <a href="#" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-hidden" title="Hide Navigation">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-minify" title="Minify Navigation">
+                                    <i class="ni ni-minify-nav"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-fixed" title="Lock Navigation">
+                                    <i class="ni ni-lock-nav"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- DOC: mobile button appears during mobile width -->
+                    <div class="hidden-lg-up">
+                        <a href="#" class="header-btn btn press-scale-down" data-action="toggle" data-class="mobile-nav-on">
+                            <i class="ni ni-menu"></i>
+                        </a>
+                    </div>
+                    <div class="search">
+                        <form class="app-forms hidden-xs-down" role="search" action="page_search.html" autocomplete="off">
+                            <input type="text" id="search-field" placeholder="Buscador" class="form-control" tabindex="1">
+                            <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
+                                <i class="fal fa-times"></i>
+                            </a>
+                        </form>
+                    </div>
+                    <div class="ml-auto d-flex">
+                        <!-- activate app search icon (mobile) -->
+                        <div class="hidden-sm-up">
+                            <a href="#" class="header-icon" data-action="toggle" data-class="mobile-search-on" data-focus="search-field" title="Search">
+                                <i class="fal fa-search"></i>
+                            </a>
+                        </div>
+                        <!-- app settings -->
+                        <!-- app shortcuts -->
+                        <!-- app message -->
+                        <!-- app notification -->
+                        <!-- app user menu -->
+                        <div>
+                            <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
+                                <img src="@Url.Content("~/assets/img/demo/avatars/avatar-admin.png")" class="profile-image rounded-circle" alt="Dr. Codex Lantern">
+                                <!-- you can also add username next to the avatar with the codes below:
+                                <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
+                                <i class="ni ni-chevron-down hidden-xs-down"></i> -->
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
+                                <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
+                                    <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
+                                        <span class="mr-2">
+                                            <img src="@Url.Content("~/assets/img/demo/avatars/avatar-admin.png")" class="rounded-circle profile-image" alt="Dr. Codex Lantern">
+                                        </span>
+                                        <div class="info-card-text">
+                                            <div class="fs-lg text-truncate text-truncate-lg">@*@Html.Action("Usuario", "Navigation")*@</div>
+                                            <span class="text-truncate text-truncate-md opacity-80">@*@Html.Action("Perfil", "Navigation")*@</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider m-0"></div>
+                                <a href="#" class="dropdown-item" data-action="app-fullscreen">
+                                    <span data-i18n="drpdwn.fullscreen">Fullscreen</span>
+                                    <i class="float-right text-muted fw-n">F11</i>
+                                </a>
+                                <a href="#" class="dropdown-item" data-action="app-print">
+                                    <span data-i18n="drpdwn.print">Print</span>
+                                    <i class="float-right text-muted fw-n">Ctrl + P</i>
+                                </a>
+                                <div class="dropdown-divider m-0"></div>
+                                <a class="dropdown-item fw-500 pt-3 pb-3" href="page_login-alt.html">
+                                    <span data-i18n="drpdwn.page-logout">Logout</span>
+                                    <span class="float-right fw-n">&commat;codexlantern</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <!-- END Page Header -->
+                <!-- BEGIN Page Content -->
+                <!-- the #js-page-content id is needed for some plugins to initialize -->
+                <main id="js-page-content" role="main" class="page-content">
+                    @RenderBody()
+                </main>
+                <!-- this overlay is activated only when mobile menu is triggered -->
+                <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div> <!-- END Page Content -->
+                <!-- BEGIN Page Footer -->
+                <footer class="page-footer" role="contentinfo">
+                    <div class="d-flex align-items-center flex-1 text-muted">
+                        <span class="hidden-md-down fw-700">2019 © SmartAdmin by&nbsp;<a href='https://www.gotbootstrap.com' class='text-primary fw-500' title='gotbootstrap.com' target='_blank'>gotbootstrap.com</a></span>
+                    </div>
+                    <div>
+                        <ul class="list-table m-0">
+                            <li><a href="intel_introduction.html" class="text-secondary fw-700">About</a></li>
+                            <li class="pl-3"><a href="info_app_licensing.html" class="text-secondary fw-700">License</a></li>
+                            <li class="pl-3"><a href="info_app_docs.html" class="text-secondary fw-700">Documentation</a></li>
+                            <li class="pl-3 fs-xl"><a href="https://wrapbootstrap.com/user/MyOrange" class="text-secondary" target="_blank"><i class="fal fa-question-circle" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </footer>
+                <!-- END Page Footer -->
+                <!-- BEGIN Shortcuts -->
+                <!-- modal shortcut -->
+                <div class="modal fade modal-backdrop-transparent" id="modal-shortcut" tabindex="-1" role="dialog" aria-labelledby="modal-shortcut" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-top modal-transparent" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <ul class="app-list w-auto h-auto p-0 text-left">
+                                    <li>
+                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-3x opacity-100 color-primary-500 "></i>
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
+                                                <i class="fal fa-home icon-stack-1x opacity-100 color-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Home
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="page_inbox_general.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-3x opacity-100 color-success-500 "></i>
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-success-300 "></i>
+                                                <i class="ni ni-envelope icon-stack-1x text-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Inbox
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
+                                            <div class="icon-stack">
+                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
+                                                <i class="fal fa-plus icon-stack-1x opacity-100 color-white"></i>
+                                            </div>
+                                            <span class="app-list-name">
+                                                Add More
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- END Shortcuts -->
+            </div>
+        </div>
+    </div>
+
+
+
+    @RenderSection("pages", false)
+
+    <!-- END NAVIGATION -->
+    <script src="~/assets/js/jquery-3.4.1.min.js"></script>
+    <script src="~/assets/js/vendors.bundle.js"></script>
+    <script src="~/assets/js/app.bundle.js"></script>
+    <script src="~/assets/js/dependency/moment/moment.js"></script>
+    <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
+    <script src="~/assets/js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
+    <script src="~/assets/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/funciones.comunes.js"></script>
+    <script src="~/Scripts/funciones.mensaje.js"></script>
+    <script>
+        $(document).ready(function () {
+            try {
+                //$.getJSON("/Login_user/ListarAlertaJson", null, function (data) {
+                $.getJSON("http://localhost/ListenToMe/Login_user/ListarAlertaJson", null, function (data) {
+                    try {
+                        var dtPersons = eval(data);
+                        displayJSONData(dtPersons);
+                    }
+                    catch (ex1) {
+                        alert("ex1");
+                    }
+                });
+            }
+            catch (ex) {
+                //alert(ex);
+            }
+            /******* Notificaciones ********/
+
+            try {
+                //$.getJSON("/Login_user/ListarNotificacionJson", null, function (data) {
+                $.getJSON("http://localhost/ListenToMe/Login_user/ListarNotificacionJson", null, function (data) {
+                try {
+
+                        var dtNotificaciones = eval(data);
+                        displayJSONDataNotificaciones(dtNotificaciones);
+                    }
+                    catch (ex1) {
+                        //alert(ex1);
+                    }
+                });
+            }
+            catch (ex) {
+                //alert(ex);
+            }
+
+            });
+        function displayJSONData(dtPersons) {
+            var strColumnData1 = "";
+
+            for (i = 0; i < dtPersons.length; i++)
+            {
+                var divRow = document.getElementById("divRow_" + i);
+                if (i < dtPersons.length) {
+                    strColumnData1 = dtPersons[i].NombreAlerta;
+                    var user = '<a class="list-group-item" href="javascript:void(0)" role="menuitem"><div class="media"><div class="media-left padding-right-10"><i class="icon md-receipt bg-red-600 white icon-circle" aria-hidden="true"></i></div><div class="media-body"><h6 class="media-heading">' + dtPersons[i].NombreAlerta + '</h6><time class="media-meta" datetime="2015-06-12T20:50:48+08:00">' + dtPersons[i].tiempo + ' Hrs</time></div></div></a>';
+                    $('#Divalerta table').append(user);
+                }
+            }
+            var NumAlerta = '<span class="badge badge-danger up">' + dtPersons.length + '</span>';
+            $('#DivNumalerta').append(NumAlerta);
+        }
+        function displayJSONDataNotificaciones(dtNotificaciones) {
+            var strColumnData1 = "";
+
+            for (i = 0; i < dtNotificaciones.length; i++) {
+
+                if (i < dtNotificaciones.length) {
+                    strColumnData1 = dtNotificaciones[i].NombreAlerta;
+                    var user = '<a class="list-group-item" href="javascript:void(0)" role="menuitem"><div class="media"><div class="media-left padding-right-10"><span class="avatar avatar-sm avatar-online"><i></i></span></div><div class="media-body"><div class="media-meta"><time datetime="2015-06-17T20:22:05+08:00">' + dtNotificaciones[i].tiempo + ' Hrs</time></div><div class="media-detail">' + dtNotificaciones[i].NombreAlerta + '</div></div></div></a>';
+                    $('#DivNotificaciones table').append(user);
+                }
+            }
+
+            var NumNotificaciones = '<span class="badge badge-info up">' + dtNotificaciones.length + '</span>';
+            $('#DivNumNotificaciones').append(NumNotificaciones);
+        }
+
+        var ruta = '@Url.Action("~")';
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,327 @@
+﻿@using Call.Cloud.Modelo
+@{
+    ViewBag.Title = "ReporteBusiness";
+    Layout = "~/Views/Shared/_Theme.cshtml";
+    //PARAMETROS INICIALES
+    List<KeyValuePair<string, string>> lstEnterpriseBE = ViewData["lstEnterpriseBE"] as List<KeyValuePair<string, string>>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Módulo de Administración</a></li>
+    <li class="breadcrumb-item">Administración</li>
+    <li class="breadcrumb-item active">Bandeja de Pagos</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-window'></i> Reporte Audios
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Reporte Audios
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="form-row">
+                        <div class="col-md-2">
+                            @Html.LabelFor(m => lstEnterpriseBE, "Empresa",
+                             new { @class = "form-label" })
+
+                            @Html.DropDownListFor(m => lstEnterpriseBE,
+                            new SelectList(lstEnterpriseBE, "value", "key"),
+                            new { @class = "form-control", @id = "slt_empresa_buscar" })
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" for="slt_oficina">Oficina</label>
+                            <select id="slt_oficina" class="form-control">
+                                <option value="0">-Seleccione-</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" for="slt_sub_oficina">Sub Oficina</label>
+                            <select id="slt_sub_oficina" class="form-control">
+                                <option value="0">-Seleccione-</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" for="slt_negocio">Negocio</label>
+                            <select id="slt_negocio" class="form-control">
+                                <option value="0">-Seleccione-</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" for="slt_speech">Speech</label>
+                            <select id="slt_speech" class="form-control">
+                                <option value="0">-Seleccione-</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="button" id="btn_buscar"><i class="fal fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="panel-content border-faded align-items-center">
+                        <div class="div-mensaje">
+                        </div>
+                        <div class="table-responsive-lg" id="div-cuenta-corriente">
+                            <table id="dt-tabla-reporte" class="table table-bordered table-hover dt-tabla-sin-filtro table-striped w-100">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Negocio</th>
+                                        <th>Speech</th>
+                                        <th>Transcripción</th>
+                                        <th>Porcentaje</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#slt_empresa_buscar").change(listarOficinas);
+            $("#slt_oficina").change(listarSubOficinas);
+            $("#slt_sub_oficina").change(listarNegocios);
+            $("#slt_negocio").change(listarSpeech);
+            listarOficinas();
+
+            $("#btn_buscar").click(buscar);
+        });
+
+        function listarOficinas() {
+            var objOfficeBE = new Object();
+            objOfficeBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ListarOficinas", "Office")',
+                data: {
+                    objOfficeBE: objOfficeBE
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#slt_oficina").empty();
+                    $("#slt_oficina").append("<option value='0'>-Seleccione-</option>");
+                    $.each(data, function (i, obj) {
+                        $("#slt_oficina").append("<option value='" + obj.Pk_Office + "'>" + obj.Name + "</option>");
+                    });
+                }
+            });
+        }
+
+        function listarSubOficinas() {
+            var objSubOfficeBE = new Object();
+            objSubOfficeBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
+            objSubOfficeBE.Pk_Office = $("#slt_oficina").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ListarSubOficinas", "SubOffice")',
+                data: {
+                    objSubOfficeBE: objSubOfficeBE
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#slt_sub_oficina").empty();
+                    $("#slt_sub_oficina").append("<option value='0'>-Seleccione-</option>");
+                    $.each(data, function (i, obj) {
+                        $("#slt_sub_oficina").append("<option value='" + obj.Pk_SubOffice + "'>" + obj.nameSubOffice + "</option>");
+                    });
+                }
+            });
+        }
+
+        function listarNegocios() {
+            var objBusinessBE = new Object();
+            objBusinessBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
+            objBusinessBE.Pk_Office = $("#slt_oficina").val();
+            objBusinessBE.Pk_SubOffice = $("#slt_sub_oficina").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ListarNegocios", "Business")',
+                data: {
+                    objBusinessBE: objBusinessBE
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#slt_negocio").empty();
+                    $("#slt_negocio").append("<option value='0'>-Seleccione-</option>");
+                    $.each(data, function (i, obj) {
+                        $("#slt_negocio").append("<option value='" + obj.PK_Business + "'>" + obj.nameBusiness + "</option>");
+                    });
+                }
+            });
+        }
+
+        function listarSpeech() {
+            var objSpeechBE = new Object();
+            objSpeechBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
+            objSpeechBE.Pk_Office = $("#slt_oficina").val();
+            objSpeechBE.Pk_SubOffice = $("#slt_sub_oficina").val();
+            objSpeechBE.PK_Business = $("#slt_negocio").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ListarSpeech", "Speech")',
+                data: {
+                    objSpeechBE: objSpeechBE
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#slt_speech").empty();
+                    $("#slt_speech").append("<option value='0'>-Seleccione-</option>");
+                    $.each(data, function (i, obj) {
+                        $("#slt_speech").append("<option value='" + obj.PK_Speech + "'>" + obj.NameSpeech + "</option>");
+                    });
+                }
+            });
+        }
+
+        function buscar() {
+            var objSpeechBE = new Object();
+            objSpeechBE.PK_Business = $("#slt_negocio").val();
+            objSpeechBE.PkSpeech = $("#slt_speech").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ListarAudioSpeech", "Reporte")',
+                data: {
+                    objSpeechBE: objSpeechBE
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data) {
+                        $("#dt-tabla-reporte").dataTable().fnClearTable();
+
+                        if (data.length > 0) {
+                            $.each(data, function (i, obj) {
+                                var cantPalabras = 30;
+                                var transcripcion = obj.TX_Transcripcion.split(" ");
+                                var htmlTexto = "", palabraInicio = "", palabraFin="";
+                                if (transcripcion.length > cantPalabras) {
+                                    palabraInicio = transcripcion.slice(0, cantPalabras).join(" ");
+                                    palabraFin = transcripcion.slice(cantPalabras + 1, transcripcion.length).join(" ");
+                                } else {
+                                    palabraInicio = obj.TX_Transcripcion;
+                                }
+
+                                htmlTexto = "<span>" + palabraInicio + " </span>" + 
+                                    "<span id='leer_" + obj.PK_audio + "' class='collapse'>" + palabraFin + "</span>" + 
+                                    "<a data-toggle='collapse' data-target='#leer_" + obj.PK_audio + "'> leer mas... </a>";
+
+                                $("#dt-tabla-reporte").dataTable().fnAddData([
+                                    (i + 1),
+                                    obj.TX_Business,
+                                    obj.TX_Speech   ,
+                                    htmlTexto, //obj.TX_Transcripcion,
+                                    obj.NU_WordWeight,
+                                    "<a class='fal fa-plus-square' rel='" + obj.PK_audio + "' onclick='verDetalle(this);'></a>"
+                                ]);
+                            });
+                        }
+                    }
+                    
+                }
+            });
+        }
+
+        function verDetalle(_this) {
+            var _btnDetail = $(_this);
+            var id_audio = _btnDetail.attr("rel");
+            if (_btnDetail.hasClass('fa-plus-square') == true) {
+                _btnDetail.parent().parent().after('<tr><td colspan="6"></td></tr>');
+
+                var objAudio = new Object();
+                objAudio.PK_audio = id_audio;
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("ListarAudioDetalle", "Reporte")',
+                    data: {
+                        objAudio: objAudio
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+            
+                        _btnDetail.removeClass('fa-plus-square').addClass('fa-minus-square');
+
+                        console.log(data);
+
+                        if (data) {
+                            var _strDetalle = '<h5><strong>Transcripción</strong></h5><p>' + data[0].TX_Transcripcion + '</p>';
+
+                            _strDetalle += '<table class="tblLista_det table" width="100%">';
+                            _strDetalle += '<thead>';
+                            _strDetalle += '<tr>';
+                            _strDetalle += '<th>N°</th>';
+                            //_strDetalle += '<th>Speech</th>';
+                            //_strDetalle += '<th>Transcripción</th>';
+                            _strDetalle += '<th>Sección</th>';
+                            _strDetalle += '<th>% Sección</th>';
+                            _strDetalle += '<th>Regla</th>';
+                            _strDetalle += '<th>% Regla</th>';
+                            _strDetalle += '<th>Palabra</th>';
+                            _strDetalle += '<th>Palabra Audio</th>';
+                            _strDetalle += '<th>% Valoración</th>';
+                            _strDetalle += '</tr>';
+                            _strDetalle += '</thead>';
+                            _strDetalle += '<tbody>';
+
+                            $.each(data, function (i, item) {
+                                _strDetalle += '<tr>';
+                                _strDetalle += '<td>' + (i + 1) + '</td>';
+                                //_strDetalle += '<td>' + item.TX_Speech + '</td>';
+                                //_strDetalle += '<td>' + item.TX_Transcripcion + '</td>';
+                                _strDetalle += '<td>' + item.TX_Section + '</td>';
+                                _strDetalle += '<td>' + item.NU_SectionWeight + '</td>';
+                                _strDetalle += '<td>' + item.TX_Rule + '</td>';
+                                _strDetalle += '<td>' + item.NU_RuleWeight + '</td>';
+                                _strDetalle += '<td>' + item.TX_Word + '</td>';
+                                _strDetalle += '<td>' + item.TX_WordAudio + '</td>';
+                                _strDetalle += '<td>' + item.NU_WordWeight + '</td>';
+                                _strDetalle += '</tr>';
+                            });
+
+                            _strDetalle += '</tbody>';
+                            _strDetalle += '</table>';
+
+                            _btnDetail.parent().parent().next().children().html(_strDetalle);
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        //$("#divAlert").dialog('open');
+                        //var err = JSON.parse(xhr.responseText);
+                        //$("#spnAlert").empty().html(err.Message);
+                    }
+                });
+
+            } else {
+                _btnDetail.removeClass('fa-minus-square').addClass('fa-plus-square');
+                _btnDetail.parent().parent().next().hide('slow', function () { $(this).remove(); });
+            }
+        }
+    </script>
+}

@@ -1,0 +1,211 @@
+﻿@using Call.Cloud.Modelo
+@using Call.Cloud.AccesoDatos
+
+@{
+    ViewBag.Title = "EjecutarFTP";
+    Layout = "~/Views/Shared/_Theme.cshtml";
+
+    IEnumerable<Agent> listaAgent = ViewData["listaAgent"] as IEnumerable<Agent>;
+    IEnumerable<Business> listaBussines = ViewData["listaBussines"] as IEnumerable<Business>;
+    IEnumerable<Speech> listaSpeach = ViewData["listaSpeach"] as IEnumerable<Speech>;
+    List<EnterpriseFTPDatos> listarFtp  = ViewData["listarFtp"] as List<EnterpriseFTPDatos>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Enterprise</a></li>
+    <li class="breadcrumb-item">Ejecutar</li>
+    <li class="breadcrumb-item active">Ejecutar FTP</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Ejecutar FTP
+        <small>
+            Ejecutar FTP
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Buscar Clientes
+                </h2>
+                <div class="panel-toolbar">
+                    <div class="custom-control d-flex custom-switch">
+                        <input id="chk_status" type="checkbox" class="custom-control-input" checked="checked">
+                        <label class="custom-control-label fw-500" for="eventlog-switch">Estado</label>
+                    </div>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="form-row">
+                        <div class="col-md-2 mb-1">
+                            @Html.LabelFor(m => listaBussines, "Business",
+                            new { @class = "form-label" })
+
+                            @Html.DropDownListFor(m => listaBussines,
+                            new SelectList(listaBussines, "PK_Business", "nameBusiness"),
+                            new { @class = "form-control", @id = "slt_business" })
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            @Html.LabelFor(m => listaSpeach, "Speech",
+                            new { @class = "form-label" })
+
+                            @Html.DropDownListFor(m => listaSpeach,
+                            new SelectList(listaSpeach, "PkSpeech", "Description"),
+                            new { @class = "form-control", @id = "slt_speech" })
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            @Html.LabelFor(m => listaAgent, "Agente",
+                            new { @class = "form-label" })
+
+                            @Html.DropDownListFor(m => listaAgent,
+                            new SelectList(listaAgent, "PkAgent", "FirstName"),
+                            new { @class = "form-control", @id = "slt_agent" })
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            @Html.LabelFor(m => listarFtp, "Ftp",
+                            new { @class = "form-label" })
+
+                            @Html.DropDownListFor(m => listarFtp,
+                            new SelectList(listarFtp, "PK_ftp", "RutaCompleta"),
+                            new { @class = "form-control", @id = "lst_ftp" })
+                        </div>
+                        <div class="col-md-1 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="button" id="btn_listar"><i class="fal fa-search"></i></button>
+                        </div>
+                        <div class="col-md-1 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-default form-control" type="button" id="btn_procesar"><i class="fal fa-upload"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-content border-faded align-items-center">
+                    <div class="table-responsive-lg" style="overflow-x:auto;">
+                        <table class="table table-bordered nowrap dt-tabla-sin-filtro m-0" id="dt-tabla-ftp" style="display:none;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Archivo</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <table class="table table-bordered nowrap dt-tabla-sin-filtro m-0" id="dt-tabla-procesamiento" style="display:none;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Archivo</th>
+                                    <th>Fecha</th>
+                                    <th>Texto</th>
+                                    <th>Tamaño</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="http://localhost:8077/signalr/hubs"></script>
+
+    <script type="text/javascript">
+        /*INTEGRACION REAL TIME*/
+        //Set the hubs URL for the connection
+        var connection = $.connection;
+
+        $.connection.hub.url = "http://localhost:8077/signalr";
+
+        // Declare a proxy to reference the hub.
+        var sincronizacion = $.connection.sincronizarHub;
+
+        $.connection.hub.error(function (error) {
+            $(".div-mensaje").html("Error de Conexion");
+            console.log(error);
+        });
+
+        $.connection.hub.start();
+
+        var contador = 0;
+        sincronizacion.client.listarProcesamientoFtp = function (archivoNombre, fecha) {
+            $("#dt-tabla-ftp").prepend('<tr>' +
+                '<td>' + (++contador) + '</td>' +
+                '<td>' + archivoNombre + '</td>' +
+                '<td>' + fecha + '</td>' + 
+                '<td>Pendiente</td>' + 
+                '</tr>');
+        }
+        
+        sincronizacion.client.listarDatosProcesamientoFtp = function (archivoNombre, fecha, tamano, texto, resultado) {
+            $("#dt-tabla-procesamiento").prepend('<tr>' +
+                '<td>' + (++contador) + '</td>' +
+                '<td>' + archivoNombre + '</td>' +
+                '<td>' + fecha + '</td>' + 
+                '<td>' + tamano + '</td>' + 
+                '<td>' + texto + '</td>' + 
+                '<td>' + resultado + '</td>' + 
+                '</tr>');
+        }
+
+        sincronizacion.client.mensajeError = function (error) {
+            alert("Ocurrio un error: " + error);
+        }
+
+        $(document).ready(function () {
+            $("#btn_listar").click(listarArchivos);
+            $("#btn_procesar").click(ejecutarProcesamiento);
+            $("#slt_business").click(comboSpeechBuscar);
+            comboSpeechBuscar();
+        });
+
+        function listarArchivos() {
+            contador = 0;
+            $("#dt-tabla-ftp").show();
+            $("#dt-tabla-procesamiento").hide();
+            sincronizacion.server.listarArchivosFTP($("#lst_ftp").val());
+        }
+
+        function ejecutarProcesamiento() {
+            $("#dt-tabla-ftp").hide();
+            $("#dt-tabla-procesamiento").show();
+            sincronizacion.server.sincronizarFTP($("#lst_ftp").val(), $("#slt_business").val(), $("#slt_speech").val(), $("#slt_agent").val());
+        }
+
+        function comboSpeechBuscar() {
+            var objNegocioBE = new Object();
+            objNegocioBE.PK_Business = $("#slt_business").val();
+
+            $.ajax({
+                url: '/Mantenimiento/SpeechListarCombos',
+                data: JSON.stringify(objNegocioBE),
+                contentType: "application/json;",
+                type: 'POST'
+            }).done(function (data, textStatus, jqXhr) {
+                $("#slt_speech").html("<option value='0'>-Seleccione-</option>");
+                $.each(data, function (i, obj) {
+                    $("#slt_speech").append("<option value='" + obj.Value + "'>" + obj.Key + "</option>");
+                });
+            }).fail(function (data, textStatus, jqXhr) {
+                console.log(data);
+            });
+        }
+    </script>
+}

@@ -1,0 +1,1073 @@
+﻿@model Call.Cloud.Mvc.Models.ReportsVM.ListaReportBusiness
+@{
+    ViewBag.Title = "ReportBusiness";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/Base/css/calendario.css" type="text/css" rel="stylesheet" />
+    <script src="~/Scripts/Calender/calendar.js" type="text/javascript"></script>
+    <script src="~/Scripts/Calender/calendar-setup.js" type="text/javascript"></script>
+    <script src="~/Scripts/Calender/calendar-es.js" type="text/javascript"></script>
+    <script src="~/Scripts/Calender/jquery-1.12.0.min.js"></script>
+</head>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">Business</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <form id="formAusenciaFiltro" role="form">
+                <div class="col-sm-12">
+                    <div class="form-group form-material">
+                        @Html.Label("parm_Pk_office", "sub-office code", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.Filtro.pk_Business_Parm, Model.listarSubOffices, new { @class = "form-control" })
+                           
+                        </div>
+                    </div>
+
+                </div>
+              
+                    <div class="text-center">
+                        <button id="btnLimpiar" class="btn btn-default" type="button" onclick="">Clean</button>
+                        <button id="btnBuscar" class="btn btn-primary" type="button" onclick="grafica01();">Show</button>
+
+
+                    
+                </div>
+            </form>
+            <h1 id="idEmpresa" style="text-align:center;color:chocolate"> </h1>
+            <div class="page-header">
+                <div class="form-group form-material">
+                    <nav class="breadcrumb-nav" role="navigation" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+
+                            <li id="ejemplo01"><a href="@Url.Action("Index", "Reports")"><label id="oficina1" style="color:chocolate">Oficina</label></a></li>
+                            <li id="ejemplo02"><a href="@Url.Action("Index", "Reports")"><label id="suboffice1" style="color:chocolate">Suboficina</label></a></li>
+                            <li id="ejemplo03"><a href="@Url.Action("Index", "Reports")"><label id="negocio1" style="color:chocolate">Negocio</label></a></li>
+                            <li id="ejemplo04"><a href="@Url.Action("Index", "Reports")"><label id="supervisor1" style="color:chocolate">Supervisor</label></a></li>
+                            <li id="ejemplo05"><a href="@Url.Action("Index", "Reports")"><label id="agente1" style="color:chocolate">Agente</label></a></li>
+                            <li id="ejemplo06"><a href="@Url.Action("Index", "Reports")"><label id="llamadaa" style="color:chocolate">Llamadas</label></a></li>
+                        </ol>
+                    </nav>
+
+                    <nav class="breadcrumb-nav" role="navigation" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+
+
+                            <li id="ejemplo3"><a href="@Url.Action("Index", "Reports")"><label id="oficina" style="color:darkred"></label></a></li>
+                            <li id="diaOffice"><a href="@Url.Action("Index", "Reports")"><label id="diaoficina" style="color:darkred"></label></a></li>
+                            <li id="mesOffice1"><a href="@Url.Action("Index", "Reports")"><label id="mesoficina" style="color:darkred"></label></a></li>
+                            <li id="ejemplo4"><a href="@Url.Action("Index", "Reports")"><label id="suboffice" style="color:darkred"></label></a></li>
+                            <li id="diaSubOffice1"><a href="@Url.Action("Index", "Reports")"><label id="diaSuboficina" style="color:darkred"></label></a></li>
+                            <li id="mesSubOffice1"><a href="@Url.Action("Index", "Reports")"><label id="mesSuboficina" style="color:darkred"></label></a></li>
+                            <li id="ejemplo5"><a href="@Url.Action("Index", "Reports")"><label id="negocio" style="color:darkred"></label></a></li>
+                            <li id="dianegocio"><a href="@Url.Action("Index", "Reports")"><label id="DayBusiness" style="color:darkred"></label></a></li>
+                            <li id="mesnegocio"><a href="@Url.Action("Index", "Reports")"><label id="mesBusiness" style="color:darkred"></label></a></li>
+                            <li id="ejemplo6"><a href="@Url.Action("Index", "Reports")"><label id="supervisor" style="color:darkred"></label></a></li>
+                            <li id="messupervisor"><a href="@Url.Action("Index", "Reports")"><label id="monthBoss" style="color:darkred"></label></a></li>
+                            <li id="diasupervisor"><a href="@Url.Action("Index", "Reports")"><label id="dayBoss" style="color:darkred"></label></a></li>
+                            <li id="ejemplo7"><a href="@Url.Action("Index", "Reports")"><label id="agente" style="color:darkred"></label></a></li>
+                            <li id="mesagente"><a href="@Url.Action("Index", "Reports")"><label id="monthAgent" style="color:darkred"></label></a></li>
+                            <li id="diaagente"><a href="@Url.Action("Index", "Reports")"><label id="dayAgent" style="color:darkred"></label></a></li>
+                            <li id="llamadas"><a href="@Url.Action("Index", "Reports")"><label id="id_llamadas" style="color:darkred"></label></a></li>
+                        </ol>
+                    </nav>
+
+                    <div id="divGrid" class="col-sm-12">
+                        <div id="chart01" style="width:auto; height:auto">
+                            <div id="div_chart" style="width: 600px;"></div>
+                        </div>
+
+                        <div id="chart02" style="width:auto; height:auto">
+                            <div id="div_chart1" style="width:900px;"> </div>
+                        </div>
+
+
+                        <div id="chart03" style="width:auto; height:auto">
+                            <div id="div_chart2" style="width:1300px;"></div>
+                        </div>
+
+                        <div id="chart04" style="width:auto; height:auto">
+                            <div id="Boss_div_chart" style="width:600px;"></div>
+                        </div>
+                        <div id="chart05" style="width:auto; height:auto;">
+                            <div id="Boss_div_Month" style="width:800px;"></div>
+                        </div>
+                        <div id="chart06" style="width:auto; height:auto;">
+                            <div id="Boss_div_Day" style="width:1200px;"></div>
+                        </div>
+                        <div id="chart07" style="width:auto; height:auto;">
+                            <div id="Agent_div_chart" style="width:600px;"></div>
+                        </div>
+                        <div id="chart08" style="width:auto; height:auto">
+                            <div id="Agent_div_Month" style="width:800px;"></div>
+                        </div>
+
+                        <div id="chart09" style="width:auto; height:auto">
+                            <div id="Agent_div_Day" style="width:1200px;"></div>
+                        </div>
+                        <div id="chart10" style="width:auto; height:auto;">
+                            <div id="chart_agent_call" style="width:600px;"></div>
+                        </div>
+                   
+
+                    <div id="chart01" style="width:auto; height:auto">
+                        <div id="div_chart" style="width: 600px;"></div>
+                    </div>
+
+                    <div id="chart02" style="width:auto; height:auto">
+                        <div id="div_chart1" style="width:900px;"> </div>
+                    </div>
+
+
+                    <div id="chart03" style="width:auto; height:auto">
+                        <div id="div_chart2" style="width: 1300px;"></div>
+                    </div>
+
+                    <div id="chart04" style="width:auto; height:auto">
+                        <div id="Boss_div_chart" style="width:600px;"></div>
+                    </div>
+                    <div id="chart05" style="width:auto; height:auto;">
+                        <div id="Boss_div_Month" style="width:800px;"></div>
+                    </div>
+                    <div id="chart06" style="width:auto; height:auto;">
+                        <div id="Boss_div_Day" style="width:1200px;"></div>
+                    </div>
+                    <div id="chart07" style="width:auto; height:auto;">
+                        <div id="Agent_div_chart" style="width:600px;"></div>
+                    </div>
+                    <div id="chart08" style="width:auto; height:auto">
+                        <div id="Agent_div_Month" style="width:800px;"></div>
+                    </div>
+
+                    <div id="chart09" style="width:auto; height:auto">
+                        <div id="Agent_div_Day" style="width:1200px;"></div>
+                    </div>
+                    <div id="chart10" style="width:auto; height:auto;">
+                        <div id="chart_agent_call" style="width:auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="panel-body">
+        
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade modal-3d-slit" id="ModalReport" aria-hidden="true"
+         aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Reports</h4>
+                </div>
+                <div class="modal-body" id="divModalReport">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(document).ready(function () {
+
+        document.getElementById("ejemplo3").style.display = 'none';
+        document.getElementById("ejemplo4").style.display = 'none';
+        document.getElementById("ejemplo5").style.display = 'none';
+        document.getElementById("ejemplo6").style.display = 'none';
+        document.getElementById("ejemplo7").style.display = 'none';
+        document.getElementById("ejemplo01").style.display = 'none';
+        document.getElementById("ejemplo02").style.display = 'none';
+        document.getElementById("ejemplo03").style.display = 'none';
+        document.getElementById("ejemplo04").style.display = 'none';
+        document.getElementById("ejemplo05").style.display = 'none';
+        document.getElementById("ejemplo06").style.display = 'none';
+        document.getElementById("diaOffice").style.display = 'none';
+        document.getElementById("mesOffice1").style.display = 'none';
+        document.getElementById("diaSubOffice1").style.display = 'none';
+        document.getElementById("mesSubOffice1").style.display = 'none';
+        document.getElementById("dianegocio").style.display = 'none';
+        document.getElementById("mesnegocio").style.display = 'none';
+        document.getElementById("messupervisor").style.display = 'none';
+        document.getElementById("diasupervisor").style.display = 'none';
+        document.getElementById("mesagente").style.display = 'none';
+        document.getElementById("diaagente").style.display = 'none';
+        document.getElementById("llamadas").style.display = 'none';
+    })
+</script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica01() {
+            var parametros = {
+                pk_Business_Parm: $("#Filtro_pk_Business_Parm").val(),
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '@Url.Action("chart_Business_Year")',
+                    data: { filtro: parametros },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'pk');
+                        data1.addColumn('number', 'Cantidad de palabras mal dichas');
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].name_business, data[i].cantidad]);
+                        }
+
+                        console.log(data);
+                        var options = {
+                            title: "Reporte de año por negocio",
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '90%', },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            tooltip: { trigger: 'selection' },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        document.getElementById("idEmpresa").innerHTML = "Reporte de negocios  por año";
+                        $("#div_chart").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("div_chart"));
+                        chart.setAction({
+                            id: 'Supervisor',
+                            text: 'Supervisor',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].name_business == name) {
+                                        array = [data[i].pk_Business];
+                                        data[i].pk_Business = array[i];
+                                        var pk_Business = array;
+                                    }
+                                }
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].name_business == name) {
+                                        array = [data[i].año];
+                                        data[i].año = array[i];
+                                        var año = array;
+                                    }
+                                }
+                                var Year = año;
+                                var pkBusinesss = pk_Business;
+                                chart.draw(view, options);
+                                if (pk_Business == pkBusinesss && año == Year) {
+                                    if (document.getElementById("chart03")) {
+                                        document.getElementById("chart02").style.display = 'none';
+                                        document.getElementById("chart01").style.display = 'none';
+                                        document.getElementById("chart03").style.display = 'none';
+                                        grafica01_Boss_Year(pkBusinesss, Year);
+                                        console.log(pkBusinesss);
+                                        document.getElementById("supervisor1").innerHTML = "Reporte de supervisor del" + " " + año;
+                                        document.getElementById("ejemplo04").style.display = 'inline';
+                                        document.getElementById("idEmpresa").innerHTML = "Reporte de supervisores del " + " " + año;
+
+                                    }
+
+                                }
+                            }
+
+                        });
+                        chart.setAction({
+                            id: 'mes',
+                            text: 'Mes',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    var array1 = new Array();
+                                    if (data[i].name_business == name) {
+                                        array = [data[i].año];
+                                        array1 = [data[i].pk_Business];
+                                        data[i].pk_Business=array1[i];
+                                        data[i].año = array[i];
+                                        var año = array;
+                                        var pk_Business = array1;
+                                    }
+                                }
+
+                                var Year = año;
+                                var pkBusiness = pk_Business;
+                                chart.draw(view, options);
+                                if (pk_Business == pkBusiness && Year == año) {
+                                    if (document.getElementById("chart01")) {
+                                        document.getElementById("chart01").style.display = 'none';
+                                        grafica02(pkBusiness, año);
+                                        document.getElementById("idEmpresa").innerHTML = "Reporte del negocio " + name + " " + "del" + " " + año + " " + "por meses";
+                                        document.getElementById("dianegocio").style.display = 'inline';
+                                        document.getElementById("DayBusiness").innerHTML = "Negocio :" + " " + name;
+                                        document.getElementById("ejemplo00").style.display = 'none';
+
+
+                                    }
+                                }
+                            }
+                        });
+                        chart.draw(data1, options);
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+                })
+            });
+        }
+    </script>
+
+
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+
+        function grafica02(pk_SubOffi, Year) {
+            var parametros = {
+                pk_Business_Par_month: pk_SubOffi,
+                añoMonth: Year,
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_Busines_Month")',
+                    dataType: 'json',
+                    data: {
+                        filtro: parametros
+                    },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'cantidad');
+                        var options = {
+                            title: "Reporte del  mes del año " + " " + Year + "" + " de la SubOficina " + "" + pk_SubOffi,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].mes, data[i].cantidad1]);
+                        }
+                        $("#div_chart1").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("div_chart1"));
+                        function selectItem() {
+
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var mes = data1.getValue(select.row, 0);
+                                var month1 = mes
+                                var año = parametros.añoMonth;
+                                var pkBusiness = parametros.pk_Business_Par_month;
+                                var pkBusiness = parametros.pk_Business_Par_month;
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].pk_business01 == pkBusiness) {
+                                        array = [data[i].name_Bunisess01];
+                                        data[i].name_Bunisess01 = array[i];
+                                        var name = array;
+
+                                    }
+                                }
+                                if (parametros.pk_Business_Par_month == pkBusiness && parametros.añoMonth == año && mes == month1) {
+                                    if (document.getElementById("chart02")) {
+
+                                        document.getElementById("chart02").style.display = 'none'
+                                        grafica03(pkBusiness, año, month1);
+                                        document.getElementById("chart05").style.display = 'none';
+                                        grafica_Business_Day(pkBusiness, año, month1);
+                                        document.getElementById("idEmpresa").innerHTML = " Reporte del negocio " + name + " " + "de" + " " + mes + " " + "del" + " " + año;
+                                        document.getElementById("mesBusiness").innerHTML = mes + " " + "del" + " " + año;
+                                        document.getElementById("mesnegocio").style.display = 'inline';
+                                    }
+
+                                }
+                            }
+                            console.log(parametros);
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+
+                        console.log(data);
+                    }
+                })
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica03(pk_offi, year, month) {
+            var parametros = {
+                pk_Business_Day_parm: pk_offi,
+                Year_Param: year,
+                Month_para: month
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_Business_Day")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'cantidad');
+                        var options = {
+                            title: "Reporte de " + " " + month + " del " + year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].dias, data[i].cantidad3]);
+                        }
+
+                        $("#div_chart2").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("div_chart2"));
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica01_Boss_Year(pkBusiness, año) {
+            var parametros = {
+                pk_business: pkBusiness,
+                añoParametro: año
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '@Url.Action("chart_Boss_Year_Organizational", "ReportBoss")',
+                    data: { filtro: parametros },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'supervisor');
+                        data1.addColumn('number', 'Cantidad de palabras mal dichas');
+
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([
+                                    data[i].name_Boss001,
+                                    data[i].cantidad,
+                            ]);
+                        }
+
+                        console.log(data);
+                        var options = {
+                            title: "Reporte de año por supervisor",
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '90%', },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            tooltip: { trigger: 'selection' },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+
+                        $("#Boss_div_chart").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Boss_div_chart"));
+                        chart.setAction({
+                            id: 'Agent',
+                            text: 'Agente',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                var año = parametros.añoParametro;
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].name_Boss001 == name) {
+                                        array = [data[i].pk_Boss];
+                                        data[i].pk_Boss = array[i];
+                                        var pk_Boss = array;
+                                    }
+                                }
+                                var pkBoss = pk_Boss;
+                                chart.draw(view, options);
+                                if (pk_Boss == pkBoss && parametros.añoParametro == año) {
+                                    if (document.getElementById("chart04")) {
+
+                                        document.getElementById("chart04").style.display = 'none';
+                                        document.getElementById("chart05").style.display = 'none';
+                                        document.getElementById("chart06").style.display = 'none';
+                                        grafica01_Agent_Year(pkBoss, año);
+                                        document.getElementById("idEmpresa").innerHTML = "Reporte de Agentes del " + " " + año;
+                                        document.getElementById("agente1").innerHTML = "Reporte de agentes del" + " " + año;
+                                        document.getElementById("ejemplo05").style.display = 'inline';
+                                    }
+
+                                }
+                            }
+                        });
+                        chart.setAction({
+                            id: 'Mes',
+                            text: 'Mes',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                var Year = parametros.añoParametro;
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].name_Boss001 == name) {
+                                        array = [data[i].pk_Boss];
+                                        data[i].pk_Boss = array[i];
+                                        var pk_Boss = array;
+                                    }
+                                }
+                                var pkBoss = pk_Boss;
+                                var año = Year;
+                                chart.draw(view, options);
+                                if (pk_Boss == pkBoss && Year == año) {
+                                    if (document.getElementById("chart04")) {
+                                        document.getElementById("chart04").style.display = 'none';
+                                        Boss_Month(pkBoss, año);
+                                        document.getElementById("idEmpresa").innerHTML = "Reporte del supervisor " + name + " " + "del" + " " + año + " " + "por meses";
+                                        document.getElementById("monthBoss").innerHTML = "Supervisor :" + " " + name;
+                                        document.getElementById("messupervisor").style.display = 'inline';
+                                    }
+                                }
+                            }
+                        })
+
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+                })
+            });
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+
+        function Boss_Month(pk_offi, Year) {
+            var parametros = {
+                pk_Boss_Parm: pk_offi,
+                Year_Parm: Year,
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_Boss_Month", "ReportBoss")',
+                    dataType: 'json',
+                    data: {
+                        filtro: parametros
+                    },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'cantidad de palabras mal dichas');
+                        var options = {
+                            title: "Reporte del  mes del año " + " " + Year + "" + " de la oficina " + "" + pk_offi,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].mes, data[i].cantidad1]);
+                        }
+
+                        $("#Boss_div_Month").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Boss_div_Month"));
+                        function selectItem() {
+
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var mes = data1.getValue(select.row, 0);
+                                var month1 = mes
+                                var año = parametros.Year_Parm;
+                                var pkBoss = parametros.pk_Boss_Parm;
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].pk_Boss01 == pkBoss) {
+                                        array = [data[i].name_Boss01];
+                                        data[i].name_Boss01 = array[i];
+                                        var name = array;
+                                    }
+                                }
+                                if (parametros.pk_Boss_Parm == pkBoss && mes == month1 && parametros.Year_Parm == año) {
+                                    if (document.getElementById("chart05")) {
+
+                                        document.getElementById("chart05").style.display = 'none'
+                                        grafica03_Boss_Day(pkBoss, month1, año);
+                                        document.getElementById("idEmpresa").innerHTML = " Reporte del supervisor " + name + " " + "de" + " " + mes + " " + "del" + " " + año;
+                                        document.getElementById("dayBoss").innerHTML = mes + " " + "del" + " " + año;
+                                        document.getElementById("diasupervisor").style.display = 'inline';
+                                    }
+
+                                }
+                            }
+
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+
+                        console.log(data);
+                    }
+                })
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica03_Boss_Day(pk_offi, month, Year) {
+            var parametros = {
+                pk_Boss_Parm1: pk_offi,
+                month_Pam: month,
+                Year_Parm1: Year
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_Boss_Day", "ReportBoss")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'cantidad');
+                        var options = {
+                            title: "Reporte de " + " " + month + " del " + Year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].dia, data[i].cantidad2]);
+                        }
+
+                        $("#Boss_div_Day").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Boss_div_Day"));
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica01_Agent_Year(pk_Boss, año) {
+            var parametros = {
+                pk_supervisor: pk_Boss,
+                añoParametro: año
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '@Url.Action("chart_Agent_Year__Organizational", "ReportAgent")',
+                    data: { filtro: parametros },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'supervisor');
+                        data1.addColumn('number', 'cantidad de palabras mal dichas');
+                        for (var i = 0; i < data.length; i++) {
+
+                            data1.addRow([
+                                    data[i].nombreAgent,
+                                     data[i].cantidad,
+                            ]);
+                        };
+                        
+                        var options = {
+                            title: "Reporte de Agent por año",
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '90%', },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+
+                        $("#Agent_div_chart").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Agent_div_chart"));
+                        function selectItem() {
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var Year = parametros.añoParametro;
+                                var name = data1.getValue(select.row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].nombreAgent == name) {
+                                        array = [data[i].codigo];
+                                        data[i].codigo = array[i];
+                                        var pk_agent = array;
+                                    
+
+                                    }
+                                }
+                                var pkAgente = pk_agent;
+                                var yearr = Year;
+                                if (pk_agent == pkAgente && Year == yearr) {
+                                    if (document.getElementById("chart07")) {
+                                        document.getElementById("chart07").style.display = 'none'
+
+                                        grafica02_Agent_Month(pk_agent, yearr);
+
+                                        document.getElementById("idEmpresa").innerHTML = "Reporte del agente " + name + " " + "del" + " " + año + " " + "por meses";
+                                        document.getElementById("monthAgent").innerHTML = "Agente :" + " " + name;
+                                        document.getElementById("mesagente").style.display = 'inline';
+                                    }
+
+                                }
+                            }
+                        }
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+                })
+            });
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+
+        function grafica02_Agent_Month(pk_offi, Year) {
+            var parametros = {
+                pk_agent: pk_offi,
+                Year_Parm: Year,
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_Agent_Month", "ReportAgent")',
+                    dataType: 'json',
+                    data: {
+                        filtro: parametros
+                    },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'cantidad');
+                        var options = {
+                            title: "Reporte del  mes del año " + " " + Year + "" + " de la oficina " + "" + pk_offi,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].mes, data[i].cantidad1]);
+                        }
+
+                        $("#Agent_div_Month").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Agent_div_Month"));
+                        function selectItem() {
+
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var mes = data1.getValue(select.row, 0);
+                                var month1 = mes
+                                var año = parametros.Year_Parm;
+                                var pkAgent = parametros.pk_agent;
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].pk_agent01 == pkAgent) {
+                                        array = [data[i].name_anget];
+                                        data[i].name_anget = array[i];
+                                        var name = array;
+                                    }
+                                }
+                                if (parametros.pk_agent == pkAgent && mes == month1 && parametros.Year_Parm == año) {
+                                    if (document.getElementById("chart08")) {
+
+                                        document.getElementById("chart08").style.display = 'none'
+                                        grafica03_Agent_Day(pkAgent, month1, año);
+                                        document.getElementById("idEmpresa").innerHTML = " Reporte del agente " + name + " " + "de" + " " + mes + " " + "del" + " " + año;
+                                        document.getElementById("dayAgent").innerHTML = mes + " " + "del" + " " + año;
+                                        document.getElementById("diaagente").style.display = 'inline';
+                                    }
+
+                                }
+                            }
+
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+
+                        console.log(data);
+                    }
+                })
+            });
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica03_Agent_Day(pk_offi, month, Year) {
+            var parametros = {
+                pk_Boss_param: pk_offi,
+                Month_param: month,
+                YearParam: Year
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_Agent_Day", "ReportAgent")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'dias');
+                        data1.addColumn('number', 'cantidad de palabras mal dichas');
+                        var options = {
+                            title: "Reporte de " + " " + month + " del " + Year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].dias, data[i].cantidad2]);
+                        }
+
+                        $("#Agent_div_Day").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Agent_div_Day"));
+                        function selectItem() {
+                            var select = chart.getSelection()[0];
+                            var pk_agente = parametros.pk_Boss_param;
+                            var dia = data1.getValue(select.row, 0);
+                            var day = dia;
+                            if (select) {
+                                if(parametros.pk_Boss_param==pk_agente && day==dia)
+                                {
+                                    if (document.getElementById("chart09")) {
+                                        document.getElementById("chart09").style.display = 'none';
+                                        Report_Call(pk_agente, day);
+                                        document.getElementById("ejemplo06").style.display = 'inline';
+                                        document.getElementById("llamadaa").innerHTML = "Llamadas del agente :" + parametros.pk_Boss_param + " " + "del mes" + " " + parametros.Month_param;
+                                    }
+                                }
+                            }
+                        }
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function Report_Call(pk_agente, date_day) {
+            var parametros = {
+                Para_pkagente: pk_agente,
+                para_fecha: date_day
+            };
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Report_Call", "ReportAgent")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'llamada');
+                        data1.addColumn('number', 'Cantidad de palabras mal dichas');
+
+                        var opctios = {
+                            //title: "Reporte de " + " " + month + " del " + Year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                        };
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                            {
+                                calc: "stringify",
+                                sourceColumn: 1,
+                                type: "string",
+                                role: "annotation"
+                            }
+                        ]);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].hora, data[i].cantidad000]);
+                        };
+
+                        $("#chart_agent_call").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("chart_agent_call"));
+                        chart.draw(view, opctios);
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+
+                })
+
+            });
+        }
+
+    </script>

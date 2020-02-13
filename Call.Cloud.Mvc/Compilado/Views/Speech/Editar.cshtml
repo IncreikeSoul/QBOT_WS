@@ -1,0 +1,54 @@
+﻿@model Call.Cloud.Mvc.Models.SpeechVM.EditarSpeechVm
+@{
+    ViewBag.Title = "Speech";
+    Layout = "";
+}
+<div class="page-content">
+    <div class="panel">
+        <div class="panel-body container-fluid">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div class="example-wrap">                     
+                        @*<p>
+                            @ViewBag.Title
+                        </p>*@
+                        @using (@Html.BeginForm("Editar", "Speech", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Item.PkSpeech)
+
+                            int pk = Int32.Parse(Model.Item.PkSpeech.ToString());
+                            Session["SessionSpeechName"] = pk;
+
+                            <div class="form-group form-material">                              
+                                @Html.Label("LastName", "Name", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name", @maxlength = "350", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+                                </div>
+                                @Html.Label("Business", "Business", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.Item.PK_Business, Model.Business, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group form-material">                                
+                                @Html.Label("Description", "Description", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.TextAreaFor(model => model.Item.Description, new { style = "width:612px;height: 50px", htmlAttributes = new
+                                    { @class = "form-control", @placeholder = "Description", @maxlength = "2000", @onkeypress = "return soloLetras(event)",
+                                      @onpaste = "return false" } })
+                                </div>
+                            </div>                            
+                            <div class="form-group form-material">
+                                <div class="col-sm-9 col-sm-offset-4">
+                                    <button type="submit" class="btn btn-primary" onclick="return grabar();">Save</button>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

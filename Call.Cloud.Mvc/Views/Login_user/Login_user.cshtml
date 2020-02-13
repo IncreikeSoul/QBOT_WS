@@ -1,0 +1,207 @@
+﻿@model Call.Cloud.Mvc.Models.LoginVm.ListarLoginVm
+@{
+    ViewBag.Title = "Login_user";
+    //Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<head>
+    <link href="~/Content/Login/animate-custom.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Login/demo.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Login/style.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Login/style2.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Login/style3.css" type="text/css" rel="stylesheet" />
+    @*<script src="~/Scripts/Calender/jquery-1.12.0.min.js"></script>*@
+</head>
+
+
+<form class="validate-login" novalidate>
+    <div class="form-group">
+        <label class="form-label" for="parame_usuario">Username</label>
+        @Html.EditorFor(model => model.Filtro.parame_usuario, new
+        {
+            htmlAttributes = new
+        {
+                @class = "form-control",
+                @placeholder = "Enter your user",
+                @autocomplete = "off",
+                @required = "required",
+                @type = "text",
+                @maxlength = "100"
+            }
+        })
+        <span class="help-block">
+            Usuario de acceso al aplicativo
+        </span>
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="parame_contra">Password</label>
+        @Html.EditorFor(model => model.Filtro.parame_contra, new
+                {
+                    htmlAttributes = new
+                {
+                        @class = "form-control",
+                        @type = "password",
+                        @required = "required",
+                        @placeholder = "Enter your password",
+                        @autocomplete = "off",
+                        @maxlength = "100"
+                    }
+                })
+        <span class="help-block">
+            Password del aplicativo
+        </span>
+    </div>
+    <div class="form-group text-left">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="rememberme">
+            <label class="custom-control-label" for="rememberme"> Remember me for the next 30 days</label>
+        </div>
+    </div>
+    <button type="button" id="btnIngresar" onclick="Login01();" class="btn btn-default float-right">Secure login</button>
+</form>
+
+@*<div class="page animsition">
+    <div class="panel-body">
+        <div id="container_demo">
+            <a class="hiddenanchor" id="toregister"></a>
+            <a class="hiddenanchor" id="tologin"></a>
+            <div id="wrapper">
+                <div id="login" class="animate form">
+                    <h1>LISTEN TO ME</h1>
+
+                    <br />
+                    <p>
+                        @Html.Label("parame_usuario", "User: ", htmlAttributes: new { @class = "uname" })
+                    @Html.EditorFor(model => model.Filtro.parame_usuario, new
+                    {
+                        htmlAttributes = new
+                    {
+                            @class = "form-control",
+                            @placeholder = "Enter your user",
+                            @required = "required",
+                    @type = "text",
+                            @maxlength = "100"
+                        }
+                    })
+                </p>
+                <p>
+                    @Html.Label("parame_contra", "Password: ", htmlAttributes: new { @class = "youpasswd" })
+                @Html.EditorFor(model => model.Filtro.parame_contra, new
+                {
+                    htmlAttributes = new
+                {
+                        @class = "form-control",
+                        @type = "password",
+                        @required = "required",
+                @placeholder = "Enter your password",
+                        @maxlength = "100"
+                    }
+                })
+            </p>
+            <p class="keeplogin">
+                <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+                <label for="loginkeeping">Remember Password</label>
+            </p>
+            <p class="text-center">
+                <input type="submit" value="Ingresar" onclick="Login01();" />
+            </p>
+            <p class="change_link"></p>
+        </div>
+    </div>
+</div>
+</div>
+<div id="pp">
+
+</div>
+</div>*@
+
+<script type="text/javascript">
+
+    $("#Filtro_parame_contra").on('keypress', function (e) {
+        //Darle la tecla ENTER
+        if (e.which === 13) {
+            Login01();
+        }
+    });
+
+    $("#Filtro_parame_usuario").on('keypress', function (e) {
+        //Darle la tecla ENTER
+        if (e.which === 13) {
+            Login01();
+        }
+    });
+
+    function Login01() {
+        var parametros = {
+            parame_usuario: $("#Filtro_parame_usuario").val(),
+            parame_contra: $("#Filtro_parame_contra").val()
+        };
+
+        if (parametros.parame_usuario == "" && parametros.parame_contra == "") {
+            $("#login").addClass('animated bounce');
+            $("#login").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $(this).removeClass('animated bounce');
+            });
+        }
+
+        else if ($("#Filtro_parame_usuario").val() == "") {
+            $("#Filtro_parame_usuario").addClass('animated shake');
+            $("#Filtro_parame_usuario").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $(this).removeClass("animated shake");
+            });
+
+        } else if ($("#Filtro_parame_contra").val() == "") {
+            $("#Filtro_parame_contra").addClass('animated shake');
+            $("#Filtro_parame_contra").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $(this).removeClass('animated shake');
+            });
+        }
+
+         else if (parametros.parame_usuario != "" && parametros.parame_contra != "") {
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '@Url.Action("Login_usuario001")',
+                data: { filtro: parametros },
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var array = new Array();
+                        if (data[i].user != $("#Filtro_parame_usuario").val()) {
+                            alert('Error de Usuario');
+                        } else if (data[i].pass != $("#Filtro_parame_contra").val()) {
+                            alert('Error de contraseña');
+                        } else if (data[i].user == $("#Filtro_parame_usuario").val() && data[i].pass == $("#Filtro_parame_contra").val()) {
+                            array = [data[i].nombre_user];
+                            data[i].nombre_user = array[i];
+                            var name = array;
+                            var url = '@Url.Action("Principal","Login_user", new {name="hola"})';
+                                url = url.replace("hola", name);
+                                location.href = url;
+                            @*window.setTimeout(function () {
+                                var url = '@Url.Action("Principal","Login_user", new {name="hola"})';
+                                url = url.replace("hola", name);
+                                location.href = url;
+                            }, 100);*@
+                        }
+                    }
+                }
+
+            });
+        }
+        return false;
+    }
+
+</script>
+<script>
+    function pasarVariables(pagina, nombres) {
+        pagina += "?";
+        nomVec = nombres.split(",");
+        for (i = 0; i < nomVec.length; i++)
+            pagina += nomVec[i] + "=" + escape(eval(nomVec[i])) + "&";
+        pagina = pagina.substring(0, pagina.length - 1);
+        location.href = pagina;
+    }
+</script>
+

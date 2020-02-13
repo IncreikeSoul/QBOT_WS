@@ -1,0 +1,52 @@
+﻿@model Call.Cloud.Mvc.Models.RuleVM.EditarRuleVm
+@{
+    ViewBag.Title = "Rule";
+    Layout = "";
+}
+
+<div class="col-sm-12">
+    <div class="example-wrap">
+        @*<p>
+                @ViewBag.Title
+            </p>*@
+        @using (@Html.BeginForm("Editar", "Rule", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditRule" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Item.PkRule)
+            <div class="form-group">
+                @Html.Label("PkSection", "Secciones", htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div>
+                    @Html.DropDownListFor(model => model.Item.PkSection, Model.Secciones, new { @class = "form-control" })
+                </div>
+                @Html.Label("Nombre", "Nombre", htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div>
+                    @Html.EditorFor(model => model.Item.NameRule, new { htmlAttributes = new { @class = "form-control", @placeholder = "RuleName", @maxlength = "1000", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("TimeRule", "Time Rule", htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div>
+                    @Html.EditorFor(model => model.Item.TimeRule, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cod Int", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                </div>
+                @Html.Label("wieght", "Weight", htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div>
+                    @Html.EditorFor(model => model.Item.wieght, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cod Int", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                </div>
+            </div>
+            <div>
+                <div>
+                    <button type="submit" class="btn btn-primary" onclick="return grabar();">Grabar </button>
+                    <button type="button" class="btn btn-warning" data-dissmiss="modal">Cancelar</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        (function () {
+            iniciarEditar();
+        })();
+    </script>
+}

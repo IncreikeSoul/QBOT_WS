@@ -1,0 +1,98 @@
+﻿@using System.Threading.Tasks;
+@model Call.Cloud.Mvc.Models.OfficeVM.ListaOfficeVm
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <script type="text/javascript">
+        var office = office || {};
+        office.Urls = office.Urls || {};
+        office.Urls.baseUrl = '@Url.Action("~")';
+        office.Urls.editarOffice = '@Url.Action("Editar","Office")';
+        office.Urls.buscarOffice = '@Url.Action("Buscar","Office")';
+        office.Urls.deleteOffice = '@Url.Action("Eliminar","Office")';
+    </script>
+</head>
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+
+
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">Offices</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <form id="formAusenciaFiltro" role="form">
+                <div class="col-sm-12">
+                    <div class="form-group form-material">
+                        @Html.Label("Item.nameOffice", "Name Office", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.Filtro.nameOffice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name Office", @maxlength = "500" } })
+                        </div>
+                        @Html.Label("Item.PkEnterprise", "Enterprise", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.Filtro.PkEnterprise, Model.Enterprise, new { @class = "form-control" })
+                        </div>
+                    </div>
+            
+                </div>
+            </form>
+
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <button id="btnLimpiar" class="btn btn-default" type="button" onclick="">Limpiar</button>
+                    <button id="btnBuscar" class="btn btn-primary" type="button" onclick="">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="divGrid" class="col-sm-12">
+            @Html.Partial("Grid")
+        </div>
+    </div>
+    
+</div>
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="ModalOffice" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Office</h4>
+            </div>
+            <div class="modal-body" id="divModalOffice"> 
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/usados/office.js"></script>
+<script>
+
+    (function () {
+        iniciar();
+    })();
+
+    function eliminar(id) {
+        var urleliminar = office.Urls.deleteOffice;
+        if (confirm("¿Está seguro de realizar esta acción?")) {
+            if (id > 0)
+                window.location.href = urleliminar + '/' + id;
+        }
+
+    }
+</script>

@@ -1,0 +1,1552 @@
+﻿@model Call.Cloud.Mvc.Models.ReportVM01.ListaReportSubOffice
+@{
+    ViewBag.Title = "ReportSubOfficeWhiteList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/Base/css/calendario.css" type="text/css" rel="stylesheet" />
+    <script src="~/Scripts/Calender/calendar.js" type="text/javascript"></script>
+    <script src="~/Scripts/Calender/calendar-setup.js" type="text/javascript"></script>
+    <script src="~/Scripts/Calender/calendar-es.js" type="text/javascript"></script>
+    <script src="~/Scripts/Calender/jquery-1.12.0.min.js"></script>
+</head>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">Sub-Office</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <form id="formAusenciaFiltro" role="form">
+                <div class="col-sm-12">
+                    <div class="form-group form-material">
+                        @Html.Label("parm_Pk_office", "sub-office code", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.Filtro.parm_Pk_office, Model.listaOffice, new { @class = "form-control" })
+                           
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <button id="btnLimpiar" class="btn btn-default" type="button" onclick="">Clean</button>
+                    <button id="btnBuscar" class="btn btn-primary" type="button" onclick="grafica01();">Show</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="divGrid" class="col-sm-12">
+
+
+            <div id="chart01" style="width:auto; height:auto">
+                <div id="div_chart" style="width: 600px;"></div>
+            </div>
+
+            <div id="chart02" style="width:auto; height:auto">
+                <div id="div_chart1" style="width:900px;"></div>
+            </div>
+
+
+            <div id="chart03" style="width:auto; height:auto">
+                <div id="div_chart2" style="width: 1300px;"></div>
+            </div>
+
+            <div id="chart04" style="width:auto; height:auto;">
+                <div id="Business_div_chart" style="width:600px;"></div>
+            </div>
+
+            <div id="chart05" style="width:auto; height:auto">
+                <div id="Business_div_month" style="width:800px;"></div>
+            </div>
+
+            <div id="chart06" style="width:auto; height:auto">
+                <div id="Business_div_Day" style="width:1200px;"></div>
+            </div>
+            <div id="chart07" style="width:auto; height:auto">
+                <div id="Boss_div_chart" style="width:600px;"></div>
+            </div>
+            <div id="chart08" style="width:auto; height:auto">
+                <div id="Boss_div_Month" style="width:800px;"></div>
+            </div>
+
+            <div id="chart09" style="width:auto; height:auto">
+                <div id="Boss_div_Day" style="width:1200px;"></div>
+            </div>
+            <div id="chart10" style="width:auto; height:auto">
+                <div id="Agent_div_chart" style="width:600px;"></div>
+            </div>
+            <div id="chart11" style="width:auto; height:auto">
+                <div id="Agent_div_Month" style="width:800px;"></div>
+            </div>
+
+            <div id="chart12" style="width:auto; height:auto">
+                <div id="Agent_div_Day" style="width:1200px;"></div>
+            </div>
+            
+
+            <div id="chart14" style="width:auto; height:auto">
+                <div id="graffica_call" style="width:600px;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade modal-3d-slit" id="ModalReport" aria-hidden="true"
+         aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Reports</h4>
+                </div>
+                <div class="modal-body" id="divModalReport">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica01() {
+            var parametros = {
+                parm_Pk_office: $("#Filtro_parm_Pk_office").val(),
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '@Url.Action("chart_whiteSubOffice_Yaer")',
+                    data: { filtro: parametros },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].name_subOffice, data[i].portCumpli, data[i].PortnoCumpl]);;
+                        }
+
+                        console.log(data);
+                        var options = {
+                            title: "Reporte de año por Sub oficina",
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '90%', },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            tooltip: { trigger: 'selection' },
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+
+                        $("#div_chart").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("div_chart"));
+                        chart.setAction({
+                            id: 'Business',
+                            text: 'Business',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    var array1 = new Array();
+                                    if (data[i].name_subOffice == name) {
+                                        var array = new Array();
+                                        array1 = [data[i].pk_subOffice];
+                                        data[i].pk_subOffice = array1[i];
+                                        array = [data[i].año];
+                                        data[i] = array[i];
+                                        var añoo = array;
+                                        var pk_subOffice = array1;
+                                        
+                                    }
+                                }
+                                var pkSubOffice = pk_subOffice;
+                                var Year = añoo;
+                                chart.draw(view, options);
+                                if (pk_subOffice == pkSubOffice && añoo == Year) {
+                                    if (document.getElementById("chart01")) {
+                                        document.getElementById("chart01").style.display = 'none';
+                                        document.getElementById("chart02").style.display = 'none';
+                                        document.getElementById("chart03").style.display = 'none';
+                                        grafica01_Business_year(pkSubOffice, añoo);
+                                    }
+                                }
+
+                            }
+                        });
+                        chart.setAction({
+                            id: 'Mes',
+                            text: 'Month',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    if (data[i].name_subOffice == name) {
+                                        var array = new Array();
+                                        var array1 = new Array();
+                                        array1 = [data[i].pk_subOffice];
+                                        array = [data[i].año];
+                                        data[i].pk_subOffice = array1[i];
+                                        data[i] = array[i];
+                                        var añoo = array;
+                                        var pksuboffice = array1;
+
+                                    }
+                                }
+                                var pk_suboffice = pksuboffice;
+                                var year = añoo;
+                                chart.draw(view, options);
+                                if (pksuboffice == pk_suboffice && year == añoo) {
+                                    if (document.getElementById("chart01")) {
+                                        document.getElementById("chart01").style.display = 'none';
+                                        grafica02(pk_suboffice, añoo);
+                                    }
+                                }
+                            }
+                        })
+
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+                })
+            });
+        }
+    </script>
+
+
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+
+        function grafica02(pk_SubOffi, Year) {
+            var parametros = {
+                pk_subOffice_Parm: pk_SubOffi,
+                YearPa: Year,
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_whiteSubOffice_month")',
+                    dataType: 'json',
+                    data: {
+                        filtro: parametros
+                    },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');;
+                        var options = {
+                            title: "Reporte del  mes del año " + " " + Year + "" + " de la SubOficina " + "" + pk_SubOffi,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].mesSubOff, data[i].portCumpli1, data[i].PortnoCumpl1]);
+                        }
+
+                        $("#div_chart1").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("div_chart1"));
+                        function selectItem() {
+
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var mes = data1.getValue(select.row, 0);
+                                var month1 = mes
+                                var año = parametros.YearPa;
+                                var pkSubOffice = parametros.pk_subOffice_Parm;
+                                if (parametros.pk_subOffice_Parm == pkSubOffice && parametros.YearPa == año && mes == month1) {
+                                    if (document.getElementById("chart02")) {
+
+                                        document.getElementById("chart02").style.display = 'none'
+                                        grafica03(pkSubOffice, año, month1);
+
+                                    }
+
+                                }
+                            }
+                            console.log(parametros);
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+
+                        console.log(data);
+                    }
+                })
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica03(pk_offi, year, month) {
+            var parametros = {
+                pk_subOfficeDay: pk_offi,
+                añoDay: year,
+                mesDay: month
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_whiteSubOffice_Day")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            title: "Reporte de " + " " + month + " del " + year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].dias, data[i].portCumpli2, data[i].PortnoCumpl2]);
+                        }
+
+                        $("#div_chart2").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("div_chart2"));
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica01_Business_year(pk_SubOffice, año) {
+            var parametros = {
+                pk_Business_Parm: pk_SubOffice,
+                añoPamaretro: año
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '@Url.Action("chart_whiteList_Business_Organizational", "ReportBusinessWhiteList")',
+                    data: { filtro: parametros },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].name_Business_year, data[i].portCumpli, data[i].PortnoCumpl]);
+                        }
+                        var options = {
+                            title: "Reporte de año por negocio",
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '90%', },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            tooltip: { trigger: 'selection' },
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+
+                        $("#Business_div_chart").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Business_div_chart"));
+                        chart.setAction({
+                            id: 'Supervisor',
+                            text: 'Manager',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].name_Business_year == name) {
+                                        array = [data[i].pk_Business];
+                                        data[i].pk_Business = array[i];
+                                        var pk_Business = array;
+                                    }
+                                }
+                                var pkBusinesss = pk_Business
+                                var añoo = parametros.añoPamaretro;
+                                chart.draw(view, options);
+                                if (pk_Business == pkBusinesss) {
+                                    if (document.getElementById("chart03")) {
+                                        document.getElementById("chart03").style.display = 'none';
+                                        document.getElementById("chart04").style.display = 'none';
+                                        document.getElementById("chart05").style.display = 'none';
+                                        document.getElementById("chart06").style.display = 'none';
+                                        grafica01_Boss_Year(pkBusinesss, añoo);
+                                        console.log(pkBusinesss);
+                                    }
+
+                                }
+                            }
+
+                        });
+                        chart.setAction({
+                            id: 'mes',
+                            text: 'Month',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].name_Business_year == name) {
+                                        array = [data[i].pk_Business];
+                                        data[i].pk_Business = array[i];
+                                        var pk_Business = array;
+                                    }
+                                }
+                                var Year = parametros.añoPamaretro;
+
+                                var pkBusiness = pk_Business;
+                                chart.draw(view, options);
+                                if (pk_Business == pkBusiness && parametros.añoPamaretro == Year) {
+                                    if (document.getElementById("chart04")) {
+                                        document.getElementById("chart04").style.display = 'none';
+                                        grafica02_Business_Month(pkBusiness, Year);
+
+                                    }
+                                }
+                            }
+                        });
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+                })
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica02_Business_Month(pk_SubOffi, Year) {
+            var parametros = {
+                pk_Business_Par_month: pk_SubOffi,
+                añoMonth: Year,
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_whiteList_Business_Month", "ReportBusinessWhiteList")',
+                    dataType: 'json',
+                    data: {
+                        filtro: parametros
+                    },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            title: "Reporte del  mes del año " + " " + Year + "" + " de la negocio " + "" + pk_SubOffi,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].mes, data[i].portCumpli1, data[i].PortnoCumpl1]);
+                        }
+
+                        $("#Business_div_month").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Business_div_month"));
+                        function selectItem() {
+
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var mes = data1.getValue(select.row, 0);
+                                var month1 = mes
+                                var año = parametros.añoMonth;
+                                var pkBusiness = parametros.pk_Business_Par_month;
+                                if (parametros.pk_Business_Par_month == pkBusiness && parametros.añoMonth == año && mes == month1) {
+                                    if (document.getElementById("chart05")) {
+
+                                        document.getElementById("chart05").style.display = 'none';
+                                        grafica_Business_Day(pkBusiness, año, month1);
+
+                                    }
+
+                                }
+                            }
+                            console.log(parametros);
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+
+                        console.log(data);
+                    }
+                })
+            });
+        }
+
+    </script>
+
+
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica_Business_Day(pk_offi, year, month) {
+            var parametros = {
+                pk_Business_Day_parm: pk_offi,
+                Year_Param: year,
+                Month_para: month
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_whileList_Business_Day", "ReportBusinessWhiteList")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            title: "Reporte de " + " " + month + " del " + year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].dias, data[i].portCumpli2, data[i].PortnoCumpl2]);
+                        }
+
+                        $("#Business_div_Day").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Business_div_Day"));
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica01_Boss_Year(pkBusiness, año) {
+            var parametros = {
+                pk_business: pkBusiness,
+                añoParametro: año
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '@Url.Action("chart_whiteList_Boss_Year_Organizational", "ReportBossWhiteList")',
+                    data: { filtro: parametros },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'supervisor');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            data1.addRow([
+                                  data[i].name_boss_year,
+                                  data[i].portCumpli,
+                                    data[i].PortnoCumpl,
+
+                            ]);
+                        }
+
+                        console.log(data);
+                        var options = {
+                            title: "Reporte de año por supervisor",
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '90%', },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            tooltip: { trigger: 'selection' },
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+
+                        $("#Boss_div_chart").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Boss_div_chart"));
+                        chart.setAction({
+                            id: 'Agent',
+                            text: 'Agent',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].name_boss_year == name) {
+                                        array = [data[i].pk_Boss];
+                                        data[i].pk_Boss = array[i];
+                                        var pk_Boss = array;
+                                    }
+                                }
+                                var pkBoss = pk_Boss;
+                                var añoo = parametros.añoParametro;
+                                chart.draw(view, options);
+                                if (pk_Boss == pkBoss && parametros.añoParametro == añoo) {
+                                    if (document.getElementById("chart07")) {
+
+                                        document.getElementById("chart07").style.display = 'none';
+                                        document.getElementById("chart08").style.display = 'none';
+                                        document.getElementById("chart09").style.display = 'none';
+                                        grafica01_Agent_Year(pkBoss, añoo);
+                                    }
+
+                                }
+                            }
+                        });
+                        chart.setAction({
+                            id: 'Mes',
+                            text: 'Month',
+                            action: function () {
+                                data1.setCell(chart.getSelection()[0].row, 1,
+                                data1.getValue(chart.getSelection()[0].row, 1));
+                                var name = data1.getValue(chart.getSelection()[0].row, 0);
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].name_boss_year == name) {
+                                        array = [data[i].pk_Boss];
+                                        data[i].pk_Boss = array[i];
+                                        var pk_Boss = array;
+                                    }
+                                }
+                                var Year = parametros.añoParametro;
+                                var pkBoss = pk_Boss;
+
+                                chart.draw(view, options);
+                                if (pk_Boss == pkBoss && parametros.añoParametro == Year) {
+                                    if (document.getElementById("chart07")) {
+                                        document.getElementById("chart07").style.display = 'none';
+                                        Boss_Month(pkBoss, Year);
+                                    }
+                                }
+                            }
+                        })
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+                })
+            });
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+
+        function Boss_Month(pk_offi, Year) {
+            var parametros = {
+                pk_Boss_Parm: pk_offi,
+                Year_Parm: Year,
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_whiteList_Boss_Month", "ReportBossWhiteList")',
+                    dataType: 'json',
+                    data: {
+                        filtro: parametros
+                    },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            title: "Reporte del  mes del año " + " " + Year + "" + " de la oficina " + "" + pk_offi,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            isStacked: true,
+                            curveType: "function",
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].mes, data[i].portCumpli1, data[i].PortnoCumpl1]);
+                        }
+
+                        $("#Boss_div_Month").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Boss_div_Month"));
+                        function selectItem() {
+
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var mes = data1.getValue(select.row, 0);
+                                var month1 = mes
+                                var año = parametros.Year_Parm;
+                                var pkBoss = parametros.pk_Boss_Parm;
+                                if (parametros.pk_Boss_Parm == pkBoss && mes == month1 && parametros.Year_Parm == año) {
+                                    if (document.getElementById("chart08")) {
+
+                                        document.getElementById("chart08").style.display = 'none'
+                                        grafica03_Boss_Day(pkBoss, month1, año);
+
+                                    }
+
+                                }
+                            }
+
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+
+                        console.log(data);
+                    }
+                })
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica03_Boss_Day(pk_offi, month, Year) {
+            var parametros = {
+                pk_Boss_Parm1: pk_offi,
+                month_Pam: month,
+                Year_Parm1: Year
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_whiteList_Boss_Day", "ReportBossWhiteList")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            title: "Reporte de " + " " + month + " del " + Year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].dia, data[i].portCumpli2, data[i].PortnoCumpl2]);
+                        }
+
+                        $("#Boss_div_Day").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Boss_div_Day"));
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica01_Agent_Year(pk_Boss, año) {
+            var parametros = {
+                pk_supervisor: pk_Boss,
+                añoParametros: año
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '@Url.Action("chart_whiteList_Agent_Organizational", "ReportAgentWhiteList")',
+                    data: { filtro: parametros },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'supervisor');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([
+                                       data[i].nombreAgent,
+                                        data[i].portCumpli,
+                                        data[i].PortnoCumpl,
+                            ]);
+                        }
+
+
+                        console.log(data);
+                        var options = {
+                            title: "Reporte de Agent por año",
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '90%', },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+
+                        $("#Agent_div_chart").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Agent_div_chart"));
+                        function selectItem() {
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var Year = parametros.añoParametros;
+
+                                var name = data1.getValue(select.row, 0);
+
+                                for (var i = 0; i < data.length; i++) {
+                                    var array = new Array();
+                                    if (data[i].nombreAgent == name) {
+                                        array = [data[i].codigo];
+                                        data[i].codigo = array[i];
+                                        var pk_Agent = array;
+                                    }
+                                }
+                                var pkAgent = pk_Agent;
+
+                                if (pk_Agent == pkAgent && parametros.añoParametros == Year) {
+
+                                    if (document.getElementById("chart10")) {
+
+                                        document.getElementById("chart10").style.display = 'none'
+                                        grafica02_Agent_Month(pkAgent, Year);
+                                       
+                                    }
+
+                                }
+                            }
+                        }
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+                })
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+
+        function grafica02_Agent_Month(pk_offi, Year) {
+            var parametros = {
+                pk_agent: pk_offi,
+                Year_Parm: Year,
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_whiteList_Agent_Month", "ReportAgentWhiteList")',
+                    dataType: 'json',
+                    data: {
+                        filtro: parametros
+                    },
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'mes');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            title: "Reporte del  mes del año " + " " + Year + "" + " de la oficina " + "" + pk_offi,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].mes, data[i].portCumpli1, data[i].PortnoCumpl1]);
+                        }
+
+                        $("#Agent_div_Month").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Agent_div_Month"));
+                        function selectItem() {
+
+                            var select = chart.getSelection()[0];
+                            if (select) {
+                                var mes = data1.getValue(select.row, 0);
+                                var month1 = mes
+                                var año = parametros.Year_Parm;
+                                var pkBoss = parametros.pk_agent;
+                                if (parametros.pk_agent == pkBoss && mes == month1 && parametros.Year_Parm == año) {
+                                    if (document.getElementById("chart11")) {
+
+                                        document.getElementById("chart11").style.display = 'none'
+                                        grafica03_Agent_Day(pkBoss, month1, año);
+
+                                    }
+
+                                }
+                            }
+
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+
+                        console.log(data);
+                    }
+                })
+            });
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function grafica03_Agent_Day(pk_offi, month, Year) {
+            var parametros = {
+                pk_Boss_param: pk_offi,
+                Month_param: month,
+                YearParam: Year
+            }
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("chart_whiteList_Agent_Day", "ReportAgentWhiteList")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'dias');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            title: "Reporte de " + " " + month + " del " + Year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                            annotations: {
+                                boxStyle: {
+                                    stroke: '#888',
+                                    strokeWidth: 1,
+                                    rx: 10,
+                                    ry: 10,
+                                    gradient: {
+                                        color1: '#fbf6a7',
+                                        color2: '#33b679',
+                                        x1: '0%', y1: '0%',
+                                        x2: '100%', y2: '100%',
+                                        useObjectBoundingBoxUnits: true
+                                    }
+                                }
+                            },
+
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1, {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        }, 2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].dias, data[i].portCumpli2, data[i].PortnoCumpl2]);
+                        }
+
+                        $("#Agent_div_Day").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("Agent_div_Day"));
+                        function selectItem() {
+                            var select = chart.getSelection()[0];
+                            var pk_agente = parametros.pk_Boss_param;
+                            var dia = data1.getValue(select.row, 0);
+                            var day = dia;
+                            if (parametros.pk_Boss_param == pk_agente && dia == day) {
+                                if (document.getElementById("chart12")) {
+                                    document.getElementById("chart12").style.display = 'none';
+                                    Report_call(pk_agente, dia);
+                                }
+                            }
+                        }
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function Report_call(pk_agent, date) {
+            var parametros = {
+                Param_pk_Agente: pk_agent,
+                Param_Date: date
+
+            };
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("report_call", "ReportAgentWhiteList")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'dias');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            //title: "Reporte de " + " " + month + " del " + Year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                            {
+                                calc: "stringify",
+                                sourceColumn: 1,
+                                type: "string",
+                                role: "annotation"
+
+                            },
+                            2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].hora, data[i].CantCumpl0001, data[i].cantNoCumpl0001]);
+                        }
+
+
+                        $("#graffica_call").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("graffica_call"));
+                        function selectItem() {
+                            var select = chart.getSelection()[0];
+                            var pk_agent = parametros.Param_pk_Agente;
+                            var dia = data1.getValue(select.row, 0);
+                            var day = dia;
+
+                            if (select) {
+                                if (parametros.Param_pk_Agente==pk_agent && dia==day) {
+                                    if (document.getElementById("chart12"))
+                                    {
+                                        document.getElementById("chart12").style.display = 'none';
+                                        Report_call(pk_agent, dia);
+                                    }
+                                }
+                            }
+                        }
+                        google.visualization.events.addListener(chart, 'select', selectItem);
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+
+    </script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ['corechart'] });
+        function Report_call(pk_agent, date) {
+            var parametros = {
+                Param_pk_Agente: pk_agent,
+                Param_Date: date
+
+            };
+            $(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("report_call", "ReportAgentWhiteList")',
+                    data: {
+                        filtro: parametros
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var data1 = new google.visualization.DataTable();
+                        data1.addColumn('string', 'dias');
+                        data1.addColumn('number', 'Porcentajes de palabras bien dichas');
+                        data1.addColumn('number', 'Porcentaje de palabras mal dichas');
+                        var options = {
+                            //title: "Reporte de " + " " + month + " del " + Year,
+                            legend: { position: 'top', maxLines: 15 },
+                            fontsize: "100px;",
+                            chartArea: { width: '100%', height: '70%', left: 49, top: 50 },
+                            backgroundColor: 'transparent',
+                            curveType: "function",
+                            isStacked: true,
+                            vAxis: { format: '#\'%\'' },
+                        }
+                        var view = new google.visualization.DataView(data1);
+                        view.setColumns([0, 1,
+                            {
+                                calc: "stringify",
+                                sourceColumn: 1,
+                                type: "string",
+                                role: "annotation"
+
+                            },
+                            2,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 2,
+                                            type: "string",
+                                            role: "annotation"
+                                        }
+                        ]);
+                        console.log(parametros);
+                        for (var i = 0; i < data.length; i++) {
+                            data1.addRow([data[i].hora, data[i].CantCumpl0001, data[i].cantNoCumpl0001]);
+                        }
+
+                        $("#graffica_call").css("height", "400");
+                        var chart = new google.visualization.ColumnChart(document.getElementById("graffica_call"));
+
+                        chart.draw(view, options);
+                    },
+                    error: function () {
+                        console.log(data);
+
+                    }
+                })
+            });
+        }
+
+    </script>

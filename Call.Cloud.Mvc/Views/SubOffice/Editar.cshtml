@@ -1,0 +1,48 @@
+﻿@model Call.Cloud.Mvc.Models.SubOfficeVM.EditarSubOfficeVm
+@{
+    ViewBag.Title = "SubOffice";
+    Layout = "";
+}
+
+<div class="page-content">
+    <div class="panel">
+        <div class="panel-body container-fluid">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div class="example-wrap">
+                        @using (@Html.BeginForm("Editar", "SubOffice", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Item.PkSubOffice)
+
+                            <div class="form-group form-material">
+                                @Html.Label("nameSubOffice", "Name subOffice", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.nameSubOffice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name SubOffice", @maxlength = "500", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+                                </div>
+                                @Html.Label("PkOffice", "Pk Office", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.Item.PkOffice, Model.Office, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group form-material">
+                                <div class="col-sm-9 col-sm-offset-4">
+                                    <button type="submit" id="btnGrabar" class="btn btn-primary" onclick="return grabar();">Grabar </button>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        iniciarEditar();
+    })();
+</script>
+

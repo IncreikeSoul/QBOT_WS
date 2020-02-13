@@ -1,0 +1,48 @@
+﻿@model Call.Cloud.Mvc.Models.SpeechVM.EditarSpeechVm
+@{
+    ViewBag.Title = "Speech";
+    Layout = "";
+}
+<div class="col-sm-12">
+    <div>
+        @using (@Html.BeginForm("Editar", "Speech", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Item.PkSpeech)
+
+            int pk = Int32.Parse(Model.Item.PkSpeech.ToString());
+            Session["SessionSpeechName"] = pk;
+
+            <div class="form-group">
+                @Html.Label("Business", "Business", htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.Item.PK_Business, Model.Business, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("LastName", "Name", htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Item.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name", @maxlength = "350", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+            </div>
+            <div class="form-group">
+                @Html.Label("Description", "Description", htmlAttributes: new { @class = "form-label" })
+                <br />
+                @Html.TextAreaFor(model => model.Item.Description, new
+                {
+                    style = "width:100%;height: 50px",
+                    htmlAttributes = new
+                {
+                        @class = "form-control",
+                        @placeholder = "Description",
+                        @maxlength = "2000",
+                        @onkeypress = "return soloLetras(event)",
+                    @onpaste = "return false"
+                    }
+                })
+            </div>
+            <div class="form-group">
+                <div>
+                    <button type="submit" class="btn btn-primary" onclick="return grabar();">Save</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

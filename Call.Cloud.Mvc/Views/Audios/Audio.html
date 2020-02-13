@@ -1,0 +1,2194 @@
+
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="bootstrap admin template">
+    <meta name="author" content="">
+    
+    <title>SmartListener | Gestión de Calidad de Call Centers</title>
+    <link href="/ListenToMeV3/Content/images/favicon.ico" rel="shortcut icon">
+    <!-- Stylesheets -->
+    <link href="/ListenToMeV3/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/ListenToMeV3/Content/css/bootstrap-extend.min.css" rel="stylesheet" />
+    <link href="/ListenToMeV3/Content/css/site.min.css" rel="stylesheet" />
+    <!-- Plugins -->
+    <link href="/ListenToMeV3/Content/vendor/animsition/animsition.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/asscrollable/asScrollable.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/switchery/switchery.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/intro-js/introjs.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/slidepanel/slidePanel.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/flag-icon-css/flag-icon.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/waves/waves.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/chartist-js/chartist.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/jvectormap/jquery-jvectormap.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/css/v1.css" rel="stylesheet" />
+    <!-- Fonts -->
+    
+    <link href="/ListenToMeV3/Content/web-icons/web-icons.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/material-design/material-design.min.css" rel="stylesheet" />
+    
+    <link href="/ListenToMeV3/Content/brand-icons/brand-icons.min.css" rel="stylesheet" />
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    
+    <script src="/ListenToMeV3/Content/vendor/modernizr/modernizr.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/breakpoints/breakpoints.js"></script>
+    <script>
+  Breakpoints();
+    </script>
+    <script src="/ListenToMeV3/Content/vendor/jquery/jquery.min.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/jquery/jquery.js"></script>
+</head>
+<body class="dashboard">
+ 
+    <nav class="site-navbar navbar navbar-inverse navbar-fixed-top navbar-mega" role="navigation">
+
+        <div class="navbar-container container-fluid">
+            <!-- Navbar Collapse -->        
+            <div class="navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+                <!-- Navbar Toolbar -->
+                <ul class="nav navbar-toolbar">                    
+                    <li id="toggleMenubar">                       
+                        <a data-toggle="menubar" href="#" role="button">                           
+                            <i class="icon hamburger hamburger-arrow-left">
+                                <span class="sr-only">Toggle menubar</span>
+                                <span class="hamburger-bar"></span>
+                             
+                            </i>
+                       
+                        </a>
+                    </li>
+               
+                    <li>
+                        <a class="icon md-search" data-toggle="collapse" href="#site-navbar-search" role="button">
+                            <span class="sr-only">Toggle Search</span>
+                        </a>
+                    
+                    </li>
+                </ul>
+                
+                <!-- End Navbar Toolbar -->
+                <!-- Navbar Toolbar Right -->
+
+
+                <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+               
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false"
+                           data-animation="scale-up" role="button">
+                            <i class="icon md-notifications" aria-hidden="true"></i>
+                            <span class="badge badge-danger up">5</span>                          
+                        </a>                                    
+                       
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                            
+                             <li class="dropdown-menu-header" role="presentation">
+                                <h5>NOTIFICATIONS</h5>
+                                <span class="label label-round label-danger">New 5</span>                           
+                            </li>
+                            <li class="list-group" role="presentation">
+                                <div data-role="container">
+                                    <div data-role="content">
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <i class="icon md-receipt bg-red-600 white icon-circle" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">A new order has been placed</h6>
+                                                    <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">5 hours ago</time>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <i class="icon md-account bg-green-600 white icon-circle" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Completed the task</h6>
+                                                    <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">2 days ago</time>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <i class="icon md-settings bg-red-600 white icon-circle" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Settings updated</h6>
+                                                    <time class="media-meta" datetime="2015-06-11T14:05:00+08:00">2 days ago</time>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Event started</h6>
+                                                    <time class="media-meta" datetime="2015-06-10T13:50:18+08:00">3 days ago</time>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <i class="icon md-comment bg-orange-600 white icon-circle" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Message received</h6>
+                                                    <time class="media-meta" datetime="2015-06-10T12:34:48+08:00">3 days ago</time>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown-menu-footer" role="presentation">
+                                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                                    <i class="icon md-settings" aria-hidden="true"></i>
+                                </a>
+                                <a href="javascript:void(0)" role="menuitem">
+                                    All notifications
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="javascript:void(0)" title="Messages" aria-expanded="false"
+                           data-animation="scale-up" role="button">
+                            <i class="icon md-email" aria-hidden="true"></i>
+                            <span class="badge badge-info up">3</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                            <li class="dropdown-menu-header" role="presentation">
+                                <h5>MESSAGES</h5>
+                                <span class="label label-round label-info">New 3</span>
+                            </li>
+                            <li class="list-group" role="presentation">
+                                <div data-role="container">
+                                    <div data-role="content">
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <span class="avatar avatar-sm avatar-online">
+                                                        <img src="/ListenToMeV3/Content/portraits/2.jpg" alt="..." />
+                                                        <i></i>
+                                                    </span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Mary Adams</h6>
+                                                    <div class="media-meta">
+                                                        <time datetime="2015-06-17T20:22:05+08:00">30 minutes ago</time>
+                                                    </div>
+                                                    <div class="media-detail">Anyways, i would like just do it</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <span class="avatar avatar-sm avatar-off">
+                                                        <img src="/ListenToMeV3/Content/portraits/3.jpg" alt="..." />
+                                                        <i></i>
+                                                    </span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Caleb Richards</h6>
+                                                    <div class="media-meta">
+                                                        <time datetime="2015-06-17T12:30:30+08:00">12 hours ago</time>
+                                                    </div>
+                                                    <div class="media-detail">I checheck the document. But there seems</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <span class="avatar avatar-sm avatar-busy">
+                                                        <img src="/ListenToMeV3/Content/portraits/4.jpg" alt="..." />
+                                                        <i></i>
+                                                    </span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">June Lane</h6>
+                                                    <div class="media-meta">
+                                                        <time datetime="2015-06-16T18:38:40+08:00">2 days ago</time>
+                                                    </div>
+                                                    <div class="media-detail">Lorem ipsum Id consectetur et minim</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item" href="javascript:void(0)" role="menuitem">
+                                            <div class="media">
+                                                <div class="media-left padding-right-10">
+                                                    <span class="avatar avatar-sm avatar-away">
+                                                        <img src="/ListenToMeV3/Content/portraits/5.jpg" alt="..." />
+                                                        <i></i>
+                                                    </span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">Edward Fletcher</h6>
+                                                    <div class="media-meta">
+                                                        <time datetime="2015-06-15T20:34:48+08:00">3 days ago</time>
+                                                    </div>
+                                                    <div class="media-detail">Dolor et irure cupidatat commodo nostrud nostrud.</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown-menu-footer" role="presentation">
+                                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
+                                    <i class="icon md-settings" aria-hidden="true"></i>
+                                </a>
+                                <a href="javascript:void(0)" role="menuitem">
+                                    See all messages
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="toggleChat">
+                        <a data-toggle="site-sidebar" href="javascript:void(0)" title="Chat" data-url="site-sidebar.tpl">
+                            <i class="icon md-comment" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- End Navbar Toolbar Right -->
+                <div class="navbar-brand navbar-brand-center">
+                    <a class="animsition-link" href="/ListenToMeV3/Login_user/Principal">
+                        <img src="/ListenToMeV3/Content/images/logo.png" class="navbar-brand-logo" />
+                    </a>
+                </div>
+            </div>
+            <!-- End Navbar Collapse -->
+            <!-- Site Navbar Seach -->
+            <div class="collapse navbar-search-overlap" id="site-navbar-search">
+                <form role="search">
+                    <div class="form-group">
+                        <div class="input-search">
+                            <i class="input-search-icon md-search" aria-hidden="true"></i>
+                            <input type="text" class="form-control" name="site-search" placeholder="Search...">
+                            <button type="button" class="input-search-close icon md-close" data-target="#site-navbar-search"
+                                    data-toggle="collapse" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- End Site Navbar Seach -->
+        </div>
+    </nav>
+    <div class="site-menubar">
+        <div class="site-menubar-header cover">
+            <div class="cover-background vertical-align" style="background-image: url('../../Content/images/color-blanco.png'); ">
+                <div class="vertical-align-middle">
+                    <a class="avatar avatar-lg " href="javascript:void(0)">
+                        <img src="/ListenToMeV3/Content/portraits/17.jpg" />
+                    </a>
+                    <div class="site-menubar-info col-sm-8">
+                        <h5 class="site-menubar-user" style="color:coral; font-weight:bolder;" ><label id="user" >Metrica X</label></h5>
+                        <p class="site-menubar-email" style="color:blueviolet">contacto@metricax.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="position: relative;" class="site-menubar-body scrollable scrollable-inverse is-enabled scrollable-vertical">
+            <div style="height: 0px; width: 277px;" class="scrollable-container">
+                <div style="width: 260px;" class="scrollable-content">
+                    <div class="site-menubar-body">
+                        <div>
+                            <div>
+                                <ul class="site-menu">
+                                    <!--Audio-->
+                                    <li class="site-menu-item active">
+                                        <a class="animsition-link" href="/ListenToMeV3/Audios/Audios">
+                                            <i class="site-menu-icon md-audio" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Audio</span>
+                                        </a>
+                                    </li>
+                                    <!--Termino de Audio -->
+
+                                    <!--Mantenimiento -->
+                                    <li class="site-menu-item active">
+                                        <a class="animsition-link" href="/ListenToMeV3/Login_user/Mantenimiento">
+                                            
+                                            <i class="site-menu-icon md-wrench" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Mantenimiento </span>                                            
+                                        </a>
+                                    </li>
+                                    <!--Termino de Speech -->
+
+
+                                    
+
+                                    
+
+                                    
+
+                                    <!-- Agent -->
+                                    
+                                    <!--Termino de Agent -->
+
+                                    <!--White List -->
+                                    <li class="site-menu-item active">
+                                        <a class="animsition-link" href="/ListenToMeV3/WhiteList/Index">
+                                            <i class="site-menu-icon md-calendar" aria-hidden="true"></i>
+                                            <span class="site-menu-title">White List</span>
+                                        </a>
+                                    </li>
+                                    <!--Termino de White List -->
+
+                                    <!--Black List -->
+                                    <li class="site-menu-item active">
+                                        <a class="animsition-link" href="/ListenToMeV3/BlackList/Index">
+                                            <i class="site-menu-icon md-receipt" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Black List</span>
+                                        </a>
+                                    </li>
+                                    <!--Termino de Black List -->
+
+                                    <!-- WordRule -->
+                                    
+                                    <!--Termino de WordRule -->
+
+                                    <!--Empiezan los reportes listas Negras-->
+                                    <li class="site-menu-item has-sub">
+                                        <a class="animation-bottom-center">
+                                            <i class="site-menu-icon md-chart" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Report Black List</span>
+                                            <span class="site-menu-arrow"></span>
+                                        </a>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/Reports/Index">
+                                                    <span class="site-menu-title">Enterprise</span>
+
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/Office/ReportOffice">
+                                                    <span class=site-menu-title>Office</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportSubOffice/SubOffice">
+                                                    <span class="site-menu-title">SubOficce</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportBusiness/ReportBusiness">
+                                                    <span class="site-menu-title">Business</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportBoss/ReportBoss">
+                                                    <span class="site-menu-title">Boss</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportAgent/ReportAgent">
+                                                    <span class="site-menu-title">Agent</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+
+                                    <!--Empiezan los reportes listas Blancas-->
+                                    <li class="site-menu-item has-sub">
+                                        <a class="animation-bottom-center">
+                                            <i class="site-menu-icon md-chart" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Report White List</span>
+                                            <span class="site-menu-arrow"></span>
+                                        </a>
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportEnterpresi/ReportEnterpresi">
+                                                    <span class="site-menu-title">Enterprise</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportOffice/ReportOffice">
+                                                    <span class="site-menu-title">Office</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportSubOfficeWhiteList/ReportSubOfficeWhiteList">
+                                                    <span class="site-menu-title">SubOffice</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportBusinessWhiteList/ReportBusinessWhiteList">
+                                                    <span class="site-menu-title">Business</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportBossWhiteList/ReportBossWhiteList">
+                                                    <span class="site-menu-title">Boss</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/ReportAgentWhiteList/ReportAgentWhiteList">
+                                                    <span class="site-menu-title">Agent</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Empiezan los reportes de Eficacia-->
+                                    <li class="site-menu-item has-sub">
+                                        <a class="animation-bottom-center">
+                                            <i class="site-menu-icon md-chart" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Report Effectiviness</span>
+                                            <span class="site-menu-arrow"></span>
+                                        </a>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/Report_Effectiveness_Enterprise/Report_Effectiveness_Enterprise">
+                                                    <span class="site-menu-title">Enterprise</span>
+
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/Report_Effectiveness_Office/Index">
+                                                    <span class=site-menu-title>Office</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/Report_Effectiveness_SubOffice/Index">
+                                                    <span class="site-menu-title">SubOffice</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/Report_Effectiveness_Business/Index">
+                                                    <span class="site-menu-title">Business</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/Report_Effectiveness_Boss/Index">
+                                                    <span class="site-menu-title">Boss</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="/ListenToMeV3/Report_Effectiveness_Agent/Index">
+                                                    <span class="site-menu-title">Agent</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div draggable="false" class="scrollable-bar scrollable-bar-vertical scrollable-bar-hide">
+                <div style="height: 30px; transform: translate3d(0px, 0px, 0px);" class="scrollable-bar-handle">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page -->
+    
+
+
+
+
+<head>
+        <script type="text/javascript">
+            debugger;
+            var agent = agent || {};
+            agent.Urls = agent.Urls || {};
+            agent.Urls.baseUrl = '/ListenToMeV3/Audios/~';
+            agent.Urls.editarAgentUrl = '/ListenToMeV3/Audios/Detalle_Audio';
+            agent.Urls.searchAgentUrl = '/ListenToMeV3/Audios/Audios_Listar';
+            agent.Urls.findAgentUrl = '/ListenToMeV3/Audios/Buscar';
+            agent.Urls.findByBusinesstUrl = '/ListenToMeV3/Audios/GetElements';
+            agent.Urls.findByBosstUrl = '/ListenToMeV3/Audios/GetElementsByBoss';
+        </script>
+
+
+</head>
+<input id="hdnPathAudio" name="hdnPathAudio" type="hidden" value="" />
+
+
+<input name="__RequestVerificationToken" type="hidden" value="wVJ887GZkmtmztXMmNRS8g6EK4C3Cw4ls3AyQKKNZivwfP5OWTmIIJ2RbEyo67bER-hNM161NZuKvqEDI0rX-8ZnzOBvCIcL6Av79Lq1rt81" />
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">Audios</h1>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <form id="formAusenciaFiltro" role="form" method="post">
+                    <div class="col-sm-12">
+                        <div class="form-group form-material">
+                            <label class="control-label col-sm-2" for="PkBusiness">Business</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" data-val="true" data-val-number="El campo PK_Business debe ser un número." data-val-required="El campo PK_Business es obligatorio." id="Filtro_PK_Business" name="Filtro.PK_Business"><option value="">TODOS</option>
+<option value="1">Telefon&#237;a</option>
+<option value="2">Venta Directa</option>
+<option value="6">Venta Metal</option>
+<option value="5">venta Cruzada</option>
+<option selected="selected" value="0">Venta Metal</option>
+</select>
+                            </div>
+                            
+                            <label class="control-label col-sm-2" for="PkBoss">Boss</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" data-val="true" data-val-number="El campo Fk_Boss debe ser un número." data-val-required="El campo Fk_Boss es obligatorio." id="Filtro_Fk_Boss" name="Filtro.Fk_Boss"><option value="">TODOS</option>
+<option value="2">Isabel Melgar</option>
+<option value="7">Gonzales Pardo</option>
+<option value="11">Richard Flor</option>
+<option value="13">Silvia Guzman</option>
+<option value="16">Juan Hurango</option>
+<option value="19">Claudia Cisneros</option>
+</select>
+                            </div>                                                            
+                        </div>
+
+                        <div class="form-group form-material">
+                                <label class="control-label col-sm-2" for="PkAgent">Agent</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" data-val="true" data-val-number="El campo PkAgent debe ser un número." data-val-required="El campo PkAgent es obligatorio." id="Filtro_PkAgent" name="Filtro.PkAgent"><option value="">TODOS</option>
+<option value="4">Yhimy Feria</option>
+<option value="5">Jhontan Fernandez</option>
+<option value="8">Sheyla Neira</option>
+<option value="9">Almendra Garro</option>
+<option value="10">Anabeli Tribe&#241;os</option>
+<option value="12">Fiorela Garc&#237;a</option>
+<option value="14">Marco Cantalicio</option>
+<option value="15">Abel Durand</option>
+<option value="17">Luis Moran</option>
+<option value="18">Percy Alexander Santiago Farfan</option>
+</select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="col-sm-12">
+                    <div class="text-center">
+                        <button id="btnLimpiar" class="btn btn-default" type="button" >Clean</button>
+                        <button id="btnBuscar" class="btn btn-primary" type="button">Find</button>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div id="divGrid" class=" col-sm-12">
+                
+<div class="page animsition" style="animation-duration: 800ms; opacity: 1;">
+    <div class="page-header">
+        <strong>List of Audio</strong>
+
+        <div class="page-header-actions">
+
+        </div>
+
+    </div>
+    <div class="panel-body">
+        <audio style="display:none" id="player2" controls></audio>  
+        <div id="divGridPagina" class="table-responsive">            
+            <input id="items_count" name="items_count" type="hidden" value="50" />
+            <table class="table table-striped table-condensed text-center">
+                <tr>
+                    <th class="text-center col-sm-1">
+                        <a class="punteroMouse">Cod</a>
+                    </th>
+                    <th class="text-center col-sm-2">
+                        <a class="punteroMouse">Name Agent</a>
+                    </th>
+                    <th class="text-center col-sm-2">
+                        <a class="punteroMouse">Name Business</a>
+                    </th>
+                    <th class="text-center col-sm-2">
+                        <a class="punteroMouse">Second</a>
+                    </th>
+                    <th class="text-center col-sm-2">
+                        <a class="punteroMouse">Date</a>
+                    </th>
+                    <th class="text-center col-sm-3">
+                        <a class="punteroMouse">Hours</a>
+                    </th>
+                    <th class="text-center col-sm-3">
+                        <a class="punteroMouse">State</a>
+                    </th>  
+                    <th class="text-center col-sm-3">
+                        <a class="punteroMouse">Details</a>
+                    </th>  
+                    <th class="text-center col-sm-3">
+                        <a class="punteroMouse">Play</a>
+                    </th>                
+                </tr>
+
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">1458</td>
+                        <td class="text-center col-sm-2">Percy Alexander Santiago Farfan</td>
+                        <td class="text-center col-sm-1">Venta Metal</td>
+                        <td class="text-center col-sm-1">120</td>
+                        <td class="text-center col-sm-1">22/05/2017</td>
+                        <td class="text-center col-sm-1">05:56:23 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="1458" data-url="" data-file="6cbba78b-3a65-494d-8f27-8b64f43652bb.wav">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','6cbba78b-3a65-494d-8f27-8b64f43652bb.wav')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','6cbba78b-3a65-494d-8f27-8b64f43652bb.wav')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">469</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">120</td>
+                        <td class="text-center col-sm-1">22/05/2017</td>
+                        <td class="text-center col-sm-1">05:56:23 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="469" data-url="" data-file="6cbba78b-3a65-494d-8f27-8b64f43652bb.wav">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','6cbba78b-3a65-494d-8f27-8b64f43652bb.wav')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','6cbba78b-3a65-494d-8f27-8b64f43652bb.wav')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">457</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">7</td>
+                        <td class="text-center col-sm-1">09/11/2016</td>
+                        <td class="text-center col-sm-1">12:30:30 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="457" data-url="" data-file="2016M11D09_123030.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M11D09_123030.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M11D09_123030.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">456</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">3</td>
+                        <td class="text-center col-sm-1">08/11/2016</td>
+                        <td class="text-center col-sm-1">05:18:02 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="456" data-url="" data-file="2016M11D08_171802.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M11D08_171802.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M11D08_171802.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">455</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">29</td>
+                        <td class="text-center col-sm-1">02/11/2016</td>
+                        <td class="text-center col-sm-1">01:44:40 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="455" data-url="" data-file="2016M11D02_134440.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M11D02_134440.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M11D02_134440.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">454</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">3</td>
+                        <td class="text-center col-sm-1">02/11/2016</td>
+                        <td class="text-center col-sm-1">01:41:55 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="454" data-url="" data-file="2016M11D02_134155.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M11D02_134155.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M11D02_134155.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">453</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">0</td>
+                        <td class="text-center col-sm-1">02/11/2016</td>
+                        <td class="text-center col-sm-1">01:41:55 p.m.</td>
+                        <td class="text-center col-sm-1">Ingresado</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="453" data-url="" data-file="2016M11D02_134155.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M11D02_134155.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M11D02_134155.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">452</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">3</td>
+                        <td class="text-center col-sm-1">27/10/2016</td>
+                        <td class="text-center col-sm-1">11:21:49 a.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="452" data-url="" data-file="2016M10D27_112149.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D27_112149.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D27_112149.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">451</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">0</td>
+                        <td class="text-center col-sm-1">27/10/2016</td>
+                        <td class="text-center col-sm-1">11:21:49 a.m.</td>
+                        <td class="text-center col-sm-1">Ingresado</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="451" data-url="" data-file="2016M10D27_112149.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D27_112149.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D27_112149.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">450</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">3</td>
+                        <td class="text-center col-sm-1">27/10/2016</td>
+                        <td class="text-center col-sm-1">11:21:25 a.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="450" data-url="" data-file="2016M10D27_112125.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D27_112125.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D27_112125.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">449</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">4</td>
+                        <td class="text-center col-sm-1">27/10/2016</td>
+                        <td class="text-center col-sm-1">11:19:51 a.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="449" data-url="" data-file="2016M10D27_111951.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D27_111951.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D27_111951.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">448</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">14</td>
+                        <td class="text-center col-sm-1">27/10/2016</td>
+                        <td class="text-center col-sm-1">11:15:08 a.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="448" data-url="" data-file="2016M10D27_111508.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D27_111508.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D27_111508.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">447</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">4</td>
+                        <td class="text-center col-sm-1">13/10/2016</td>
+                        <td class="text-center col-sm-1">04:39:16 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="447" data-url="" data-file="2016M10D13_163916.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D13_163916.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D13_163916.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">446</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">7</td>
+                        <td class="text-center col-sm-1">12/10/2016</td>
+                        <td class="text-center col-sm-1">12:18:26 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="446" data-url="" data-file="2016M10D12_121826.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D12_121826.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D12_121826.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">445</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">6</td>
+                        <td class="text-center col-sm-1">11/10/2016</td>
+                        <td class="text-center col-sm-1">04:22:00 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="445" data-url="" data-file="2016M10D11_162200.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D11_162200.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D11_162200.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">444</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">133</td>
+                        <td class="text-center col-sm-1">11/10/2016</td>
+                        <td class="text-center col-sm-1">01:28:19 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="444" data-url="" data-file="2016M10D11_132819.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D11_132819.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D11_132819.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">443</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">40</td>
+                        <td class="text-center col-sm-1">11/10/2016</td>
+                        <td class="text-center col-sm-1">12:10:11 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="443" data-url="" data-file="2016M10D11_121011.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D11_121011.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D11_121011.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">442</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">30</td>
+                        <td class="text-center col-sm-1">11/10/2016</td>
+                        <td class="text-center col-sm-1">11:17:01 a.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="442" data-url="" data-file="2016M10D11_111701.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D11_111701.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D11_111701.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">441</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">3</td>
+                        <td class="text-center col-sm-1">10/10/2016</td>
+                        <td class="text-center col-sm-1">07:51:13 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="441" data-url="" data-file="2016M10D10_195113.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D10_195113.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D10_195113.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">440</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">3</td>
+                        <td class="text-center col-sm-1">06/10/2016</td>
+                        <td class="text-center col-sm-1">10:11:03 a.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="440" data-url="" data-file="2016M10D06_101103.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M10D06_101103.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M10D06_101103.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">439</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">4</td>
+                        <td class="text-center col-sm-1">30/09/2016</td>
+                        <td class="text-center col-sm-1">12:28:24 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="439" data-url="" data-file="2016M09D30_122824.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D30_122824.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D30_122824.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">438</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">3</td>
+                        <td class="text-center col-sm-1">30/09/2016</td>
+                        <td class="text-center col-sm-1">12:23:44 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="438" data-url="" data-file="2016M09D30_122344.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D30_122344.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D30_122344.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">437</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">3</td>
+                        <td class="text-center col-sm-1">30/09/2016</td>
+                        <td class="text-center col-sm-1">12:21:09 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="437" data-url="" data-file="2016M09D30_122109.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D30_122109.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D30_122109.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">436</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">40</td>
+                        <td class="text-center col-sm-1">30/09/2016</td>
+                        <td class="text-center col-sm-1">12:14:27 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="436" data-url="" data-file="2016M09D30_121427.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D30_121427.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D30_121427.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">435</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">41</td>
+                        <td class="text-center col-sm-1">30/09/2016</td>
+                        <td class="text-center col-sm-1">12:11:01 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="435" data-url="" data-file="2016M09D30_121101.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D30_121101.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D30_121101.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">434</td>
+                        <td class="text-center col-sm-2">Luis Moran</td>
+                        <td class="text-center col-sm-1">venta Cruzada</td>
+                        <td class="text-center col-sm-1">45</td>
+                        <td class="text-center col-sm-1">23/09/2016</td>
+                        <td class="text-center col-sm-1">02:59:10 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="434" data-url="" data-file="2016M09D23_145910.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D23_145910.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D23_145910.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">433</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">5</td>
+                        <td class="text-center col-sm-1">23/09/2016</td>
+                        <td class="text-center col-sm-1">02:46:11 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="433" data-url="" data-file="2016M09D23_144611.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D23_144611.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D23_144611.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">432</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">11</td>
+                        <td class="text-center col-sm-1">23/09/2016</td>
+                        <td class="text-center col-sm-1">02:45:49 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="432" data-url="" data-file="2016M09D23_144549.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D23_144549.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D23_144549.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">431</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">8</td>
+                        <td class="text-center col-sm-1">23/09/2016</td>
+                        <td class="text-center col-sm-1">02:45:35 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="431" data-url="" data-file="2016M09D23_144535.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D23_144535.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D23_144535.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">430</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">7</td>
+                        <td class="text-center col-sm-1">23/09/2016</td>
+                        <td class="text-center col-sm-1">02:45:21 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="430" data-url="" data-file="2016M09D23_144521.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D23_144521.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D23_144521.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">425</td>
+                        <td class="text-center col-sm-2">Abel Durand</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">6</td>
+                        <td class="text-center col-sm-1">22/09/2016</td>
+                        <td class="text-center col-sm-1">06:03:35 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="425" data-url="" data-file="2016M09D22_180335.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D22_180335.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D22_180335.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">411</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">34</td>
+                        <td class="text-center col-sm-1">21/09/2016</td>
+                        <td class="text-center col-sm-1">02:35:03 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="411" data-url="" data-file="2016M09D21_143503.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D21_143503.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D21_143503.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">391</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">61</td>
+                        <td class="text-center col-sm-1">13/09/2016</td>
+                        <td class="text-center col-sm-1">02:14:36 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="391" data-url="" data-file="2016M09D13_141436.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D13_141436.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D13_141436.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">390</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">33</td>
+                        <td class="text-center col-sm-1">13/09/2016</td>
+                        <td class="text-center col-sm-1">12:45:07 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="390" data-url="" data-file="2016M09D13_124507.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D13_124507.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D13_124507.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">389</td>
+                        <td class="text-center col-sm-2">Abel Durand</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">37</td>
+                        <td class="text-center col-sm-1">09/09/2016</td>
+                        <td class="text-center col-sm-1">05:34:54 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="389" data-url="" data-file="2016M09D09_173454.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D09_173454.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D09_173454.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">388</td>
+                        <td class="text-center col-sm-2">Abel Durand</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">42</td>
+                        <td class="text-center col-sm-1">09/09/2016</td>
+                        <td class="text-center col-sm-1">04:00:49 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="388" data-url="" data-file="2016M09D09_160049.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D09_160049.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D09_160049.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">387</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">6</td>
+                        <td class="text-center col-sm-1">08/09/2016</td>
+                        <td class="text-center col-sm-1">08:43:48 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="387" data-url="" data-file="2016M09D08_204348.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D08_204348.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D08_204348.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">386</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">7</td>
+                        <td class="text-center col-sm-1">08/09/2016</td>
+                        <td class="text-center col-sm-1">11:39:13 a.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="386" data-url="" data-file="2016M09D08_113913.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D08_113913.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D08_113913.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">385</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">4</td>
+                        <td class="text-center col-sm-1">08/09/2016</td>
+                        <td class="text-center col-sm-1">10:13:50 a.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="385" data-url="" data-file="2016M09D08_101350.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D08_101350.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D08_101350.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">384</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">34</td>
+                        <td class="text-center col-sm-1">06/09/2016</td>
+                        <td class="text-center col-sm-1">05:34:15 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="384" data-url="" data-file="2016M09D06_173415.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D06_173415.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D06_173415.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">383</td>
+                        <td class="text-center col-sm-2">Abel Durand</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">17</td>
+                        <td class="text-center col-sm-1">06/09/2016</td>
+                        <td class="text-center col-sm-1">03:11:06 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="383" data-url="" data-file="2016M09D06_151106.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D06_151106.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D06_151106.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">382</td>
+                        <td class="text-center col-sm-2">Abel Durand</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">60</td>
+                        <td class="text-center col-sm-1">06/09/2016</td>
+                        <td class="text-center col-sm-1">12:50:02 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="382" data-url="" data-file="2016M09D06_125002.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D06_125002.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D06_125002.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">380</td>
+                        <td class="text-center col-sm-2">Abel Durand</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">64</td>
+                        <td class="text-center col-sm-1">06/09/2016</td>
+                        <td class="text-center col-sm-1">12:34:33 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="380" data-url="" data-file="2016M09D06_123433.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D06_123433.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D06_123433.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">376</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">18</td>
+                        <td class="text-center col-sm-1">02/09/2016</td>
+                        <td class="text-center col-sm-1">03:59:54 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="376" data-url="" data-file="2016M09D02_155954.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D02_155954.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D02_155954.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">375</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">21</td>
+                        <td class="text-center col-sm-1">02/09/2016</td>
+                        <td class="text-center col-sm-1">03:49:46 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="375" data-url="" data-file="2016M09D02_154946.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D02_154946.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D02_154946.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">374</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">34</td>
+                        <td class="text-center col-sm-1">02/09/2016</td>
+                        <td class="text-center col-sm-1">01:30:07 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="374" data-url="" data-file="2016M09D02_133007.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M09D02_133007.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M09D02_133007.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">369</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">30</td>
+                        <td class="text-center col-sm-1">23/08/2016</td>
+                        <td class="text-center col-sm-1">07:45:36 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="369" data-url="" data-file="2016M08D23_194536.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M08D23_194536.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M08D23_194536.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">367</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">26</td>
+                        <td class="text-center col-sm-1">23/08/2016</td>
+                        <td class="text-center col-sm-1">04:42:44 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="367" data-url="" data-file="2016M08D23_164244.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M08D23_164244.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M08D23_164244.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">364</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">8</td>
+                        <td class="text-center col-sm-1">16/08/2016</td>
+                        <td class="text-center col-sm-1">02:33:42 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="364" data-url="" data-file="2016M08D17_143342.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M08D17_143342.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M08D17_143342.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td class="text-center col-sm-1">360</td>
+                        <td class="text-center col-sm-2">Marco Cantalicio</td>
+                        <td class="text-center col-sm-1">Venta Directa</td>
+                        <td class="text-center col-sm-1">10</td>
+                        <td class="text-center col-sm-1">17/08/2016</td>
+                        <td class="text-center col-sm-1">02:22:11 p.m.</td>
+                        <td class="text-center col-sm-1">Transcrito</td>
+                        <td class="text-right col-sm-1">
+                            <a class="btn btn-sm btn-primary btn-round icon wb-list" title="Detalle de Audio" data-toggle="modal" data-original-title="editar" data-target="#ModalAgent" data-id="360" data-url="" data-file="2016M08D17_142211.mp3">                                    
+                            </a>                       
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title="Reproducir" data-toggle="tooltip" onclick="reproducirAudio('','2016M08D17_142211.mp3')"
+                               data-original-title="Reproducir">
+                             </a>                           
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary btn-round" title="ReproducirPrueba" data-toggle="tooltip" onclick="reproducirAudioPrueba('','2016M08D17_142211.mp3')"
+                                data-original-title="ReproducirPrueba">
+                            </a>
+                        </td>
+                    </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/ListenToMeV3/Scripts/usados/Audios.js"></script>
+<!-- Modal que abre el detalle -->
+<script type="text/javascript" >
+    (function () {
+        iniciar();
+       
+    })();    
+</script>
+
+<!-- Botón reproducir / también pone pausa -->
+<script>
+    $("#player2").trigger('load');
+
+    var ind = 0;
+
+    function reproducirAudio(path, file) {
+        debugger;
+        var files = path + file;
+        
+        for (var count = 0; count <= 2; count++) {
+            count++;            
+            if (count == 1 && ind!=1) {
+                debugger;
+                $("#player2").attr("src", files).trigger("play");
+                ind++;
+                break;                
+            }
+
+            if (ind == 1) {
+                debugger;
+                $("#player2").attr("src", files).trigger("pause");
+                $("#player2").attr("src", files).prop("currentTime", 0);
+                ind--;
+                break;
+            }
+        }
+    }
+</script>
+
+<!-- Sacar audio de un segundo de inicio a otro segundo fin definido -->
+<script>
+    function reproducirAudioPrueba(path, file) {                
+            var files = path + file;     
+            var player = document.getElementById('player2');
+            player.setAttribute("src", files);
+            player.currentTime = 4.16;
+            player.play();
+
+            setTimeout(function () {
+                player.pause();
+            }, 1880.00);
+        }    
+</script>
+
+
+<!-- Para reproducir un audio     
+    function reproducirAudio(path, file) {
+    var files = path + file;
+    $("#player2").attr("src", files).trigger("play");
+    }    
+-->
+            </div>
+        </div>
+    </div>   
+</div>
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="ModalAgent" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Audios</h4>
+            </div>
+            <div class="modal-body" id="divModalAudio">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/ListenToMeV3/Scripts/usados/Audios.js"></script>
+<script type="text/javascript" >
+    (function () {
+        iniciar();
+    })();
+
+</script>
+
+<!--combo por negocio-->
+<script type="text/javascript">
+  // Inicialización
+  $(document).ready(function() {
+      $("#Filtro_PK_Business").change(function () {
+          debugger;
+          cambiaElementosByBusi($("#Filtro_PK_Business").val());
+          debugger;
+    });
+      cambiaElementosByBusi($("#Filtro_PK_Business").val());
+      debugger;
+  });
+
+  // Carga el desplegable de elementos en función
+  // de la categoría que le llega como parámetro.
+
+  function cambiaElementosByBusi(pk) {
+
+      debugger;
+      var dd = document.getElementById("Filtro_Fk_Boss");
+      debugger;
+    dd.options.length = 0;
+    dd.options[0] = new Option("TODOS");
+    dd.selectedIndex = 0;
+    debugger;
+    // Control de errores
+
+    $("#Filtro_Fk_Boss").ajaxError(function (event, request, settings) {
+        debugger;
+        dd.options[0] = new Option("Business incorrecta");
+        debugger;
+    });
+
+    var urlsupervisor = agent.Urls.findByBusinesstUrl;
+    // Obtenemos los datos...
+
+    $.getJSON(        
+        urlsupervisor, // URL a la acción        
+        {
+            pkbusiness: pk
+        },        
+
+        // Objeto JSON con parámetros
+        function(data) {                    // Función de retorno exitoso
+            $.each(data, function (i, item) {
+                debugger;
+                dd.options[0] = new Option("TODOS");
+                for (var i = 0; i < data.length; i++) {                 
+                    if (data.length >= 0) {
+                        dd.options[0] = new Option("TODOS");
+                        dd.selectedIndex = 0;
+                        dd.options[i+1]= new Option(data[i].FirstName, data[i].PkAgent);
+                        debugger;
+                    }
+                }
+          });
+            dd.disabled = false;
+            debugger;
+        });
+    }
+</script>
+
+<!--combo por suppervisor-->
+<script type="text/javascript">
+  // Inicialización
+  $(document).ready(function() {
+      $("#Filtro_Fk_Boss").change(function () {
+          debugger;
+          cambiaElementosBySup($("#Filtro_Fk_Boss").val());
+          debugger;
+    });
+      cambiaElementosBySup($("#Filtro_Fk_Boss").val());
+      debugger;
+  });
+
+  // Carga el desplegable de elementos en función
+  // de la categoría que le llega como parámetro.
+
+  function cambiaElementosBySup(pkb) {
+
+      debugger;
+      var di = document.getElementById("Filtro_PkAgent");
+      debugger;
+      di.options.length = 0;
+      di.options[0] = new Option("TODOS");
+      di.selectedIndex = 0;
+    debugger;
+    // Control de errores
+
+    $("#Filtro_PkAgent").ajaxError(function (event, request, settings) {
+        debugger;
+        di.options[0] = new Option("Boss incorrecta");
+        debugger;
+    });
+
+    var urlagent = agent.Urls.findByBosstUrl;
+    // Obtenemos los datos...
+
+    $.getJSON(
+        urlagent, // URL a la acción
+        {
+            pkboss: pkb
+        },        
+        // Objeto JSON con parámetros
+        function(data) {                    // Función de retorno exitoso
+            $.each(data, function (i, item) {
+                di.options[0] = new Option("TODOS");
+                for (var i = 0; i < data.length; i++) {
+                    if (data.length >= 0) {
+                        di.options[0] = new Option("TODOS");
+                        di.selectedIndex = 0;
+                        di.options[i + 1] = new Option(data[i].FirstName, data[i].PkAgent);
+                        debugger;
+                    }
+                }
+          });
+            di.disabled = false;
+            debugger;
+        });
+    }
+</script>
+
+    <!-- End Page -->
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="site-footer-legal">© 2016 <a href="http://themeforest.net/item/remark-responsive-bootstrap-admin-template/11989202">Smart Listener</a></div>
+        <div class="site-footer-right">
+            © Copyright 2016 SmartListener - Todos los derechos reservados
+        </div>
+    </footer>
+    <!-- Core  -->
+    <script src="/ListenToMeV3/Scripts/genericos/jquery.numeric.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/bootstrap/bootstrap.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/animsition/animsition.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/asscroll/jquery-asScroll.js"></script>
+    <script src="/ListenToMeV3/Content/vendor/asscrollable/jquery.asScrollable.all.min.js"></script>
+
+    
+    <script src="/ListenToMeV3/Content/vendor/mousewheel/jquery.mousewheel.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/asscrollable/jquery.asScrollable.all.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/waves/waves.js"></script>
+    <!-- Plugins -->
+    
+    <script src="/ListenToMeV3/Content/vendor/switchery/switchery.min.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/intro-js/intro.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/screenfull/screenfull.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/slidepanel/jquery-slidePanel.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/chartist-js/chartist.min.js"></script>
+    
+    
+    <script src="/ListenToMeV3/Content/vendor/jvectormap/jquery-jvectormap.min.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/matchheight/jquery.matchHeight-min.js"></script>
+    
+    <script src="/ListenToMeV3/Content/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Scripts -->
+    
+    <script src="/ListenToMeV3/Content/js/core.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/site.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/sections/menu.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/sections/menubar.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/sections/sidebar.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/configs/config-colors.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/configs/config-tour.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/components/asscrollable.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/components/animsition.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/components/slidepanel.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/components/switchery.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/components/tabs.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/components/matchheight.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/components/jvectormap.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/components/peity.js"></script>
+    
+    <script src="/ListenToMeV3/Content/js/dashboard/v1.js"></script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+﻿@using System.Threading.Tasks;
+@model Call.Cloud.Mvc.Models.WhiteListVM.ListaWhiteListVM
+@{ 
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    @{ 
+        <script type="text/javascript">
+            var whitelist = whitelist || {};
+            whitelist.Urls = whitelist.Urls || {};
+            whitelist.Urls.baseUrl = '@Url.Action("~")';
+            whitelist.Urls.editarWhitelist = '@Url.Action("Editar","WhiteList")';
+            whitelist.Urls.searchWhitelist = '@Url.Action("Buscar","WhiteList")';
+            whitelist.Urls.searchYhimyWhitelist = '@Url.Action("Buscqueda", "WhiteList")';
+            whitelist.Urls.deleteWhitelist = '@Url.Action("Eliminar","WhiteList")';
+
+        </script>
+    }
+    <script type="text/javascript" src="~/Scripts/usados/whiteList.js"></script>
+</head>
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong>Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+<!--Encabesado con agregar uno nuevo-->
+
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title" >WhiteList</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <form id="formAusenciaFiltro" role="form">
+                <div class="col-sm-12">
+                    <div class="form-group form-material">
+                        @Html.Label("word", "Word", htmlAttributes: new { @class = "control-label col-sm-2"})
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.Filtro.word, new { htmlAttributes = new { @class = "form-control", @placeholder = "Word", @maxlenght = "200"} })
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+        
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <button id="btnLimpiar" type="button" class="btn btn-bottom">Clean</button>
+                    <button id="btnBuscar" type="button" class="btn btn-primary" onclick="">Find</button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br /> <br /> <br />
+        <div class="col-sm-12">
+            <div class="text-left">
+               @* @Html.ActionLink("Execute", "Buscqueda", new { id =1},new {@class= "btn btn-primary" })*@
+                <button id="btnBuscarYhimy" type="button" class="btn btn-primary">Execute</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="divGrid" class=" col-sm-12">
+            @Html.Partial("Grid")
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div class="modal fade modal-3d-slit" id="ModalWhiteList" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">WhiteList</h4>
+            </div>
+            <div class="modal-body" id="divModalWhiteList">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+ 
+    (function () {
+        iniciar();
+    })();
+    function eliminar(id) {
+        var urlEmiliminarWhiteList = whitelist.Urls.deleteWhitelist;
+        if (confirm("¿Está seguro de realizar esta acción?")) {
+            if (id > 0)
+                window.location.href =urlEmiliminarWhiteList + '/'+id;
+        }
+    }
+    
+</script>

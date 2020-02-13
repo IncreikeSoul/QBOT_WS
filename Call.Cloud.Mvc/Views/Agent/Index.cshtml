@@ -1,0 +1,135 @@
+﻿@using System.Threading.Tasks;
+@model Call.Cloud.Mvc.Models.AgentVM.ListaAgentVm
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Theme.cshtml";
+}
+
+<head>
+    @{
+        <script type="text/javascript">
+            var agent = agent || {};
+            agent.Urls = agent.Urls || {};
+            agent.Urls.baseUrl = '@Url.Action("~")';
+            agent.Urls.editarAgentUrl = '@Url.Action("Editar","Agent")';
+            agent.Urls.searchAgentUrl = '@Url.Action("Buscar","Agent")';
+            agent.Urls.deleteAgentUrl = '@Url.Action("Eliminar","Agent")';
+        </script>
+        <script type="text/javascript" src="~/Scripts/usados/agents.js"></script>
+    }
+
+</head>
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Agente</a></li>
+    <li class="breadcrumb-item">Registrar</li>
+    <li class="breadcrumb-item active">Registrar Agente</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Registrar Agente
+        <small>
+            Registrar Agente
+        </small>
+    </h1>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Agente
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="form-row">
+                        <div class="col-md-2 mb-1">
+                            @Html.Label("Item.FirstName", "First Name", htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Filtro.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name", @maxlength = "500" } })
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            @Html.Label("LastName", "Last Name", htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Filtro.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name", @maxlength = "500" } })
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            @Html.Label("Bussines", "Bussines", htmlAttributes: new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.Filtro.PkBussines, Model.Bussines, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button id="btnBuscar" class="btn btn-primary form-control" type="button" onclick="">Buscar</button>
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button id="btnLimpiar" class="btn btn-default form-control" type="button" onclick="">Limpiar</button>
+                        </div>
+
+                        <div class="col-md-2 ml-auto">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="button" data-toggle="modal" data-target="#ModalAgent" data-id="-1">Nuevo</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-content border-faded align-items-center">
+                    <div class="table-responsive-lg" style="overflow-x:auto;">
+                        @Html.Partial("Grid")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="ModalAgent" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Agents</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="divModalAgent">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        (function () {
+            iniciar();
+        })();
+        function eliminar(id) {
+            var urlEliminarAgent = agent.Urls.deleteAgentUrl;
+
+            if (confirm("¿Está seguro de realizar esta acción?")) {
+                if (id > 0)
+                    window.location.href = urlEliminarAgent + '/' + id;
+            }
+
+        }
+    </script>
+}

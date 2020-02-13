@@ -1,0 +1,147 @@
+﻿@model Call.Cloud.Mvc.Models.Effectiveness.ListaReportEnterprise
+@{
+    ViewBag.Title = "Grid_Rule";
+    Layout = "";
+}
+
+<head>
+    <script type="text/javascript">
+        var Report = Report || {};
+        Report.Urls = Report.Urls || {};
+        Report.Urls.baseUrl = '@Url.Action("~")';
+        @*Report.Urls.name_rule = '@Url.Action("name_rules", "Report_Effectiveness_Boss")';*@
+    </script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Grid_Rule</title>
+</head>
+
+<div class="panel-body">
+    <audio style="display:none" id="player2" controls></audio>
+    <div id="divGridPagina" class="table-responsive table-hover" style="display:inline">
+        @Html.Hidden("items_count", Model.Elementos.Count())
+        <table class="table ace_tooltip">
+            @*<tr>
+                    <th class="text-center col-sm-1">
+                        <a class="punteroMouse">Nombre de Reglas</a>
+                    </th>
+                    <th class="text-center col-sm-1">
+                        <a class="punteroMouse">Estado</a>
+
+                    </th>
+                    <th class="text-center col-sm-1">
+                        <a class="note-dimension-picker-unhighlighted">Play</a>
+
+                    </th>
+                </tr>*@
+
+            <tr>
+                <td class="text-center col-sm-1">Cod. Audio</td>
+                <td class="text-center col-sm-1">Agente</td>
+                <td class="text-center col-sm-1">Sección</td>
+                <td class="text-center col-sm-1">S. Peso</td>
+                <td class="text-center col-sm-1">Regla</td>
+                <td class="text-center col-sm-1">R. Peso</td>
+                <td class="text-center col-sm-1">Cumplimiento</td>
+                <td class="text-center col-sm-1">Total</td>
+                <td class="text-center col-sm-1"></td>
+                <td class="text-center col-sm-1">Escucha</td>
+            </tr>
+
+            @for (var i = 0; i < Model.Elementos.Count(); i++)
+            {
+                var item = Model.Elementos.ToList()[i];
+
+                <tr>
+
+                    <td>@item.pkAudio</td>
+                    <td class="text-center col-sm-1">@item.nameAgent</td>
+                    <td class="text-center col-sm-1">@item.nameSection</td>
+                    <td class="text-center col-sm-1">@item.PesoSeccion</td>
+                    <td class="text-center col-sm-1">@item.name_rule</td>
+                    <td class="text-center col-sm-1">@item.PesoRegla</td>
+                    <td class="text-center col-sm-1">@item.Cumplimiento</td>
+                    <td class="text-center col-sm-1">@item.Total</td>
+
+                    @if (item.state == 0)
+                    {
+                        <td class="text-right col-sm-1"><h6 class="text-center" style="color:red">█</h6> </td>
+
+                    }
+                    @if (item.state == 1)
+                    {
+                        <td class="text-right col-sm-1"><h6 class="text-center" style="color:green">█</h6> </td>
+                    }
+                    <td class="text-right col-sm-1">
+                        @if (item.starSecond == 0 && item.endSecond == 0)
+                        {
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play disabled default" title=""
+                               data-toggle="tooltip" data-original-title="Reproducir"
+                               onclick="reproducirAudioPrueba('@item.direccionAudio','@item.fileName','@item.starSecond','@item.endSecond')">
+                            </a>
+                        }
+                        @if (item.starSecond != 0 && item.endSecond != 0)
+                        {
+                            <a class="btn btn-sm btn-primary btn-round btn-icon md-play" title=""
+                               data-toggle="tooltip" data-original-title="Reproducir"
+                               onclick="reproducirAudioPrueba('@item.direccionAudio','@item.fileName','@item.starSecond','@item.endSecond')">
+                            </a>
+                        }
+
+                    </td>
+
+                </tr>
+
+            }
+
+        </table>
+
+
+    </div>
+
+</div>
+
+
+<script>
+            function ReproduceAudioSeccion(path, file, star, end) {
+                path = "http://kontacta.me/listentome/Content/audios/"
+
+                var files = path + file;
+                var player = document.getElementById('player2');
+                player.setAttribute("src", files);
+                
+                var http = new XMLHttpRequest();
+                http.open('HEAD', files, false);
+                http.send();
+
+                if (http.status != 404) {
+
+                    //alert(star.toString() + " / " + end.toString() + "/" + rest.toString())
+                    player.currentTime = star.replace(",", ".");
+                    player.play();
+
+                    var rest = (end.replace(",", ".") - star.replace(",", ".")) * 1000;
+
+                    setTimeout(function () {
+                            player.pause();
+                        }, rest);
+                      
+                }
+                else {
+                    alert("Audio no encontrado");
+                }
+            }
+
+
+        function reproducirAudioPrueba(path, file, star, end) {
+            //var miArrayInicio = [1,2,3,4,5];
+            /*var miArrayInicio = [6.62, 6.91, 7.23];
+
+            miArrayInicio.forEach(function (valor, indice, array) {
+                start = "" + valor.toString() + "";
+                ReproduceAudioSeccion(path, file, start, end);
+            });
+            */
+            ReproduceAudioSeccion(path, file, start, end);
+        }
+
+</script>

@@ -1,0 +1,65 @@
+﻿@model Call.Cloud.Mvc.Models.WordRuleVM.EditarWordRuleVm
+@{
+    ViewBag.Title = "Word Rule";
+    Layout = "";
+}
+<div class="page-content">
+    <div class="panel">
+        <div class="panel-body container-fluid">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div class="example-wrap">
+                        <p>
+                            @ViewBag.Title
+                        </p>
+                        @using (@Html.BeginForm("EditarByRegla", "WordRule", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditWordRule" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Item.PkWorldRule)
+                            <div class="form-group form-material">
+                                @Html.HiddenFor(model => model.Item.PkRule)
+                                @Html.Label("PkRule", "Rule", htmlAttributes: new { @class = "control-label col-sm-2", @disabled = "disabled" })
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.Item.PkRule, Model.Reglas, new { @class = "form-control", @disabled = "disabled" })
+                                </div>
+                                @Html.Label("Word", "Word", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.Word, new { htmlAttributes = new { @class = "form-control", @placeholder = "Word", @maxlength = "1000", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+                                </div>
+                                @Html.Label("Sequence", "Sequence", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.Sequence, new { htmlAttributes = new { @class = "form-control", @placeholder = "Sequence", @maxlength = "10", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                                </div>
+                            </div>
+                            <div class="form-group form-material">
+
+                                @Html.Label("TimeWord", "Time Word", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.TimeWord, new { htmlAttributes = new { @class = "form-control", @placeholder = "Time Word", @maxlength = "5", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                                </div>
+                                @Html.Label("Weight", "Weight", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.Weight, new { htmlAttributes = new { @class = "form-control", @placeholder = "Weight", @maxlength = "10", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group form-material">
+                                <div class="col-sm-9 col-sm-offset-4">
+                                    <button type="submit" class="btn btn-primary" onclick="return grabar();">Save </button>
+                                    <button type="button" class="btn btn-warning" data-dissmiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                                
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        iniciarEditar();
+    })();
+</script>

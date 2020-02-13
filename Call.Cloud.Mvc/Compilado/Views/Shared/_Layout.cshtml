@@ -1,0 +1,685 @@
+﻿
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="bootstrap admin template">
+    <meta name="author" content="">
+    
+    <title>Listen To Me | Gestión de Calidad de Call Centers</title>
+    <link href="~/Content/images/favicon.ico" rel="shortcut icon">
+    <!-- Stylesheets -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-extend.min.css" rel="stylesheet" />
+    <link href="~/Content/css/site.min.css" rel="stylesheet" />
+    <!-- Plugins -->
+    <link href="~/Content/vendor/animsition/animsition.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/asscrollable/asScrollable.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/switchery/switchery.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/intro-js/introjs.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/slidepanel/slidePanel.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/flag-icon-css/flag-icon.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/waves/waves.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/chartist-js/chartist.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/jvectormap/jquery-jvectormap.css" rel="stylesheet" />
+    
+    <link href="~/Content/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css" rel="stylesheet" />
+    
+    <link href="~/Content/css/v1.css" rel="stylesheet" />
+    <!-- Fonts -->
+    
+    <link href="~/Content/web-icons/web-icons.css" rel="stylesheet" />
+    
+    <link href="~/Content/material-design/material-design.min.css" rel="stylesheet" />
+    
+    <link href="~/Content/brand-icons/brand-icons.min.css" rel="stylesheet" />
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    
+    <script src="~/Content/vendor/modernizr/modernizr.js"></script>
+    
+    <script src="~/Content/vendor/breakpoints/breakpoints.js"></script>
+    <script>
+  Breakpoints();
+    </script>
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    
+    <script src="~/Content/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" language="javascript">
+        
+        //var GetStudentsURL = '<%: Url.Action("ListarAlertaJson", "JsonOperations") %>';
+
+        $(document).ready(function () {
+            try {
+                //$.getJSON("/Login_user/ListarAlertaJson", null, function (data) {
+                $.getJSON("http://localhost/ListenToMe/Login_user/ListarAlertaJson", null, function (data) {
+                    try {
+                        var dtPersons = eval(data);
+                        displayJSONData(dtPersons);
+                    }
+                    catch (ex1) {
+                        alert("ex1"); 
+                    }
+                });
+            }
+            catch (ex) {
+                //alert(ex);  
+            }
+            /******* Notificaciones ********/
+
+            try {
+                //$.getJSON("/Login_user/ListarNotificacionJson", null, function (data) {
+                $.getJSON("http://localhost/ListenToMe/Login_user/ListarNotificacionJson", null, function (data) {
+                try {
+
+                        var dtNotificaciones = eval(data);
+                        displayJSONDataNotificaciones(dtNotificaciones);
+                    }
+                    catch (ex1) {
+                        //alert(ex1);
+                    }
+                });
+            }
+            catch (ex) {
+                //alert(ex);
+            }
+
+            });
+        function displayJSONData(dtPersons) {
+            var strColumnData1 = "";
+
+            for (i = 0; i < dtPersons.length; i++)
+            {
+                var divRow = document.getElementById("divRow_" + i);
+                if (i < dtPersons.length) {
+                    strColumnData1 = dtPersons[i].NombreAlerta;
+                    var user = '<a class="list-group-item" href="javascript:void(0)" role="menuitem"><div class="media"><div class="media-left padding-right-10"><i class="icon md-receipt bg-red-600 white icon-circle" aria-hidden="true"></i></div><div class="media-body"><h6 class="media-heading">' + dtPersons[i].NombreAlerta + '</h6><time class="media-meta" datetime="2015-06-12T20:50:48+08:00">' + dtPersons[i].tiempo + ' Hrs</time></div></div></a>';
+                    $('#Divalerta table').append(user);
+                }
+            }
+        }
+        function displayJSONDataNotificaciones(dtNotificaciones) {
+            var strColumnData1 = "";
+
+            for (i = 0; i < dtNotificaciones.length; i++) {
+                
+                if (i < dtNotificaciones.length) {
+                    strColumnData1 = dtNotificaciones[i].NombreAlerta;
+                    var user = '<a class="list-group-item" href="javascript:void(0)" role="menuitem"><div class="media"><div class="media-left padding-right-10"><span class="avatar avatar-sm avatar-online"><i></i></span></div><div class="media-body"><div class="media-meta"><time datetime="2015-06-17T20:22:05+08:00">' + dtNotificaciones[i].tiempo + ' Hrs</time></div><div class="media-detail">' + dtNotificaciones[i].NombreAlerta + '</div></div></div></a>';
+                    $('#DivNotificaciones table').append(user);
+                }
+            }
+        }
+    </script>
+
+</head>
+<body class="dashboard">
+    
+    <nav class="site-navbar navbar navbar-inverse navbar-fixed-top navbar-mega" role="navigation">
+
+        <div class="navbar-container container-fluid">
+            <!-- Navbar Collapse -->        
+            <div class="navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+                <!-- Navbar Toolbar -->
+                <ul class="nav navbar-toolbar">                    
+                    <li id="toggleMenubar">                       
+                        <a data-toggle="menubar" href="#" role="button">                           
+                            <i class="icon hamburger hamburger-arrow-left">
+                                <span class="sr-only">Toggle menubar</span>
+                                <span class="hamburger-bar"></span>
+                             
+                            </i>
+                       
+                        </a>
+                    </li>
+               
+                    <li>
+                        <a class="icon md-search" data-toggle="collapse" href="#site-navbar-search" role="button">
+                            <span class="sr-only">Toggle Search</span>
+                        </a>
+                    
+                    </li>
+                </ul>
+                
+                <!-- End Navbar Toolbar -->
+                <!-- Navbar Toolbar Right -->
+
+
+                <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+               
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="javascript:void(0)" title="Alertas" aria-expanded="false"
+                           data-animation="scale-up" role="button">
+                            <i class="icon md-notifications" aria-hidden="true"></i>
+                            <span class="badge badge-danger up">@ViewBag.Message</span>                          
+                        </a>                                    
+                       
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                            @*<li><a><i id="user" style="right:40px; font-size:14px; color:white; right:30px;"></i></a></li>*@
+                            <li class="dropdown-menu-header" role="presentation">
+                                <h5>ALERTAS</h5>
+                                <span class="label label-round label-danger">@ViewBag.Message</span>
+                            </li>
+                            <li class="list-group" role="presentation">
+                                <div data-role="container">
+                                    <div data-role="content">
+                                        <div id="Divalerta">
+                                            <table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="javascript:void(0)" title="Notificaciones" aria-expanded="false"
+                           data-animation="scale-up" role="button">
+                            <i class="icon md-email" aria-hidden="true"></i>
+                            <span class="badge badge-info up">@ViewBag.NumNotificaciones</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                            <li class="dropdown-menu-header" role="presentation">
+                                <h5>Notificaciones</h5>
+                                <span class="label label-round label-info">@ViewBag.NumNotificaciones</span>
+                            </li>
+                            <li class="list-group" role="presentation">
+                                <div data-role="container">
+                                    <div data-role="content">
+
+                                        <div id="DivNotificaciones">
+                                            <table></table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li id="toggleChat">
+                        
+
+                        <a data-toggle="site-sidebar" href='@Url.Action("LogOff", "Login_User")' title="Cerrar Sesión" data-url="site-sidebar.tpl">
+                            <img src='~/Content/images/logout-16.ico' />
+                        </a>
+
+                    </li>
+                </ul>
+                <!-- End Navbar Toolbar Right -->
+                <div class="navbar-brand navbar-brand-center">
+                    <a class="animsition-link" href="@Url.Action("Principal","Login_user")">
+                        <img src="~/Content/images/logo.png" class="navbar-brand-logo" />
+                    </a>
+                </div>
+            </div>
+            <!-- End Navbar Collapse -->
+            <!-- Site Navbar Seach -->
+            <div class="collapse navbar-search-overlap" id="site-navbar-search">
+                <form role="search">
+                    <div class="form-group">
+                        <div class="input-search">
+                            <i class="input-search-icon md-search" aria-hidden="true"></i>
+                            <input type="text" class="form-control" name="site-search" placeholder="Search...">
+                            <button type="button" class="input-search-close icon md-close" data-target="#site-navbar-search"
+                                    data-toggle="collapse" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- End Site Navbar Seach -->
+        </div>
+    </nav>
+    <div class="site-menubar">
+        <div class="site-menubar-header cover">
+            <div class="cover-background vertical-align" style="background-image: url('../../Content/images/color-blanco.png'); ">
+                <div class="vertical-align-middle">
+                    <a class="avatar avatar-lg " href="javascript:void(0)">
+                        <img src="~/Content/portraits/17.jpg" />
+                    </a>
+                    <div class="site-menubar-info col-sm-8">
+                        <h5 class="site-menubar-user" style="color:coral; font-weight:bolder;" ><label id="user" >Listen To Me</label></h5>
+                        <p class="site-menubar-email" style="color:blueviolet">contacto@orbelite.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="position: relative;" class="site-menubar-body scrollable scrollable-inverse is-enabled scrollable-vertical">
+            <div style="height: 0px; width: 277px;" class="scrollable-container">
+                <div style="width: 260px;" class="scrollable-content">
+                    <div class="site-menubar-body">
+                        <div>
+                            <div>
+                                <ul class="site-menu">
+                                    <!--Audio-->
+                                    <li class="site-menu-item active">
+                                        <a class="animsition-link" href="@Url.Action("Audios","Audios")">
+                                            <i class="site-menu-icon md-audio" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Audio</span>
+                                        </a>
+                                    </li>
+                                    <!--Termino de Audio -->
+
+                                    <!--Mantenimiento -->
+
+                                    <li class="site-menu-item has-sub open">
+                                        <a class="animation-bottom-center waves-effect waves-classic">
+                                            <i class="site-menu-icon md-chart" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Maintenance</span>
+                                            <span class="site-menu-arrow"></span>
+                                        </a>
+
+                                        <ul class="site-menu-sub" style="">
+                                            <li class="site-menu-item is-shown">
+                                                <a class="animsition-link waves-effect waves-classic" href="">
+                                                    <span class="site-menu-title">Enterprise</span>
+
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub" style="">
+                                            <li class="site-menu-item is-shown">
+                                                <a class="animsition-link waves-effect waves-classic" href="../Office/Index">
+                                                    <span class="site-menu-title">Office</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub" style="">
+                                            <li class="site-menu-item is-shown">
+                                                <a class="animsition-link waves-effect waves-classic" href="">
+                                                    <span class="site-menu-title">SubOffice</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub" style="">
+                                            <li class="site-menu-item is-shown">
+                                                <a class="animsition-link waves-effect waves-classic" href="">
+                                                    <span class="site-menu-title">Business</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub" style="">
+                                            <li class="site-menu-item is-shown">
+                                                <a class="animsition-link waves-effect waves-classic" href="../Speech/Index">
+                                                    <span class="site-menu-title">Speech</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub" style="">
+                                            <li class="site-menu-item is-shown">
+                                                <a class="animsition-link waves-effect waves-classic" href="../Agent/Index">
+                                                    <span class="site-menu-title">Staff</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+
+                                    </li>
+                                    <!--Termino de Speech -->
+
+
+                                    @*<!--Speech -->
+                                    <li class="site-menu-item active">
+                                        <a class="animsition-link" href="@Url.Action("Index","Speech")">
+                                            <i class="site-menu-icon md-palette" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Speech</span>
+                                        </a>
+                                    </li>
+                                    <!--Termino de Speech -->*@
+
+                                    @*<li class="site-menu-item has-sub">
+                                            <a href="@Url.Action("Index","Section")">
+                                                <i class="site-menu-icon md-google-pages" aria-hidden="true"></i>
+                                                <span class="site-menu-title">Secciones</span>
+                                                <span class="site-menu-arrow"></span>
+                                            </a>
+                                        </li>*@
+
+                                    @*<li class="site-menu-item has-sub">
+                                            <a href="@Url.Action("Index","Rule")">
+                                                <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
+                                                <span class="site-menu-title">Reglas</span>
+                                                <span class="site-menu-arrow"></span>
+                                            </a>
+                                        </li>*@
+
+                                    <!-- Agent -->
+                                    @*<li class="site-menu-item active">
+                                        <a class="animsition-link" href="@Url.Action("Index","Agent")">
+                                            <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Agents</span>
+                                        </a>
+                                    </li>*@
+                                    <!--Termino de Agent -->
+
+                                    <!--White List -->
+                                    <li class="site-menu-item active">
+                                        <a class="animsition-link" href="@Url.Action("Index", "WhiteList")">
+                                            <i class="site-menu-icon md-calendar" aria-hidden="true"></i>
+                                            <span class="site-menu-title">White List</span>
+                                        </a>
+                                    </li>
+                                    <!--Termino de White List -->
+
+                                    <!--Black List -->
+                                    <li class="site-menu-item active">
+                                        <a class="animsition-link" href="@Url.Action("Index", "BlackList")">
+                                            <i class="site-menu-icon md-receipt" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Black List</span>
+                                        </a>
+                                    </li>
+                                    <!--Termino de Black List -->
+
+                                    <!-- WordRule -->
+                                    @*<li class="site-menu-item has-sub">
+                                            <a href="@Url.Action("Index", "WordRule")">
+                                                <i class="site-menu-icon md-format-color-fill" aria-hidden="true"></i>
+                                                <span class="site-menu-title">Word Rule</span>
+                                                <span class="site-menu-arrow"></span>
+                                            </a>
+                                        </li>*@
+                                    <!--Termino de WordRule -->
+
+                                    <!--Empiezan los reportes listas Negras-->
+                                    <li class="site-menu-item has-sub">
+                                        <a class="animation-bottom-center">
+                                            <i class="site-menu-icon md-chart" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Report Black List</span>
+                                            <span class="site-menu-arrow"></span>
+                                        </a>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("Index","Reports")">
+                                                    <span class="site-menu-title">Enterprise</span>
+
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportOffice","Office")">
+                                                    <span class=site-menu-title>Office</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("SubOffice","ReportSubOffice")">
+                                                    <span class="site-menu-title">SubOficce</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportBusiness","ReportBusiness")">
+                                                    <span class="site-menu-title">Business</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportBoss","ReportBoss")">
+                                                    <span class="site-menu-title">Boss</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportAgent","ReportAgent")">
+                                                    <span class="site-menu-title">Agent</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+
+                                    <!--Empiezan los reportes listas Blancas-->
+                                    <li class="site-menu-item has-sub">
+                                        <a class="animation-bottom-center">
+                                            <i class="site-menu-icon md-chart" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Report White List</span>
+                                            <span class="site-menu-arrow"></span>
+                                        </a>
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportEnterpresi", "ReportEnterpresi")">
+                                                    <span class="site-menu-title">Enterprise</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportOffice", "ReportOffice")">
+                                                    <span class="site-menu-title">Office</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportSubOfficeWhiteList", "ReportSubOfficeWhiteList")">
+                                                    <span class="site-menu-title">SubOffice</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportBusinessWhiteList","ReportBusinessWhiteList")">
+                                                    <span class="site-menu-title">Business</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportBossWhiteList","ReportBossWhiteList")">
+                                                    <span class="site-menu-title">Boss</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("ReportAgentWhiteList","ReportAgentWhiteList")">
+                                                    <span class="site-menu-title">Agent</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Empiezan los reportes de Eficacia-->
+                                    <li class="site-menu-item has-sub">
+                                        <a class="animation-bottom-center">
+                                            <i class="site-menu-icon md-chart" aria-hidden="true"></i>
+                                            <span class="site-menu-title">Report Effectiviness</span>
+                                            <span class="site-menu-arrow"></span>
+                                        </a>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("Report_Effectiveness_Enterprise","Report_Effectiveness_Enterprise")">
+                                                    <span class="site-menu-title">Enterprise</span>
+
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("Index","Report_Effectiveness_Office")">
+                                                    <span class=site-menu-title>Office</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("Index","Report_Effectiveness_SubOffice")">
+                                                    <span class="site-menu-title">SubOffice</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("Index","Report_Effectiveness_Business")">
+                                                    <span class="site-menu-title">Business</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("Index","Report_Effectiveness_Boss")">
+                                                    <span class="site-menu-title">Boss</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="site-menu-sub">
+                                            <li class="site-menu-item">
+                                                <a class="animsition-link" href="@Url.Action("Index","Report_Effectiveness_Agent")">
+                                                    <span class="site-menu-title">Agent</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div draggable="false" class="scrollable-bar scrollable-bar-vertical scrollable-bar-hide">
+                <div style="height: 30px; transform: translate3d(0px, 0px, 0px);" class="scrollable-bar-handle">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page -->
+    @RenderBody()
+    <!-- End Page -->
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="site-footer-legal">© 2017 <a href="http://themeforest.net/item/remark-responsive-bootstrap-admin-template/11989202">Listen To Me</a></div>
+        <div class="site-footer-right">
+            © Copyright 2017 Listen To Me - Todos los derechos reservados
+        </div>
+    </footer>
+    <!-- Core  -->
+    <script src="~/Scripts/genericos/jquery.numeric.js"></script>
+    
+    <script src="~/Content/vendor/bootstrap/bootstrap.js"></script>
+    
+    <script src="~/Content/vendor/animsition/animsition.js"></script>
+    
+    <script src="~/Content/vendor/asscroll/jquery-asScroll.js"></script>
+    <script src="~/Content/vendor/asscrollable/jquery.asScrollable.all.min.js"></script>
+
+    
+    <script src="~/Content/vendor/mousewheel/jquery.mousewheel.js"></script>
+    
+    <script src="~/Content/vendor/asscrollable/jquery.asScrollable.all.js"></script>
+    
+    <script src="~/Content/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+    
+    <script src="~/Content/vendor/waves/waves.js"></script>
+    <!-- Plugins -->
+    
+    <script src="~/Content/vendor/switchery/switchery.min.js"></script>
+    
+    <script src="~/Content/vendor/intro-js/intro.js"></script>
+    
+    <script src="~/Content/vendor/screenfull/screenfull.js"></script>
+    
+    <script src="~/Content/vendor/slidepanel/jquery-slidePanel.js"></script>
+    
+    <script src="~/Content/vendor/chartist-js/chartist.min.js"></script>
+    
+    
+    <script src="~/Content/vendor/jvectormap/jquery-jvectormap.min.js"></script>
+    
+    <script src="~/Content/vendor/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    
+    <script src="~/Content/vendor/matchheight/jquery.matchHeight-min.js"></script>
+    
+    <script src="~/Content/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Scripts -->
+    
+    <script src="~/Content/js/core.js"></script>
+    
+    <script src="~/Content/js/site.js"></script>
+    
+    <script src="~/Content/js/sections/menu.js"></script>
+    
+    <script src="~/Content/js/sections/menubar.js"></script>
+    
+    <script src="~/Content/js/sections/sidebar.js"></script>
+    
+    <script src="~/Content/js/configs/config-colors.js"></script>
+    
+    <script src="~/Content/js/configs/config-tour.js"></script>
+    
+    <script src="~/Content/js/components/asscrollable.js"></script>
+    
+    <script src="~/Content/js/components/animsition.js"></script>
+    
+    <script src="~/Content/js/components/slidepanel.js"></script>
+    
+    <script src="~/Content/js/components/switchery.js"></script>
+    
+    <script src="~/Content/js/components/tabs.js"></script>
+    
+    <script src="~/Content/js/components/matchheight.js"></script>
+    
+    <script src="~/Content/js/components/jvectormap.js"></script>
+    
+    <script src="~/Content/js/components/peity.js"></script>
+    
+    <script src="~/Content/js/dashboard/v1.js"></script>
+
+    <script>
+            /*$(document).ready(function () {
+               var  cadVariables = location.search.substring(1, location.search.length);
+               var  arrVariables = cadVariables.split("?");
+                for (i = 0; i < arrVariables.length; i++) {
+                    arrVariableActual = arrVariables[i].split("=");
+                    if (isNaN(parseFloat(arrVariableActual[1]))){
+                        document.getElementById("user").innerHTML = unescape(arrVariableActual[1]);
+                        eval(arrVariableActual[0] + "='" + unescape(arrVariableActual[1]) + "';");
+                    }
+
+
+                    else
+                        eval(arrVariableActual[0] + "=" + arrVariableActual[1] + ";");
+                }
+            })*/
+        </scrip>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿@model Call.Cloud.Mvc.Models.SpeechVM.ListaSpeechVm
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    
+    @{
+    <script type="text/javascript">
+         var speech = speech || {};
+         speech.Urls = speech.Urls || {};
+         speech.Urls.baseUrl = '@Url.Content("~")';
+        speech.Urls.editarSpeechUrl = '@Url.Action("Editar","Speech")';
+        speech.Urls.searchSpeechUrl = '@Url.Action("Buscar", "Speech")';
+        speech.Urls.deleteSpeechUrl = '@Url.Action("Eliminar", "Speech")';
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/usados/speechs.js")"></script> 
+    }
+</head>
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+@Html.AntiForgeryToken()
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">Speech</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <form id="formAusenciaFiltro" role="form">
+                <div class="col-sm-12">
+                    <div class="form-group form-material">
+                        @Html.Label("Name", "Name", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.Filtro.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name", @maxlength = "500" } })
+                        </div>
+                        @Html.Label("Description", "Description", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.Filtro.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Description", @maxlength = "500" } })
+                        </div>
+                    </div>
+                    <div class="form-group form-material">
+                        @Html.Label("Business", "Business", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">                            
+                            @Html.DropDownListFor(model => model.Filtro.PK_Business, Model.Business, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <button id="btnLimpiar" class="btn btn-default" type="button" onclick="">Clean</button>
+                    <button id="btnBuscar" class="btn btn-primary" type="button" onclick="">Find</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="divGrid" class=" col-sm-12">
+            @Html.Partial("Grid")
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="ModalSpeech" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Speechs</h4>
+            </div>
+            <div class="modal-body" id="divModalSpeech">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        iniciar();
+    })();
+    function eliminar(id) {
+        var urlEliminarSpeech = speech.Urls.deleteSpeechUrl;
+        if (confirm("¿Está seguro de realizar esta acción?")) {
+            if (id > 0)
+                window.location.href = urlEliminarSpeech + '/' + id;
+        }
+    }
+</script>

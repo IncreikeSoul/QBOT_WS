@@ -1,0 +1,140 @@
+﻿@using System.Threading.Tasks;
+@model Call.Cloud.Mvc.Models.WhiteListVM.ListaWhiteListVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Theme.cshtml";
+}
+
+<head>
+    @{
+        <script type="text/javascript">
+            var whitelist = whitelist || {};
+            whitelist.Urls = whitelist.Urls || {};
+            whitelist.Urls.baseUrl = '@Url.Action("~")';
+            whitelist.Urls.editarWhitelist = '@Url.Action("Editar","WhiteList")';
+            whitelist.Urls.searchWhitelist = '@Url.Action("Buscar","WhiteList")';
+            whitelist.Urls.searchYhimyWhitelist = '@Url.Action("Buscqueda", "WhiteList")';
+            whitelist.Urls.deleteWhitelist = '@Url.Action("Eliminar","WhiteList")';
+
+        </script>
+    }
+    <script type="text/javascript" src="~/Scripts/usados/whiteList.js"></script>
+</head>
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Q-BOT</a></li>
+    <li class="breadcrumb-item">Mantenimiento</li>
+    <li class="breadcrumb-item active">WhiteList</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> WhiteList
+        <small>
+            WhiteList
+        </small>
+    </h1>
+</div>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong>Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+<!--Encabesado con agregar uno nuevo-->
+
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    WhiteList
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="form-row">
+                        <div class="col-md-2 mb-1">
+                            @Html.Label("word", "Word", htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Filtro.word, new { htmlAttributes = new { @class = "form-control", @placeholder = "Word", @maxlenght = "200" } })
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button id="btnBuscar" class="btn btn-primary form-control" type="button" onclick="">Buscar</button>
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button id="btnLimpiar" class="btn btn-default form-control" type="button" onclick="">Limpiar</button>
+                        </div>
+
+                        <div class="col-md-2 ml-auto">
+                            <label class="form-label">&nbsp;</label>
+                            <button id="btnBuscarYhimy" type="button" class="btn btn-primary form-control">Execute</button>
+                        </div>
+
+                        <div class="col-md-2 ml-auto">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="button" class="btn-primary form-control" data-toggle="modal"
+                                    data-original-title="Nuevo" title="Nuevo" data-target="#ModalWhiteList" data-id="-1">
+                                Nuevo
+                            </button>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                <div class="panel-content border-faded align-items-center">
+                    <div class="table-responsive-lg" style="overflow-x:auto;">
+                        @Html.Partial("Grid")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div class="modal fade modal-3d-slit" id="ModalWhiteList" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">WhiteList</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="divModalWhiteList">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        (function () {
+            iniciar();
+        })();
+        function eliminar(id) {
+            var urlEmiliminarWhiteList = whitelist.Urls.deleteWhitelist;
+            if (confirm("¿Está seguro de realizar esta acción?")) {
+                if (id > 0)
+                    window.location.href = urlEmiliminarWhiteList + '/' + id;
+            }
+        }
+
+    </script>
+}
+

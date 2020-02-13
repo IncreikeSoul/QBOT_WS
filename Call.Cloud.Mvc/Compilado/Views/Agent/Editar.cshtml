@@ -1,0 +1,135 @@
+﻿@model Call.Cloud.Mvc.Models.AgentVM.EditarAgentVm
+@{
+    ViewBag.Title = "Agent";
+    Layout = "";
+}
+<script>
+
+    $(document).ready(function () {
+        var ckb_status = $("#Item_Flag_Fk_Boss").prop('checked');
+
+        debugger;
+
+        if (ckb_status == true) {
+            $('#LabelJefe').hide();
+            $('#divJefe').hide();
+        }
+        else {
+            $('#LabelJefe').show();
+            $('#divJefe').show();
+        }
+
+        $("#Item_PkBussines").change(function () {
+
+            $.getJSON('/Agent/BuscarJefe', { PkBussines: $('#Item_PkBussines').val() }, function (data) {
+                $.each(data, function () {
+                    $('#product').append('<option value=' +
+                        this.ProductID + '>' + this.ProductName + '</option>');
+                });
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert('Error getting products!');
+            });
+        });
+
+    });
+    function habilitar(value) {
+
+        if (value.checked) {
+            $('#LabelJefe').hide();
+            $('#divJefe').hide(); 
+        } else {
+            $('#LabelJefe').show();
+            $('#divJefe').show();
+        }
+    }
+</script>
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#Item_PkBussines').change(function () {
+                alert("alerta");
+
+                $.getJSON('/Agent/BuscarJefe', { PkBussines: $('#Item_PkBussines').val() }, function (data) {
+                    $.each(data, function () {
+                        $('#product').append('<option value=' +
+                            this.ProductID + '>' + this.ProductName + '</option>');
+                    });
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert('Error getting products!');
+                });
+            });
+        });
+    </script>*@
+
+<div class="page-content">
+    <div class="panel">
+        <div class="panel-body container-fluid">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div class="example-wrap">
+                       
+                        @using (@Html.BeginForm("Editar", "Agent", FormMethod.Post, new {  @class = "form-horizontal", role = "form",id="frmEditAgent"}))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model=>model.Item.PkAgent)
+                            <div class="form-group form-material">
+                                @Html.Label("FirstName", "First Name", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name", @maxlength = "500", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+                                </div>
+                                @Html.Label("LastName", "Last Name", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name", @maxlength = "500", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+                                </div>
+                            </div>
+                            <div class="form-group form-material">
+                                @Html.Label("Bussines", "Bussines", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.Item.PkBussines,Model.Bussines, new {  @class = "form-control"})
+                                </div>
+                                @Html.Label("Dni", "DNI", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.Dni, new { htmlAttributes = new { @class = "form-control", @placeholder = "DNI", @maxlength = "8", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                                </div>
+                            </div>
+                            <div class="form-group form-material">
+                                @Html.Label("CodInt", "Cod Int", htmlAttributes: new { @class = "control-label col-sm-2"})
+                                <div class="col-sm-4" >
+                                    @Html.EditorFor(model => model.Item.CodInt, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cod Int", @maxlength = "10", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                                </div>
+                               
+                                @Html.Label("Email", "Email", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.Mail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mail", @maxlength = "500"}})
+                                </div>
+
+                            </div>
+                            <div class="form-group form-material">
+                                @Html.Label("Es Jefe:", "Es Jefe", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                   @Html.CheckBoxFor(model => model.Item.Flag_Fk_Boss, new { @class = "control-label col-sm-2", onchange = "habilitar(this);" }) 
+                                </div>
+                                <div id="LabelJefe">
+                                    @Html.Label("Jefe", "Jefe", htmlAttributes: new { @class = "control-label col-sm-2", id = "lblLabelIdJefe" })
+                                </div>
+                                <div class="col-sm-4" id="divJefe">
+                                    @Html.DropDownListFor(model => model.Item.Fk_Boss, Model.Agent, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group form-material">
+                                <div class="col-sm-9 col-sm-offset-4">
+                                    <button type="submit" id="btnGrabar" class="btn btn-primary" onclick="return grabar();">Save </button>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        iniciarEditar();
+    })();
+</script>

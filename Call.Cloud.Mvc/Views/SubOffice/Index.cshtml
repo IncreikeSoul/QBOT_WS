@@ -1,0 +1,98 @@
+﻿@using System.Threading.Tasks;
+@model Call.Cloud.Mvc.Models.SubOfficeVM.ListaSubOfficeVm
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <script src="~/Scripts/suboffice.js"></script>
+    <script type="text/javascript">
+        var suboffice = suboffice || {};
+        suboffice.Urls = suboffice.Urls || {};
+        suboffice.Urls.baseUrl = '@Url.Action("~")';
+        suboffice.Urls.editarSubOffice = '@Url.Action("Editar", "SubOffice")';
+        suboffice.Urls.buscarSubOffice = '@Url.Action("Buscar", "SubOffice")';
+        suboffice.Urls.deleteSubOffice = '@Url.Action("Eliminar", "SubOffice")';
+    </script>
+</head>
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        <strong> Mensaje: </strong>@ViewBag.Mensaje
+    </div>
+}
+
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">SubOffices</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <form id="formAusenciaFiltro" role="form">
+                <div class="col-sm-12">
+                    <div class="form-group form-material">
+                        @Html.Label("Item.nameSubOffice", "Name SubOffice", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.Filtro.nameSubOffice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name SubOffice", @maxlength = "500" } })
+                        </div>
+                        @Html.Label("Item.PkOffice", "Office", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.Filtro.PkOffice, Model.Offices, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <button id="btnLimpiar" class="btn btn-default" type="button" onclick="">Limpiar</button>
+                    <button id="btnBuscar" class="btn btn-primary" type="button" onclick="">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="divGrid" class="col-sm-12">
+            @Html.Partial("Grid")
+        </div>
+    </div>
+
+</div>
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="ModalSubOffice" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">SubOffice</h4>
+            </div>
+            <div class="modal-body" id="divModalSubOffice">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    (function () {
+        iniciar();
+    })();
+
+    function eliminar(id) {
+        var url = suboffice.Urls.deleteSubOffice;
+        if (confirm("¿Está seguro de realizar esta acción?")) {
+            if (id > 0)
+                window.location.href = url +'/' + id;
+        }
+
+    }
+</script>

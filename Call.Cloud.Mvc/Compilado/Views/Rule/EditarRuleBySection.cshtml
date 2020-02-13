@@ -1,0 +1,54 @@
+﻿@model Call.Cloud.Mvc.Models.RuleVM.EditarRuleBySectionVM
+@{
+    ViewBag.Title = "Rule";
+    Layout = "";
+}
+<div class="page-content">
+    <div class="panel">
+        <div class="panel-body container-fluid">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div class="example-wrap">
+                        @*<p>
+                            @ViewBag.Title
+                        </p>*@
+                        @using (@Html.BeginForm("EditarRuleBySection", "Rule", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditRule" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(x => x.Item.PkRule)
+                            <div class="form-group form-material">
+                                @Html.HiddenFor(model => model.Item.PkSection)
+                                
+                                @Html.Label("PkSection", "Section", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.Item.PkSection, Model.Secciones, new { @class = "form-control", @disabled="disabled" })
+                                </div>
+
+                                @Html.Label("Name", "Name", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.NameRule, new { htmlAttributes = new { @class = "form-control", @placeholder = "RuleName", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+                                </div>
+                            </div>
+                            <div class="form-group form-material">
+                                @Html.Label("TimeRule", "Time Rule", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.TimeRule, new { htmlAttributes = new { @class = "form-control", @placeholder = "Time Rule", @maxlength = "10", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                                </div>
+                                @Html.Label("wieght", "Weight", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.wieght, new { htmlAttributes = new { @class = "form-control", @placeholder = "Weight", @maxlength = "10", @onkeypress = "return soloNumeros(event)", @onpaste = "return false" } })
+                                </div>
+                            </div>
+                                <div class="form-group form-material">
+                                    <div class="col-sm-9 col-sm-offset-4">
+                                        <button type="submit" class="btn btn-primary" onclick="return grabarRule()">Save </button>
+                                        <button type="button" class="btn btn-warning" data-dissmiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

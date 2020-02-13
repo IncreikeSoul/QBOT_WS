@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Oficina";
+    Layout = "~/Views/Shared/_Theme.cshtml";
+    //PARAMETROS INICIALES
+    List<KeyValuePair<string, string>> lstEnterpriseBE = ViewData["lstEnterpriseBE"] as List<KeyValuePair<string, string>>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Módulo de Administración</a></li>
+    <li class="breadcrumb-item">Mantenimiento</li>
+    <li class="breadcrumb-item active">Oficina</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Oficina
+        <small>
+            Registro Oficina
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Buscar Oficina
+                </h2>
+                <div class="panel-toolbar">
+                    <div class="custom-control d-flex custom-switch">
+                        <input id="eventlog-switch" type="checkbox" class="custom-control-input" checked="checked">
+                        <label class="custom-control-label fw-500" for="eventlog-switch">Estado</label>
+                    </div>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            @Html.LabelFor(m => lstEnterpriseBE, "Empresa",
+                            new { @class = "form-label" })
+
+                            @Html.DropDownListFor(m => lstEnterpriseBE,
+                            new SelectList(lstEnterpriseBE, "value", "key"),
+                            new { @class = "form-control", @id = "slt_empresa_buscar" })
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            @Html.Label("txt_oficina_buscar", "Oficina",
+                            new { @class = "format-label" })
+
+                            @Html.TextBox("txt_empresa_buscar", "",
+                            new { @class = "form-control", @placeholder = "Oficina" })
+                        </div>
+                        <div class="col-md-1 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="button" id="btn_buscar"><i class="fal fa-search"></i></button>
+                        </div>
+                        <div class="col-md-1 mb-1">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-default form-control" type="button" id="btn_limpiar"><i class="fal fa-eraser"></i></button>
+                        </div>
+
+                        <div class="col-md-1 ml-auto">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="button" onclick="limpiarPopup();" data-toggle="modal" data-target="#pop-up-registrar"><i class="fal fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-content border-faded align-items-center">
+                    <div class="div-mensaje mb-3">
+                    </div>
+                    <div class="table-responsive-lg">
+                        <table id="dt-tabla" class="table table-bordered table-hover table-striped w-100">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Oficina</th>
+                                    <th>Estado</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section pages{
+    <!-- Modal Aplicar Pago -->
+    <div class="modal fade" id="pop-up-registrar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Oficina</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="txt_codigo" value="0" />
+                    <div class="form-group">
+                        @Html.LabelFor(m => lstEnterpriseBE, "Empresa",
+                        new { @class = "form-label" })
+
+                        @Html.DropDownListFor(m => lstEnterpriseBE,
+                        new SelectList(lstEnterpriseBE, "value", "key"),
+                        new { @class = "form-control", @id = "slt_empresa" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("txt_oficina", "Oficina",
+                        new { @class = "format-label" })
+
+                        @Html.TextBox("txt_oficina", "",
+                        new { @class = "form-control", @placeholder = "Oficina" })
+                    </div>
+                    <div class="form-group">
+                        <label for="slt_estado">Estado</label>
+
+                        <select id="slt_estado" class="form-control">
+                            <option value="0">Inactivo</option>
+                            <option value="1" selected>Activo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btn_registrar">Registrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script src="~/Scripts/Views/Oficina.js"></script>
+}

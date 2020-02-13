@@ -1,0 +1,49 @@
+﻿@model Call.Cloud.Mvc.Models.BlackListVM.EditarBlackListVm
+@{
+    ViewBag.Title = "BlackList";
+    Layout = "";
+}
+<div class="page-content">
+    <div class="panel">
+        <div class="panel-body container-fluid">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div class="example-wrap">
+                        @*<p>
+                            @ViewBag.Title
+                        </p>*@
+                        @using (@Html.BeginForm("Editar", "BlackList", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Item.pk)
+
+                            <div class="form-group form-material">
+                                @Html.Label("Word", "Word", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model.Item.word, new { htmlAttributes = new { @class = "form-control", @placeholder = "Word", @onkeypress = "return soloLetras(event)", @onpaste = "return false" } })
+                                </div>
+                                @Html.Label("Enterprise", "Enterprise", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.Item.PkenterPrise, Model.PKEnterprise, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group form-material">
+                                <div class="col-sm-9 col-sm-offset-4">
+                                    <button type="submit" class="btn btn-primary" onclick="return grabar();">Save </button>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        iniciarEditar();
+    })();
+</script>
+

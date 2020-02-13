@@ -1,0 +1,267 @@
+﻿@model  IEnumerable<Call.Cloud.Modelo.Speech>
+@{
+    ViewBag.Title = "SPEECH";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string nom = string.Empty;
+
+    string name2 = "";
+
+    name2 = (String)Session["SpeechName"];
+
+    string seccion = (string)Session["SectionName"];
+
+    int pkspeech = 0;
+    pkspeech = (int)Session["PkSpeech"];
+
+    int pksection = 0;
+    pksection = (int)Session["PkSection"];
+
+    bool status = false;
+    status = (bool)Session["Estado"];
+
+}
+<head>
+    <script type="text/javascript" src="~/Scripts/usados/wordRuleBySection.js"></script>
+    @{
+
+        <script type="text/javascript">
+            debugger;
+            var section = section || {};
+            section.Urls = section.Urls || {};
+            section.Urls.baseUrl = '@Url.Content("~")';
+            section.Urls.editarSectionUrl = '@Url.Action("EditarBySpeech", "Section")';
+            section.Urls.listarReglasWordUrl = '@Url.Action("WordRuleBySection", "Section")';
+            section.Urls.deleteSectionUrl = '@Url.Action("EliminarSection", "Section")';
+            section.Urls.cargarSectionUrl = '@Url.Action("SectionBySpeech", "Speech")';
+        </script>
+
+
+    }
+
+</head>
+
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">@ViewBag.Title</h1>
+        <br />
+        <div class="panel panel-heading">
+            <div class="panel-body form-horizontal">
+
+                <div class="text-center col-sm-6">
+
+                    <h4>Speech :  @name2 </h4>
+
+                    <!--Botón agregar nueva Sección-->
+                    <div class="text-right">
+                        <button type="button" class="btn btn-sm btn-icon btn-primary btn-round" data-toggle="modal"
+                                data-original-title="Nuevo" title="Nuevo" data-target="#ModalSection" data-id="-1"
+                                data-namespeech="@name2" data-speech="@pkspeech">
+                            <i class="icon md-sign-in" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <!--   -->
+                    <!-- *************************  Inicia el form **************************** -->
+                    <form id="formAusenciaFiltro" role="form">
+                        @for (int i = 0; i < Model.ToList().Count(); i++)
+                        {
+
+                            <div class="form-group">
+                                <div class="text-left">
+                                    <h5>
+                                        Section :
+                                        @Html.Label("Item.FirstName", Model.ToList()[i].SectionName, htmlAttributes: new { @class = "control-label" })
+                                    </h5>
+
+                                </div>
+
+                                <div class="col-sm-12 inline-block" style="padding-bottom: 5px;">
+                                    <div class="text-left col-sm-2">
+                                        @Html.Label("Item.Weight", "Peso", htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="text-right col-sm-4">
+                                        @Html.TextBox("Weight", Model.ToList()[i].WeightSection, htmlAttributes: new { @class = "form-control round text-right", @disabled = "disabled" })
+                                    </div>
+                                    <div class="text-right col-sm-2">
+                                        @Html.Label("Item.TMO", "TMO", htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="text-right col-sm-4">
+                                        @Html.TextBox("TMO", Model.ToList()[i].TMO, htmlAttributes: new { @class = "form-control round text-right", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <br /> <br />
+                                <div class="text-center col-sm-12">
+                                    <a class="btn btn-sm btn-icon btn-primary btn-round" title="Editar" data-toggle="modal" data-original-title="Editar"
+                                       data-target="#ModalSection" data-id="@Model.ToList()[i].PkSection" data-namespeech="@Model.ToList()[i].SpeechName" data-speech="@Model.ToList()[i].PkSpeech">
+                                        <i class="icon md-edit" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm btn-icon btn-primary btn-round" title="Eliminar" onclick="eliminarSection('@Model.ToList()[i].PkSection',
+                                       '@pkspeech')"
+                                       data-toggle="tooltip" data-original-title="Eliminar">
+                                        <i class="icon md-delete" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm btn-icon btn-primary btn-round" title="Listar" data-original-title="listar" id="@Model.ToList()[i].PkSection"
+                                       onclick="listar('@Model.ToList()[i].PkSection', '@Model.ToList()[i].SectionName', '@Model.ToList()[i].PkSpeech','@Model.ToList()[i].SpeechName')" data-toggle="tooltip">
+                                        <i class="icon md-long-arrow-tab" aria-hidden="true"></i>
+                                        @{
+                                            Session["Status"] = Model.ToList()[i].Status;
+                                            Session["NombreSeccion"] = Model.ToList()[i].SectionName;
+                                        }
+                                    </a>
+                                </div>
+                                <br /> <br />
+
+                                <!--esto es la sección completa, la descripción-->
+                                @foreach (var des in Model.ToList()[i].descripcion)
+                                {
+                                    nom += des + "";
+                                }
+                                @Html.TextAreaFor(model => nom, new { @class = "form-control", @placeholder = "Description", @maxlength = "500", @readonly = "readonly" })
+                                @{
+                                    nom = string.Empty;
+                                }
+
+                            </div><br />
+
+                        }
+
+                    </form>
+
+                </div>
+                <!--Empiezan las reglas-->
+                <div class="col-sm-6">
+                    <div id="divGrid" class="col-sm-12">
+                        @Html.Hidden("GridRule")
+                    </div>
+                </div>
+
+                <!--Empieza el pie-->
+                <form>
+                    <div class="col-sm-12">
+                        <br /><br /><br />
+                        <div class="text-center">
+                            @Html.ActionLink("Return", "Index", "Speech", htmlAttributes: new { @class = "btn btn-default" })
+                            <button id="btnBuscar" class="btn btn-primary" type="button" onclick="">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!--fin de todo-->
+    </div>
+</div>
+<div class="modal fade modal-3d-slit" id="ModalSection" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Sections</h4>
+            </div>
+            <div class="modal-body" id="divModalSection">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        function listar(id, name, speech, namespeech) {
+
+            var urlListarReglas = section.Urls.listarReglasWordUrl;
+
+            if (id > 0)
+                $.ajax({
+
+                    url: urlListarReglas,
+                    data: {
+                        id: id,
+                        name: name,
+                        speech: speech,
+                        namespeech: namespeech
+                    },
+                    Type: 'GET'
+                }).done(function (data, textStatus, jqXhr) {
+
+                    $("#divGrid").html(data);
+
+                }).fail(function (data, textStatus, jqXhr) {
+
+                    console.log(data);
+                });
+            return false;
+
+        };
+    </script>
+
+    <script>
+    (function () {
+        var section =@ViewBag.Section;
+        $("#"+section).click();
+
+        var nombre="@ViewBag.nombreSection";
+        $("#"+nombre).click();
+        debugger;
+
+        var name="@ViewBag.nombrespeech";
+        $("#"+name).click();
+        debugger;
+
+        var estado= '@Session["Status"]';
+        debugger;
+
+        if ("@status" == estado) {
+
+            if ("@pksection" == "@pksection") {
+                debugger;
+                iniciarSection();
+                listar("@pksection", nombre, "@pkspeech", "@name2");
+            }
+        }
+        else {
+            debugger;
+            iniciarSection();
+        }
+
+    })();
+
+    function eliminarSection(id, speech) {
+
+        var urlEliminarSection = section.Urls.deleteSectionUrl;
+        var retornar = section.Urls.cargarSectionUrl;
+
+        var section =@ViewBag.Section;
+        $("#"+section).click();
+
+        var nombre="@ViewBag.nombreSection";
+        $("#"+nombre).click();
+        debugger;
+
+        debugger;
+
+        if (confirm("¿Está seguro de Eliminar esta Sección?")) {
+            if (id > 0)
+                $.ajax({
+                    url: urlEliminarSection,
+                    data: {
+                        id: id,
+                        speech: speech
+                    },
+                    type: 'GET'
+                }).done(function (data, textStatus, jqXhr) {
+                    debugger;
+                    window.location.href =retornar;
+                }).fail(function (data, textStatus, jqXhr) {
+                    debugger;
+                    console.log(data);
+                });
+
+            return false;
+
+        }
+    }
+    </script>
+}
