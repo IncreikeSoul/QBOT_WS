@@ -35,14 +35,27 @@
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-<div class="subheader">
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i> Audios
-        <small>
-            Visualizar audios
-        </small>
-    </h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="subheader">
+                <h1 class="subheader-title">
+                    <i class='subheader-icon fal fa-music'></i> Audios
+                    <small>
+                        Visualizar audios
+                    </small>
+                </h1>
+            </div>
+        </div>
+        <div class="col-lg-2" style="text-align: right; padding-top: 13px;">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAgregar">
+                <i class="fal fa-pencil"></i> Agregar
+            </button>
+        </div>
+    </div>
 </div>
+
+
 
 @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
 {
@@ -56,11 +69,11 @@
 
 @Html.AntiForgeryToken()
 <div class="row">
-    <div class="col-xl-6">
+    <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    Audios
+                    Coleccion de Audios
                 </h2>
                 <div class="panel-toolbar">
                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -128,6 +141,47 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="modalAgregar" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">TRANSCRIPTAR AUDIO</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="divMoAudy">
+                <div class="container">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Nombre / Descripcion</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Example file input</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Example textarea</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" readonly>
+                                @ViewData["textoCad"]
+                            </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-warning">
+                    <i class="fal fa-box-check"></i> Ejecutar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @section scripts{
     <script type="text/javascript" src="~/Scripts/usados/Audios.js"></script>
@@ -247,5 +301,6 @@
                 });
         }
     </script>
+
 
 }

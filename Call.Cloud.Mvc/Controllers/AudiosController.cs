@@ -11,11 +11,14 @@ using Call.Cloud.Mvc.Models.AudioVM;
 using Call.Cloud.Logica;
 using Call.Cloud.Modelo;
 using System.Threading;
+using System.Text;
 
 /* Seguridad */
 using Call.Cloud.Mvc.Models.Acount;
 using Call.Cloud.Mvc.Controllers.Shared;
 /* Fin Seguridad */
+
+using Google.Cloud.Speech.V1;
 
 namespace Call.Cloud.Mvc.Controllers
 {
@@ -126,6 +129,7 @@ namespace Call.Cloud.Mvc.Controllers
             var detalle_audio= await r.listar_audios_detalle(id);
             return View("Detalle_Audio", CrearModelo1(id));
         }
+
         [HttpGet]
         public async Task<ActionResult> Detalle_Audio(int id)
         {
@@ -136,8 +140,38 @@ namespace Call.Cloud.Mvc.Controllers
             {
                 pk_auido  = id
             });
-     var list_detall_audio= await  r.listar_audios_detalle(item);
-     return View(new ListaDetalleVM(item, list_detall_audio));
+             var list_detall_audio= await  r.listar_audios_detalle(item);
+             return View(new ListaDetalleVM(item, list_detall_audio));
         }
+
+        //Transcripcion de datos
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> transcriptarAudio()
+        {
+            var speech = SpeechClient.Create();
+            var response = speech.Recognize(new RecognitionConfig()
+            {
+                Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
+                SampleRateHertz = 16000,
+                LanguageCode = "esp",
+            }, RecognitionAudio.FromFile("D:/meperdonas.mp3"));
+
+            StringBuilder cadena = new StringBuilder();
+
+            foreach (var result in response.Results)
+            {
+                foreach (var alternative in result.Alternatives)
+                {
+                    cadena.Append(alternative.Transcript);
+                }
+            }
+            ViewData["textoCad"] = cadena;
+
+            return View("~/Audios/Audios.cshtml");
+        }
+
+
     }
 }
