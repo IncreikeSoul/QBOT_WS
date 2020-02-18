@@ -48,13 +48,10 @@
             </div>
         </div>
         <div class="col-lg-2" style="text-align: right; padding-top: 13px;">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAgregar">
-                <i class="fal fa-pencil"></i> Agregar
-            </button>
+            <a class="btn btn-info" href="../Audios/Transcripcion" role="button"><i class="fal fa-pencil"></i>&nbsp;Agregar</a>
         </div>
     </div>
 </div>
-
 
 
 @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
@@ -142,46 +139,6 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade modal-3d-slit" id="modalAgregar" aria-hidden="true"
-     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">TRANSCRIPTAR AUDIO</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body" id="divMoAudy">
-                <div class="container">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Nombre / Descripcion</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" readonly>
-                                @ViewData["textoCad"]
-                            </textarea>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-warning">
-                    <i class="fal fa-box-check"></i> Ejecutar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 @section scripts{
     <script type="text/javascript" src="~/Scripts/usados/Audios.js"></script>
@@ -241,62 +198,6 @@
                         }
                     });
                     dd.disabled = false;
-
-                });
-        }
-    </script>
-
-    <!--combo por suppervisor-->
-    <script type="text/javascript">
-        // Inicialización
-        $(document).ready(function () {
-            $("#Filtro_Fk_Boss").change(function () {
-
-                cambiaElementosBySup($("#Filtro_Fk_Boss").val());
-
-            });
-            cambiaElementosBySup($("#Filtro_Fk_Boss").val());
-
-        });
-
-        // Carga el desplegable de elementos en función
-        // de la categoría que le llega como parámetro.
-
-        function cambiaElementosBySup(pkb) {
-            var di = document.getElementById("Filtro_PkAgent");
-            di.options.length = 0;
-            di.options[0] = new Option("TODOS");
-            di.selectedIndex = 0;
-
-            // Control de errores
-
-            $("#Filtro_PkAgent").ajaxError(function (event, request, settings) {
-                di.options[0] = new Option("Boss incorrecta");
-
-            });
-
-            var urlagent = agent.Urls.findByBosstUrl;
-            // Obtenemos los datos...
-
-            $.getJSON(
-                urlagent, // URL a la acción
-                {
-                    pkboss: pkb
-                },
-                // Objeto JSON con parámetros
-                function (data) {                    // Función de retorno exitoso
-                    $.each(data, function (i, item) {
-                        di.options[0] = new Option("TODOS");
-                        for (var i = 0; i < data.length; i++) {
-                            if (data.length >= 0) {
-                                di.options[0] = new Option("TODOS");
-                                di.selectedIndex = 0;
-                                di.options[i + 1] = new Option(data[i].FirstName, data[i].PkAgent);
-
-                            }
-                        }
-                    });
-                    di.disabled = false;
 
                 });
         }

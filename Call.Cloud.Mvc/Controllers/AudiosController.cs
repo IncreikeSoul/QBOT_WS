@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Diagnostics;
 
 using Call.Cloud.Mvc.Models.Effectiveness;
 using Call.Cloud.Mvc.App_Start.Extenciones;
@@ -18,7 +19,7 @@ using Call.Cloud.Mvc.Models.Acount;
 using Call.Cloud.Mvc.Controllers.Shared;
 /* Fin Seguridad */
 
-using Google.Cloud.Speech.V1;
+//using Google.Cloud.Speech.V1;
 
 namespace Call.Cloud.Mvc.Controllers
 {
@@ -117,12 +118,12 @@ namespace Call.Cloud.Mvc.Controllers
             var datosAudios = await r.listar_audios_detalle(Item);
             return new ListaDetalleVM(Item, datosAudios);
         }
+
         public async Task<ActionResult> Audios_Listar(AudioVm filtro)
         {
             return View("Grid", await  CrearModelo(filtro));
         }
 
-          
         public async Task<ActionResult> Detalle_Audio1(AudioVm id)
         {
             Audio r = new Audio();
@@ -134,7 +135,6 @@ namespace Call.Cloud.Mvc.Controllers
         public async Task<ActionResult> Detalle_Audio(int id)
         {
             Audio r = new Audio();
-          
 
             var item = (id == -1) ? new AudioVm () : (new AudioVm
             {
@@ -144,34 +144,23 @@ namespace Call.Cloud.Mvc.Controllers
              return View(new ListaDetalleVM(item, list_detall_audio));
         }
 
-        //Transcripcion de datos
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> transcriptarAudio()
+        /*AVANCE DEL TRANSCRIPCION DE DATOS*/
+        // GET: Transcripcion
+        public ActionResult Transcripcion()
         {
-            var speech = SpeechClient.Create();
-            var response = speech.Recognize(new RecognitionConfig()
-            {
-                Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
-                SampleRateHertz = 16000,
-                LanguageCode = "esp",
-            }, RecognitionAudio.FromFile("D:/meperdonas.mp3"));
-
-            StringBuilder cadena = new StringBuilder();
-
-            foreach (var result in response.Results)
-            {
-                foreach (var alternative in result.Alternatives)
-                {
-                    cadena.Append(alternative.Transcript);
-                }
-            }
-            ViewData["textoCad"] = cadena;
-
-            return View("~/Audios/Audios.cshtml");
+            return View();
         }
 
+        //Transcriptar Info desde mp3
+        public JsonResult RegistrarDatosByFile(AudioTexto objAudioTexto)
+        {
+            List<AudioTexto> resultado = new List<AudioTexto>();
+            AudiosLogica objAudiosLogica = new AudiosLogica();
+            //resultado = await objEnterpriseBL.EmpresaListar(objEnterpriseBE);
+            Debug.WriteLine("aaaaaaaa");
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

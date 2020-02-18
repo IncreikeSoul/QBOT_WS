@@ -30,7 +30,6 @@ namespace Call.Cloud.Mvc.Controllers
             }
             else
             {
-                Console.WriteLine("Si funciona el login :)");
                 //Alertas alerta = new Alertas();
                 //var NumAlertas = alerta.NumeroAlertas();
                 //ViewBag.Message = NumAlertas;

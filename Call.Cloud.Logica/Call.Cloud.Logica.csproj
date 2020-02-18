@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgentLogica.cs" />
+    <Compile Include="AudiosLogica.cs" />
     <Compile Include="BlackListLogica.cs" />
     <Compile Include="BusinessLogica.cs" />
     <Compile Include="CategoryLogica.cs" />

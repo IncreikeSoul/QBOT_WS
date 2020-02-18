@@ -12,6 +12,9 @@ namespace Call.Cloud.Mvc.Controllers
 {
     public class WordRuleController : Controller
     {
+        
+        private string mensajeRespuesta = "";
+
         public async Task<ActionResult> Index(string respuesta = "",int id=0)
         {
             ViewBag.Mensaje = respuesta;
@@ -56,7 +59,6 @@ namespace Call.Cloud.Mvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Editar(WordRule Item)
         {
-            string mensajeRespuesta = "";
             WordRuleLogica oRuleLogica = new WordRuleLogica();
             var rpta = await oRuleLogica.Edit(Item);
             if (rpta == 2)
@@ -109,7 +111,6 @@ namespace Call.Cloud.Mvc.Controllers
             bool estado = Item.Status;
             Session["Estado"] = estado;
             
-            string mensajeRespuesta = "";
             WordRuleLogica oRuleLogica = new WordRuleLogica();
             var rpta = await oRuleLogica.Edit(Item);
             if (rpta == 2)
@@ -128,7 +129,6 @@ namespace Call.Cloud.Mvc.Controllers
         //**********************************************************************************************
         public async Task<ActionResult> Eliminar(int id)
         {
-            string mensajeRespuesta = "";
             WordRuleLogica oRuleLogica = new WordRuleLogica();
             var rpta = await oRuleLogica.Delete(new WordRule
             {
@@ -147,7 +147,6 @@ namespace Call.Cloud.Mvc.Controllers
         public async Task<ActionResult> EliminarWordRule(int id, int sec, int speech, string namespeech, string namesection)
         {
 
-            string mensajeRespuesta = "";
             WordRuleLogica oRuleLogica = new WordRuleLogica();
 
             WordRule item = new WordRule();

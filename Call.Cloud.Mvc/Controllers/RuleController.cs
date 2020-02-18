@@ -40,6 +40,8 @@ namespace Call.Cloud.Mvc.Controllers
         //    return View("Grid", await CrearModelo(filtro));
         //}
 
+        private String mensajeRespuesta = "";
+
         [HttpGet]
         public async Task<ActionResult> Editar(int id)
         {
@@ -57,7 +59,6 @@ namespace Call.Cloud.Mvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Editar(Rule Item)
         {
-            string mensajeRespuesta = "";
             RuleLogica oRuleLogica = new RuleLogica();
             var rpta = await oRuleLogica.Edit(Item);
             if (rpta == 2)
@@ -112,7 +113,6 @@ namespace Call.Cloud.Mvc.Controllers
             bool estado = Item.Status;
             Session["Estado"] = estado;
             
-            string mensajeRespuesta = "";
             RuleLogica oRuleLogica = new RuleLogica();
             var rpta = await oRuleLogica.Edit(Item);
             if (rpta == 2)
@@ -128,7 +128,6 @@ namespace Call.Cloud.Mvc.Controllers
 
         public async Task<ActionResult> Eliminar(int id)
         {
-            string mensajeRespuesta = "";
             RuleLogica oRuleLogica = new RuleLogica();
             var rpta = await oRuleLogica.Delete(new Rule
             {
@@ -145,7 +144,6 @@ namespace Call.Cloud.Mvc.Controllers
         }
         public async Task<JsonResult> EliminarRuleGrid(int id)
         {
-            string mensajeRespuesta = "";
             RuleLogica oRuleLogica = new RuleLogica();
             var rpta = await oRuleLogica.Delete(new Rule
             {
@@ -162,7 +160,6 @@ namespace Call.Cloud.Mvc.Controllers
 
         public async Task<ActionResult> EliminarRule(int id, int sec, int speech, string namespeech, string namesection)
         {            
-            string mensajeRespuesta = "";
             RuleLogica oRuleLogica = new RuleLogica();
             
             Rule item = new Rule();

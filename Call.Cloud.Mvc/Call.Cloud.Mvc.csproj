@@ -50,39 +50,6 @@
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Google.Api.CommonProtos, Version=1.7.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Api.CommonProtos.1.7.0\lib\net45\Google.Api.CommonProtos.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Api.Gax, Version=2.10.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Api.Gax.2.10.0\lib\net45\Google.Api.Gax.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Api.Gax.Grpc, Version=2.10.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Api.Gax.Grpc.2.10.0\lib\net45\Google.Api.Gax.Grpc.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.41.1\lib\net45\Google.Apis.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Auth, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.1.41.1\lib\net45\Google.Apis.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.1.41.1\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Core.1.41.1\lib\net45\Google.Apis.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.PlatformServices, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.41.1\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Cloud.Speech.V1, Version=1.3.1.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Cloud.Speech.V1.1.3.1\lib\net45\Google.Cloud.Speech.V1.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.LongRunning, Version=1.1.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.LongRunning.1.1.0\lib\net45\Google.LongRunning.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf, Version=3.8.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.8.0\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
     <Reference Include="Grpc.Auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
       <HintPath>..\packages\Grpc.Auth.1.22.0\lib\net45\Grpc.Auth.dll</HintPath>
     </Reference>
@@ -3569,12 +3536,13 @@
     <Content Include="Scripts\usados\whiteList.js" />
     <Content Include="Scripts\usados\wordRuleBySection.js" />
     <Content Include="Scripts\usados\wordRules.js" />
-    <Content Include="Scripts\Views\Empresa.js" />
-    <Content Include="Scripts\Views\Seccion.js" />
-    <Content Include="Scripts\Views\Speech.js" />
-    <Content Include="Scripts\Views\Negocio.js" />
-    <Content Include="Scripts\Views\SubOficina.js" />
-    <Content Include="Scripts\Views\Oficina.js" />
+    <Content Include="Scripts\Views\Audio\Transcripcion.js" />
+    <Content Include="Scripts\Views\Mantenimiento\Empresa.js" />
+    <Content Include="Scripts\Views\Mantenimiento\Seccion.js" />
+    <Content Include="Scripts\Views\Mantenimiento\Speech.js" />
+    <Content Include="Scripts\Views\Mantenimiento\Negocio.js" />
+    <Content Include="Scripts\Views\Mantenimiento\SubOficina.js" />
+    <Content Include="Scripts\Views\Mantenimiento\Oficina.js" />
     <Content Include="Service References\ServiceAgent\Call.Cloud.Mvc.ServiceAgent.Agent.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -4481,6 +4449,7 @@
     <Content Include="Views\Mantenimiento\Negocio.cshtml" />
     <Content Include="Views\Mantenimiento\Speech.cshtml" />
     <Content Include="Views\Mantenimiento\Seccion.cshtml" />
+    <Content Include="Views\Audios\Transcripcion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
