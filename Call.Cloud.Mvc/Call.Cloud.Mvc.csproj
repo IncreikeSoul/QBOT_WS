@@ -3536,7 +3536,7 @@
     <Content Include="Scripts\usados\whiteList.js" />
     <Content Include="Scripts\usados\wordRuleBySection.js" />
     <Content Include="Scripts\usados\wordRules.js" />
-    <Content Include="Scripts\Views\Audio\Transcripcion.js" />
+    <Content Include="Scripts\Views\Audio\CargarAudio.js" />
     <Content Include="Scripts\Views\Mantenimiento\Empresa.js" />
     <Content Include="Scripts\Views\Mantenimiento\Seccion.js" />
     <Content Include="Scripts\Views\Mantenimiento\Speech.js" />
@@ -3591,6 +3591,7 @@
     <Compile Include="Controllers\AudiosController.cs" />
     <Compile Include="Controllers\BlackListController.cs" />
     <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\CargaAudioController.cs" />
     <Compile Include="Controllers\EnterpriseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\Login_userController.cs" />
@@ -3633,7 +3634,6 @@
     <Compile Include="Models\AgentVM\ListaAgentVm.cs" />
     <Compile Include="Models\Alertas\AlertaModel.cs" />
     <Compile Include="Models\AudioVM\AudioVm.cs" />
-    <Compile Include="Models\AudioVM\AudioTexto.cs" />
     <Compile Include="Models\AudioVM\Detalle_Audio.cs" />
     <Compile Include="Models\AudioVM\ListaDetalleVM.cs" />
     <Compile Include="Models\AudioVM\ListasAudios.cs" />
@@ -4449,7 +4449,7 @@
     <Content Include="Views\Mantenimiento\Negocio.cshtml" />
     <Content Include="Views\Mantenimiento\Speech.cshtml" />
     <Content Include="Views\Mantenimiento\Seccion.cshtml" />
-    <Content Include="Views\Audios\Transcripcion.cshtml" />
+    <Content Include="Views\CargaAudio\CargaAudio.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -19,8 +19,6 @@ using Call.Cloud.Mvc.Models.Acount;
 using Call.Cloud.Mvc.Controllers.Shared;
 /* Fin Seguridad */
 
-//using Google.Cloud.Speech.V1;
-
 namespace Call.Cloud.Mvc.Controllers
 {
     public class AudiosController : ApplicationController<LogOnModel>
@@ -142,24 +140,6 @@ namespace Call.Cloud.Mvc.Controllers
             });
              var list_detall_audio= await  r.listar_audios_detalle(item);
              return View(new ListaDetalleVM(item, list_detall_audio));
-        }
-
-        /*AVANCE DEL TRANSCRIPCION DE DATOS*/
-        // GET: Transcripcion
-        public ActionResult Transcripcion()
-        {
-            return View();
-        }
-
-        //Transcriptar Info desde mp3
-        public JsonResult RegistrarDatosByFile(AudioTexto objAudioTexto)
-        {
-            List<AudioTexto> resultado = new List<AudioTexto>();
-            AudiosLogica objAudiosLogica = new AudiosLogica();
-            //resultado = await objEnterpriseBL.EmpresaListar(objEnterpriseBE);
-            Debug.WriteLine("aaaaaaaa");
-
-            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
     }

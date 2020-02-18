@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "CargaAudio";
+    Layout = "~/Views/Shared/_Theme.cshtml";
+}
+
+<style>
+    .cuerpoDrop {
+        background: rgb(243, 244, 245);
+        height: 100%;
+        color: rgb(100, 108, 127);
+        font-family: Roboto, "Open Sans", sans-serif;
+        font-size: 20px;
+        font-weight: 300;
+        text-rendering: optimizeLegibility;
+    }
+
+    .dropzone {
+        background: white;
+        border-radius: 5px;
+        border: 2px dashed rgb(0, 135, 247);
+        border-image: none;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .scrollbar
+    {
+	    height: 300px;
+	    overflow-y: scroll;
+    }
+
+    /*
+     *  STYLE 1
+     */
+
+    #style-1::-webkit-scrollbar-track
+    {
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	    border-radius: 10px;
+	    background-color: #F5F5F5;
+    }
+
+    #style-1::-webkit-scrollbar
+    {
+	    width: 12px;
+	    background-color: #F5F5F5;
+    }
+
+    #style-1::-webkit-scrollbar-thumb
+    {
+	    border-radius: 10px;
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	    background-color: #555;
+    }
+</style>
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Storage</a></li>
+    <li class="breadcrumb-item">Cargar Audios</li>
+    <li class="breadcrumb-item active">Subir</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Cargar Audios
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2> Seleccione o arrastre los archivos .mp3 en el contenedor </h2>
+                <div class="panel-toolbar">
+                    <div class="custom-control d-flex custom-switch">
+                        <input id="eventlog-switch" type="checkbox" class="custom-control-input" checked="checked">
+                        <label class="custom-control-label fw-500" for="eventlog-switch">Estado</label>
+                    </div>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show cuerpoDrop">
+                <div class="panel-content">
+                    <div class="form-row">
+                        <div class="scrollbar" id="style-default">
+                            <div id="dropzone" style="margin: 0px 10px 0px 10px;">
+                                <form class="dropzone needsclick" id="demo-upload" action="/CargaAudio/CargaAudio">
+                                    <div class="dz-message needsclick">
+                                        Drop files here or click to upload.<BR>
+                                        <span class="note needsclick">
+                                            (This is just a demo dropzone. Selected
+                                            files are <STRONG>not</STRONG> actually uploaded.)
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-10"></div>
+            <div class="col-lg-2" style="text-align: right;">
+                <button type="button" class="btn btn-dark">
+                    <i class="fal fa-upload"></i>&nbsp;&nbsp; Iniciar Carga
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        if (!$.browser.webkit) {
+            $('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');
+        }
+    });
+
+    var dropzone = new Dropzone('#demo-upload', {
+        previewTemplate: document.querySelector('#preview-template').innerHTML,
+        parallelUploads: 2,
+        thumbnailHeight: 120,
+        thumbnailWidth: 120,
+        maxFilesize: 10,
+        filesizeBase: 1000,
+        thumbnail: function (file, dataUrl) {
+            if (file.previewElement) {
+                file.previewElement.classList.remove("dz-file-preview");
+                var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                for (var i = 0; i < images.length; i++) {
+                    var thumbnailElement = images[i];
+                    thumbnailElement.alt = file.name;
+                    thumbnailElement.src = dataUrl;
+                }
+                setTimeout(function () { file.previewElement.classList.add("dz-image-preview"); }, 1);
+            }
+        }
+
+    });
+
+    var minSteps = 6,
+        maxSteps = 60,
+        timeBetweenSteps = 100,
+        bytesPerStep = 100000;
+
+    dropzone.uploadFiles = function (files) {
+        var self = this;
+
+        for (var i = 0; i < files.length; i++) {
+
+            var file = files[i];
+            totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+            for (var step = 0; step < totalSteps; step++) {
+                var duration = timeBetweenSteps * (step + 1);
+                setTimeout(function (file, totalSteps, step) {
+                    return function () {
+                        file.upload = {
+                            progress: 100 * (step + 1) / totalSteps,
+                            total: file.size,
+                            bytesSent: (step + 1) * file.size / totalSteps
+                        };
+
+                        self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+                        if (file.upload.progress == 100) {
+                            file.status = Dropzone.SUCCESS;
+                            self.emit("success", file, 'success', null);
+                            self.emit("complete", file);
+                            self.processQueue();
+                            //document.getElementsByClassName("dz-success-mark").style.opacity = "1";
+                        }
+                    };
+                }(file, totalSteps, step), duration);
+            }
+        }
+    }
+</script>
+
+@section scripts{
+    <script src="~/Scripts/Views/Audio/CargarAudio.js"></script>
+}
+
