@@ -9,7 +9,7 @@ function cargaDatos() {
         url: '/CargaAudio/IniciarCarga',
         data: JSON.stringify(objNegocioBE),
         contentType: "application/json;",
-        type: 'POST'
+        type: 'POST' 
     }).done(function (data, textStatus, jqXhr) {
         if (data) {
             $('#pop-up-registrar').modal('hide');
@@ -19,7 +19,6 @@ function cargaDatos() {
     }).fail(function (data, textStatus, jqXhr) {
         console.log(data);
     });*/
-
 }
 
 

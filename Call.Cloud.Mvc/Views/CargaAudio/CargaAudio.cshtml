@@ -108,11 +108,16 @@
     <hr />
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-10"></div>
-            <div class="col-lg-2" style="text-align: right;">
-                <button type="submit" class="btn btn-dark" onclick="cargaDatos()">
-                    <i class="fal fa-upload"></i>&nbsp;&nbsp; Iniciar Carga
-                </button>
+            <div class="col-lg-8"></div>
+            <div class="col-lg-4" style="text-align: right;">
+                <span style="display: inline">
+                    <button type="submit" class="btn btn-dark" onclick="cargaDatos()">
+                        <i class="fal fa-upload"></i>&nbsp;&nbsp; Iniciar Carga
+                    </button>
+                    <button type="submit" class="btn btn-warning" onclick="limpiarContainer()">
+                        <i class="fal fa-times"></i>&nbsp;&nbsp; Limpiar
+                    </button>
+                </span>
             </div>
         </div>
     </div>
@@ -125,7 +130,7 @@
         parallelUploads: 2,
         thumbnailHeight: 120,
         thumbnailWidth: 120,
-        maxFilesize: 50,
+        maxFilesize: 150,
         filesizeBase: 1000,
         thumbnail: function (file, dataUrl) {
             if (file.previewElement) {
@@ -176,6 +181,11 @@
                 }(file, totalSteps, step), duration);
             }
         }
+    }
+
+    function limpiarContainer() {
+        Dropzone.forElement('#demo-upload').removeAllFiles(true);
+
     }
 </script>
 
