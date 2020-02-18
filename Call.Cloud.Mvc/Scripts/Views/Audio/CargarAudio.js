@@ -1,24 +1,28 @@
-﻿$(function () {
-    $("#btnTranscriptar").click(function () {
-        var objAudioTexto = new Object();
-        objAudioTexto.NomDescripcion = $("#txtNombreDesc").val();
-        objAudioTexto.nomArchivo = $("#txtArchivo").val();
+﻿
+function cargaDatos() {
+    var objNegocioBE = new Object();
+    objNegocioBE.PK_Business = "aa";
+    objNegocioBE.Pk_SubOffice = "bnnnb";
+    alert("porrfaaa: " + JSON.stringify(objNegocioBE));
 
-        $.ajax({
-            url: '/Audios/RegistrarDatosByFile',
-            data: JSON.stringify(objAudioTexto),
-            contentType: "application/json;",
-            type: 'POST'
-        }).done(function (data, textStatus, jqXhr) {
+    /*$.ajax({
+        url: '/CargaAudio/IniciarCarga',
+        data: JSON.stringify(objNegocioBE),
+        contentType: "application/json;",
+        type: 'POST'
+    }).done(function (data, textStatus, jqXhr) {
+        if (data) {
+            $('#pop-up-registrar').modal('hide');
+            bootbox.alert("Registro realizado correctamente.");
+            listar();
+        }
+    }).fail(function (data, textStatus, jqXhr) {
+        console.log(data);
+    });*/
 
-            alert('Success!!');
+}
 
-        }).fail(function (data, textStatus, jqXhr) {
-            alert(data);
-        });
 
-    })
-});
 
 
 

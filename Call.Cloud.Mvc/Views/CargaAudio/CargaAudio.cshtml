@@ -26,7 +26,7 @@
     }
     .scrollbar
     {
-	    height: 300px;
+	    max-height: 300px;
 	    overflow-y: scroll;
     }
 
@@ -87,10 +87,10 @@
             <div class="panel-container show cuerpoDrop">
                 <div class="panel-content">
                     <div class="form-row">
-                        <div class="scrollbar" id="style-default">
+                        <div class="scrollbar col-lg-12" id="style-default">
                             <div id="dropzone" style="margin: 0px 10px 0px 10px;">
-                                <form class="dropzone needsclick" id="demo-upload" action="/CargaAudio/CargaAudio">
-                                    <div class="dz-message needsclick">
+                                <form class="dropzone needsclick" id="demo-upload" action="/CargaAudio/CargaAudio/IniciarCarga">
+                                    <div class="dz-message dz-default needsclick">
                                         Drop files here or click to upload.<BR>
                                         <span class="note needsclick">
                                             (This is just a demo dropzone. Selected
@@ -110,30 +110,22 @@
         <div class="row">
             <div class="col-lg-10"></div>
             <div class="col-lg-2" style="text-align: right;">
-                <button type="button" class="btn btn-dark">
+                <button type="submit" class="btn btn-dark" onclick="cargaDatos()">
                     <i class="fal fa-upload"></i>&nbsp;&nbsp; Iniciar Carga
                 </button>
             </div>
         </div>
     </div>
     
-
 </div>
 
-
 <script>
-    $(document).ready(function () {
-        if (!$.browser.webkit) {
-            $('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');
-        }
-    });
-
     var dropzone = new Dropzone('#demo-upload', {
         previewTemplate: document.querySelector('#preview-template').innerHTML,
         parallelUploads: 2,
         thumbnailHeight: 120,
         thumbnailWidth: 120,
-        maxFilesize: 10,
+        maxFilesize: 50,
         filesizeBase: 1000,
         thumbnail: function (file, dataUrl) {
             if (file.previewElement) {
@@ -147,7 +139,6 @@
                 setTimeout(function () { file.previewElement.classList.add("dz-image-preview"); }, 1);
             }
         }
-
     });
 
     var minSteps = 6,

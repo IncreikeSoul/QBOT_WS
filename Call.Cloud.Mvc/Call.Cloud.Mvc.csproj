@@ -4459,6 +4459,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Archivos\" />
     <Folder Include="Content\themalogin\" />
     <Folder Include="Views\Business\" />
     <Folder Include="WebService\" />
