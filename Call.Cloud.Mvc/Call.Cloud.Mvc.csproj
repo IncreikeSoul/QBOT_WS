@@ -3536,7 +3536,6 @@
     <Content Include="Scripts\usados\whiteList.js" />
     <Content Include="Scripts\usados\wordRuleBySection.js" />
     <Content Include="Scripts\usados\wordRules.js" />
-    <Content Include="Scripts\Views\Audio\CargarAudio.js" />
     <Content Include="Scripts\Views\Mantenimiento\Empresa.js" />
     <Content Include="Scripts\Views\Mantenimiento\Seccion.js" />
     <Content Include="Scripts\Views\Mantenimiento\Speech.js" />
@@ -4459,7 +4458,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Archivos\" />
+    <Folder Include="Archivos\Audios\" />
     <Folder Include="Content\themalogin\" />
     <Folder Include="Views\Business\" />
     <Folder Include="WebService\" />

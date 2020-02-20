@@ -18,41 +18,48 @@ namespace Call.Cloud.Mvc.Controllers
 
         // POST: CargaAudio/IniciarCarga
         [HttpPost]
-        public ActionResult IniciarCarga(HttpContext context)
+        public ActionResult IniciarCarga()
         {
-            ProcessRequest(context);
-            return View();
-        }
-
-        public void ProcessRequest(HttpContext context)
-        {
-            context.Response.ContentType = "text/plain";
-
-            string dirFullPath = HostingEnvironment.MapPath("~/Archivos/");
-            string[] files;
-            int numFiles;
-            files = System.IO.Directory.GetFiles(dirFullPath);
-            numFiles = files.Length;
-            numFiles += 1;
-
-            string str_image = "";
-
-            foreach (string s in context.Request.Files)
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            try
             {
-                HttpPostedFile file = context.Request.Files[s];
-                //  int fileSizeInBytes = file.ContentLength;
-                string fileName = file.FileName;
-                string fileExtension = file.ContentType;
-
-                if (!string.IsNullOrEmpty(fileName))
+                foreach (string fileName in Request.Files)
                 {
-                    fileExtension = Path.GetExtension(fileName);
-                    str_image = "MyPHOTO_" + numFiles.ToString() + fileExtension;
-                    string pathToSave_100 = HostingEnvironment.MapPath("~/Archivos/") + str_image;
-                    file.SaveAs(pathToSave_100);
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    //Save file content goes here
+                    fName = file.FileName;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        //var originalDirectory = new DirectoryInfo(string.Format("{0}Archivos\\WallImages", Server.MapPath(@"\")));
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Archivos", Server.MapPath(@"\")));
+                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "Audios");
+                        var fileName1 = Path.GetFileName(file.FileName);
+                        bool isExists = System.IO.Directory.Exists(pathString);
+
+                        if (!isExists)
+                            System.IO.Directory.CreateDirectory(pathString);
+
+                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
+                        file.SaveAs(path);
+
+                    }
+
                 }
+
             }
-            context.Response.Write(str_image);
+            catch (Exception ex)
+            {
+                isSavedSuccessfully = false;
+            }
+            if (isSavedSuccessfully)
+            {
+                return Json(new { Message = fName });
+            }
+            else
+            {
+                return Json(new { Message = "Error in saving file" });
+            }
         }
 
     }

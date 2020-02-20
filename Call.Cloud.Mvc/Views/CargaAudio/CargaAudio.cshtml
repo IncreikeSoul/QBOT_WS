@@ -63,16 +63,22 @@
 </ol>
 
 <div class="subheader">
-    <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-edit'></i> Cargar Audios
-    </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="subheader-title">
+                    <i class='subheader-icon fal fa-edit'></i> Cargar Audios
+                </h1>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
-                <h2> Seleccione o arrastre los archivos .mp3 en el contenedor </h2>
+                <h2> Seleccione o arrastre los archivos .wav en el dropzone. </h2>
                 <div class="panel-toolbar">
                     <div class="custom-control d-flex custom-switch">
                         <input id="eventlog-switch" type="checkbox" class="custom-control-input" checked="checked">
@@ -88,38 +94,26 @@
                 <div class="panel-content">
                     <div class="form-row">
                         <div class="scrollbar col-lg-12" id="style-default">
-                            <div id="dropzone" style="margin: 0px 10px 0px 10px;">
-                                <form class="dropzone needsclick" id="demo-upload" action="/CargaAudio/CargaAudio/IniciarCarga">
-                                    <div class="dz-message dz-default needsclick">
-                                        Drop files here or click to upload.<BR>
-                                        <span class="note needsclick">
-                                            (This is just a demo dropzone. Selected
-                                            files are <STRONG>not</STRONG> actually uploaded.)
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
+                            <section>
+                                <div id="dropzone" style="margin: 0px 10px 0px 10px;">
+                                    <form class="dropzone needsclick" id="demo-upload" action="~/CargaAudio/IniciarCarga" 
+                                          method="post" enctype="multipart/form-data">
+                                        <div class="fallback">
+                                            <input name="file" type="file" multiple />
+                                            <input type="submit" value="Upload" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <hr />
+    
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-8"></div>
-            <div class="col-lg-4" style="text-align: right;">
-                <span style="display: inline">
-                    <button type="submit" class="btn btn-dark" onclick="cargaDatos()">
-                        <i class="fal fa-upload"></i>&nbsp;&nbsp; Iniciar Carga
-                    </button>
-                    <button type="submit" class="btn btn-warning" onclick="limpiarContainer()">
-                        <i class="fal fa-times"></i>&nbsp;&nbsp; Limpiar
-                    </button>
-                </span>
-            </div>
-        </div>
+        <label style="font-weight: lighter;">*Puede colocar uno o muchos audios de manera dinámica en este espacio.</label>
     </div>
     
 </div>
@@ -127,10 +121,12 @@
 <script>
     var dropzone = new Dropzone('#demo-upload', {
         previewTemplate: document.querySelector('#preview-template').innerHTML,
+        paramName: 'audio',
         parallelUploads: 2,
         thumbnailHeight: 120,
         thumbnailWidth: 120,
-        maxFilesize: 150,
+        acceptedFiles: '.mp3, .wav',
+        maxFilesize: 1024,
         filesizeBase: 1000,
         thumbnail: function (file, dataUrl) {
             if (file.previewElement) {
@@ -182,6 +178,15 @@
             }
         }
     }
+
+    dropzone.options.dropzoneForm = {
+        init: function () {
+            this.on("complete", function (data) {
+                //var res = eval('(' + data.xhr.responseText + ')');
+                 var res = JSON.parse(data.xhr.responseText);
+            });
+        }
+    };
 
     function limpiarContainer() {
         Dropzone.forElement('#demo-upload').removeAllFiles(true);
