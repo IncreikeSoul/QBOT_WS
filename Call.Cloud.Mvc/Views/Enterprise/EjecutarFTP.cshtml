@@ -28,7 +28,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xl-6">
+    <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
@@ -72,7 +72,11 @@
                             new SelectList(listaAgent, "PkAgent", "FirstName"),
                             new { @class = "form-control", @id = "slt_agent" })
                         </div>
-                        <div class="col-md-2 mb-1">
+                        <div class="col-md-2 mb-1 text-center" style="padding-top: 34px;">
+                            <label for="chk_tipo_carpeta">Carpeta <input type="radio" id="chk_tipo_carpeta" name="chk_tipo" value="carpeta" /></label>
+                            <label for="chk_tipo_ftp">FTP <input type="radio" id="chk_tipo_ftp" name="chk_tipo" value="ftp" /></label>
+                        </div>
+                        <div class="col-md-2 mb-1" id="div_ftp" style="display:none;">
                             @Html.LabelFor(m => listarFtp, "Ftp",
                             new { @class = "form-label" })
 
@@ -173,20 +177,52 @@
             $("#btn_listar").click(listarArchivos);
             $("#btn_procesar").click(ejecutarProcesamiento);
             $("#slt_business").click(comboSpeechBuscar);
+            $("#chk_tipo_carpeta").change(function () { tipoSeleccion(1); });
+            $("#chk_tipo_ftp").change(function () { tipoSeleccion(2); });
+
             comboSpeechBuscar();
         });
+
+        var tipo = 0;
+
+        function tipoSeleccion(tipo) {
+            switch (tipo) {
+                case 1: $("#div_ftp").hide();
+                    tipo = 1;
+                    break;
+                case 2: $("#div_ftp").show();
+                    tipo = 2;
+                    break;
+            }
+        }
 
         function listarArchivos() {
             contador = 0;
             $("#dt-tabla-ftp").show();
             $("#dt-tabla-procesamiento").hide();
-            sincronizacion.server.listarArchivosFTP($("#lst_ftp").val());
+
+            var rbDestino = $('input:radio[name=chk_tipo]:checked').val();
+            if (rbDestino == "ftp") {
+                sincronizacion.server.listarArchivosFTP($("#lst_ftp").val());
+            }
+            if (rbDestino == "carpeta") {
+                sincronizacion.server.listarArchivosFile();
+            }
         }
 
         function ejecutarProcesamiento() {
             $("#dt-tabla-ftp").hide();
             $("#dt-tabla-procesamiento").show();
-            sincronizacion.server.sincronizarFTP($("#lst_ftp").val(), $("#slt_business").val(), $("#slt_speech").val(), $("#slt_agent").val());
+
+            var rbDestino = $('input:radio[name=chk_tipo]:checked').val();
+            var today = new Date();
+            var time = today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+            switch (rbDestino) {
+                case "ftp": sincronizacion.server.sincronizarFTP($("#lst_ftp").val(), $("#slt_business").val(), $("#slt_speech").val(), $("#slt_agent").val());
+                    break;
+                case "carpeta": sincronizacion.server.sincronizarFile($("#slt_business").val(), $("#slt_speech").val(), $("#slt_agent").val(), time);
+                    break;
+            }
         }
 
         function comboSpeechBuscar() {

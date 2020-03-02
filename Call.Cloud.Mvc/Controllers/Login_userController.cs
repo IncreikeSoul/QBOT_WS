@@ -30,11 +30,11 @@ namespace Call.Cloud.Mvc.Controllers
             }
             else
             {
-                //Alertas alerta = new Alertas();
-                //var NumAlertas = alerta.NumeroAlertas();
-                //ViewBag.Message = NumAlertas;
-                //var NumNotificaciones = alerta.NumeroNotificaciones();
-                //ViewBag.NumNotificaciones = NumNotificaciones;
+                Alertas alerta = new Alertas();
+                var NumAlertas = alerta.NumeroAlertas();
+                ViewBag.Message = NumAlertas;
+                var NumNotificaciones = alerta.NumeroNotificaciones();
+                ViewBag.NumNotificaciones = NumNotificaciones;
                 return View();
             }
         }
@@ -62,20 +62,25 @@ namespace Call.Cloud.Mvc.Controllers
 
 
         public JsonResult Login_usuario001(LogOnModel filtro){
+            try {
 
-            ///if (ModelState.IsValid)
-            //{
+                ///if (ModelState.IsValid)
+                //{
                 /*Set model to session*/
                 SetLogOnSessionModel(filtro);
                 /*Shows the session*/
                 LogOnModel sessionModel = GetLogOnSessionModel();
                 //return RedirectToAction("Index", "Home");
-            //}
+                //}
 
-            LOGIN lg = new LOGIN();
-            var datos = lg.Login_usuario(filtro);
-          
-            return Json(datos, JsonRequestBehavior.AllowGet);
+                LOGIN lg = new LOGIN();
+                var datos = lg.Login_usuario(filtro);
+
+                return Json(datos, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex) {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public async Task<JsonResult> grafica1(Elements filtro)

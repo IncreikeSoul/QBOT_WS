@@ -24,34 +24,31 @@
         margin-left: auto;
         margin-right: auto;
     }
-    .scrollbar
-    {
-	    max-height: 300px;
-	    overflow-y: scroll;
+
+    .scrollbar {
+        max-height: 300px;
+        overflow-y: scroll;
     }
 
     /*
      *  STYLE 1
      */
 
-    #style-1::-webkit-scrollbar-track
-    {
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	    border-radius: 10px;
-	    background-color: #F5F5F5;
+    #style-1::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #F5F5F5;
     }
 
-    #style-1::-webkit-scrollbar
-    {
-	    width: 12px;
-	    background-color: #F5F5F5;
+    #style-1::-webkit-scrollbar {
+        width: 12px;
+        background-color: #F5F5F5;
     }
 
-    #style-1::-webkit-scrollbar-thumb
-    {
-	    border-radius: 10px;
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	    background-color: #555;
+    #style-1::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
     }
 </style>
 
@@ -96,11 +93,11 @@
                         <div class="scrollbar col-lg-12" id="style-default">
                             <section>
                                 <div id="dropzone" style="margin: 0px 10px 0px 10px;">
-                                    <form class="dropzone needsclick" id="demo-upload" action="~/CargaAudio/IniciarCarga" 
+                                    <form class="dropzone needsclick" id="demo-upload" action="~/CargaAudio/IniciarCarga"
                                           method="post" enctype="multipart/form-data">
                                         <div class="fallback">
                                             <input name="file" type="file" multiple />
-                                            <input type="submit" value="Upload" />
+                                            <input id="btnSubmit" type="submit" value="Upload" />
                                         </div>
                                     </form>
                                 </div>
@@ -111,11 +108,11 @@
             </div>
         </div>
     </div>
-    
+
     <div class="container-fluid">
         <label style="font-weight: lighter;">*Puede colocar uno o muchos audios de manera dinámica en este espacio.</label>
     </div>
-    
+
 </div>
 
 <script>
@@ -188,13 +185,6 @@
         }
     };
 
-    function limpiarContainer() {
-        Dropzone.forElement('#demo-upload').removeAllFiles(true);
-
-    }
 </script>
 
-@section scripts{
-    <script src="~/Scripts/Views/Audio/CargarAudio.js"></script>
-}
 

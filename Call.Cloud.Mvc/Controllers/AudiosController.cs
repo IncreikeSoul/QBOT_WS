@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Diagnostics;
 
 using Call.Cloud.Mvc.Models.Effectiveness;
 using Call.Cloud.Mvc.App_Start.Extenciones;
@@ -12,7 +11,6 @@ using Call.Cloud.Mvc.Models.AudioVM;
 using Call.Cloud.Logica;
 using Call.Cloud.Modelo;
 using System.Threading;
-using System.Text;
 
 /* Seguridad */
 using Call.Cloud.Mvc.Models.Acount;
@@ -116,31 +114,30 @@ namespace Call.Cloud.Mvc.Controllers
             var datosAudios = await r.listar_audios_detalle(Item);
             return new ListaDetalleVM(Item, datosAudios);
         }
-
         public async Task<ActionResult> Audios_Listar(AudioVm filtro)
         {
             return View("Grid", await  CrearModelo(filtro));
         }
 
+          
         public async Task<ActionResult> Detalle_Audio1(AudioVm id)
         {
             Audio r = new Audio();
             var detalle_audio= await r.listar_audios_detalle(id);
             return View("Detalle_Audio", CrearModelo1(id));
         }
-
         [HttpGet]
         public async Task<ActionResult> Detalle_Audio(int id)
         {
             Audio r = new Audio();
+          
 
             var item = (id == -1) ? new AudioVm () : (new AudioVm
             {
                 pk_auido  = id
             });
-             var list_detall_audio= await  r.listar_audios_detalle(item);
-             return View(new ListaDetalleVM(item, list_detall_audio));
+     var list_detall_audio= await  r.listar_audios_detalle(item);
+     return View(new ListaDetalleVM(item, list_detall_audio));
         }
-
     }
 }

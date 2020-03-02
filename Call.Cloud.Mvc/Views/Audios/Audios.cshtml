@@ -35,21 +35,14 @@
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="subheader">
-                <h1 class="subheader-title">
-                    <i class='subheader-icon fal fa-music'></i> Audios
-                    <small>
-                        Visualizar audios
-                    </small>
-                </h1>
-            </div>
-        </div>
-    </div>
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class='subheader-icon fal fa-edit'></i> Audios
+        <small>
+            Visualizar audios
+        </small>
+    </h1>
 </div>
-
 
 @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
 {
@@ -67,7 +60,7 @@
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    Coleccion de Audios
+                    Audios
                 </h2>
                 <div class="panel-toolbar">
                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -136,7 +129,6 @@
     </div>
 </div>
 
-
 @section scripts{
     <script type="text/javascript" src="~/Scripts/usados/Audios.js"></script>
     <script type="text/javascript">
@@ -200,5 +192,60 @@
         }
     </script>
 
+    <!--combo por suppervisor-->
+    <script type="text/javascript">
+        // Inicialización
+        $(document).ready(function () {
+            $("#Filtro_Fk_Boss").change(function () {
+
+                cambiaElementosBySup($("#Filtro_Fk_Boss").val());
+
+            });
+            cambiaElementosBySup($("#Filtro_Fk_Boss").val());
+
+        });
+
+        // Carga el desplegable de elementos en función
+        // de la categoría que le llega como parámetro.
+
+        function cambiaElementosBySup(pkb) {
+            var di = document.getElementById("Filtro_PkAgent");
+            di.options.length = 0;
+            di.options[0] = new Option("TODOS");
+            di.selectedIndex = 0;
+
+            // Control de errores
+
+            $("#Filtro_PkAgent").ajaxError(function (event, request, settings) {
+                di.options[0] = new Option("Boss incorrecta");
+
+            });
+
+            var urlagent = agent.Urls.findByBosstUrl;
+            // Obtenemos los datos...
+
+            $.getJSON(
+                urlagent, // URL a la acción
+                {
+                    pkboss: pkb
+                },
+                // Objeto JSON con parámetros
+                function (data) {                    // Función de retorno exitoso
+                    $.each(data, function (i, item) {
+                        di.options[0] = new Option("TODOS");
+                        for (var i = 0; i < data.length; i++) {
+                            if (data.length >= 0) {
+                                di.options[0] = new Option("TODOS");
+                                di.selectedIndex = 0;
+                                di.options[i + 1] = new Option(data[i].FirstName, data[i].PkAgent);
+
+                            }
+                        }
+                    });
+                    di.disabled = false;
+
+                });
+        }
+    </script>
 
 }

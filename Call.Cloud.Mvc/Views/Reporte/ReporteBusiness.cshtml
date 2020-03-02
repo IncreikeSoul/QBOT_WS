@@ -37,7 +37,7 @@
                     <div class="form-row">
                         <div class="col-md-2">
                             @Html.LabelFor(m => lstEnterpriseBE, "Empresa",
-                             new { @class = "form-label" })
+                            new { @class = "form-label" })
 
                             @Html.DropDownListFor(m => lstEnterpriseBE,
                             new SelectList(lstEnterpriseBE, "value", "key"),
@@ -45,25 +45,25 @@
                         </div>
                         <div class="col-md-2">
                             <label class="form-label" for="slt_oficina">Oficina</label>
-                            <select id="slt_oficina" class="form-control">
+                            <select id="slt_oficina_buscar" class="form-control">
                                 <option value="0">-Seleccione-</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label class="form-label" for="slt_sub_oficina">Sub Oficina</label>
-                            <select id="slt_sub_oficina" class="form-control">
+                            <select id="slt_sub_oficina_buscar" class="form-control">
                                 <option value="0">-Seleccione-</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label class="form-label" for="slt_negocio">Negocio</label>
-                            <select id="slt_negocio" class="form-control">
+                            <select id="slt_negocio_buscar" class="form-control">
                                 <option value="0">-Seleccione-</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label class="form-label" for="slt_speech">Speech</label>
-                            <select id="slt_speech" class="form-control">
+                            <select id="slt_speech_buscar" class="form-control">
                                 <option value="0">-Seleccione-</option>
                             </select>
                         </div>
@@ -100,43 +100,43 @@
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#slt_empresa_buscar").change(listarOficinas);
-            $("#slt_oficina").change(listarSubOficinas);
-            $("#slt_sub_oficina").change(listarNegocios);
-            $("#slt_negocio").change(listarSpeech);
-            listarOficinas();
+            $("#slt_empresa_buscar").change(cblistarOficinas);
+            $("#slt_oficina_buscar").change(cblistarSubOficinas);
+            //$("#slt_sub_oficina_buscar").change(cblistarNegocios);
+            //$("#slt_negocio_buscar").change(cblistarSpeech);
+            //$("#slt_speech_buscar").change(cblistarSpeech);
 
             $("#btn_buscar").click(buscar);
         });
 
-        function listarOficinas() {
+        function cblistarOficinas() {
             var objOfficeBE = new Object();
             objOfficeBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
+            Console.log("-->" +objOfficeBE);
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("ListarOficinas", "Office")',
+                url: '/ReporteBusiness/OficinaListarCombos',
                 data: {
                     objOfficeBE: objOfficeBE
                 },
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
-                    $("#slt_oficina").empty();
-                    $("#slt_oficina").append("<option value='0'>-Seleccione-</option>");
+                    $("#slt_oficina_buscar").empty();
+                    $("#slt_oficina_buscar").append("<option value='0'>-Seleccione-</option>");
                     $.each(data, function (i, obj) {
-                        $("#slt_oficina").append("<option value='" + obj.Pk_Office + "'>" + obj.Name + "</option>");
+                        $("#slt_oficina_buscar").append("<option value='" + obj.Pk_Office + "'>" + obj.Name + "</option>");
                     });
                 }
             });
         }
 
-        function listarSubOficinas() {
+        function cblistarSubOficinas() {
             var objSubOfficeBE = new Object();
             objSubOfficeBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
-            objSubOfficeBE.Pk_Office = $("#slt_oficina").val();
+            objSubOfficeBE.Pk_Office = $("#slt_oficina_buscar").val();
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("ListarSubOficinas", "SubOffice")',
+                url: '@Url.Action("ListarSubOficinas", "SubOficinaListarCombos")',
                 data: {
                     objSubOfficeBE: objSubOfficeBE
                 },
@@ -152,52 +152,7 @@
             });
         }
 
-        function listarNegocios() {
-            var objBusinessBE = new Object();
-            objBusinessBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
-            objBusinessBE.Pk_Office = $("#slt_oficina").val();
-            objBusinessBE.Pk_SubOffice = $("#slt_sub_oficina").val();
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("ListarNegocios", "Business")',
-                data: {
-                    objBusinessBE: objBusinessBE
-                },
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    $("#slt_negocio").empty();
-                    $("#slt_negocio").append("<option value='0'>-Seleccione-</option>");
-                    $.each(data, function (i, obj) {
-                        $("#slt_negocio").append("<option value='" + obj.PK_Business + "'>" + obj.nameBusiness + "</option>");
-                    });
-                }
-            });
-        }
-
-        function listarSpeech() {
-            var objSpeechBE = new Object();
-            objSpeechBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
-            objSpeechBE.Pk_Office = $("#slt_oficina").val();
-            objSpeechBE.Pk_SubOffice = $("#slt_sub_oficina").val();
-            objSpeechBE.PK_Business = $("#slt_negocio").val();
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("ListarSpeech", "Speech")',
-                data: {
-                    objSpeechBE: objSpeechBE
-                },
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    $("#slt_speech").empty();
-                    $("#slt_speech").append("<option value='0'>-Seleccione-</option>");
-                    $.each(data, function (i, obj) {
-                        $("#slt_speech").append("<option value='" + obj.PK_Speech + "'>" + obj.NameSpeech + "</option>");
-                    });
-                }
-            });
-        }
+        
 
         function buscar() {
             var objSpeechBE = new Object();

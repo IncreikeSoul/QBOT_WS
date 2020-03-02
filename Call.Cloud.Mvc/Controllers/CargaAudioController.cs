@@ -31,9 +31,8 @@ namespace Call.Cloud.Mvc.Controllers
                     fName = file.FileName;
                     if (file != null && file.ContentLength > 0)
                     {
-                        //var originalDirectory = new DirectoryInfo(string.Format("{0}Archivos\\WallImages", Server.MapPath(@"\")));
-                        var originalDirectory = new DirectoryInfo(string.Format("{0}Archivos", Server.MapPath(@"\")));
-                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "Audios");
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}assets\\Archivos\\Audios", Server.MapPath(@"\")));
+                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "loading");
                         var fileName1 = Path.GetFileName(file.FileName);
                         bool isExists = System.IO.Directory.Exists(pathString);
 
@@ -48,7 +47,9 @@ namespace Call.Cloud.Mvc.Controllers
                 }
 
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 isSavedSuccessfully = false;
             }

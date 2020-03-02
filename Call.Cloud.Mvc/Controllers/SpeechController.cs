@@ -69,7 +69,9 @@ namespace Call.Cloud.Mvc.Controllers
         [HttpPost]
         public async Task<ActionResult> Editar(Speech Item)
         {
+#pragma warning disable CS0219 // The variable 'mensajeRespuesta' is assigned but its value is never used
             string mensajeRespuesta = "";
+#pragma warning restore CS0219 // The variable 'mensajeRespuesta' is assigned but its value is never used
             SpeechLogica OSpeechLogica = new SpeechLogica();
             var rpta = await OSpeechLogica.Edit(Item);
             if (rpta == 2)

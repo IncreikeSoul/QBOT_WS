@@ -16,7 +16,7 @@ namespace Call.Cloud.Mvc.App_Start.Extenciones
         public List<LogOnModel> Login_usuario(LogOnModel Item)
 
         {
-            //Prueba
+
             List<LogOnModel> mostrar = null;
             using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CallCloud"].ConnectionString))
             {
