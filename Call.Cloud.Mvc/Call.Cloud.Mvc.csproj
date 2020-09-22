@@ -1172,8 +1172,6 @@
     <Content Include="assets\webfonts\fa-regular-400.svg" />
     <Content Include="assets\webfonts\fa-solid-900.svg" />
     <Content Include="assets\webfonts\nextgen-icons.svg" />
-    <Content Include="Content\audios\0197f710-a4c4-43e9-9b54-91b55fcf9abb.wav" />
-    <Content Include="Content\audios\1a0670d3-9e39-4bb1-84f8-23bb8ba5243c.wav" />
     <Content Include="Content\css\alertify.css" />
     <Content Include="Content\css\alertify.min.css" />
     <Content Include="Content\css\animation.css" />
@@ -3521,8 +3519,10 @@
     <Content Include="Scripts\usados\whiteList.js" />
     <Content Include="Scripts\usados\wordRuleBySection.js" />
     <Content Include="Scripts\usados\wordRules.js" />
+    <Content Include="Scripts\Views\Reporte.js" />
     <Content Include="Scripts\Views\Empresa.js" />
     <Content Include="Scripts\Views\Seccion.js" />
+    <Content Include="Scripts\Views\CargaAudio.js" />
     <Content Include="Scripts\Views\Speech.js" />
     <Content Include="Scripts\Views\Negocio.js" />
     <Content Include="Scripts\Views\SubOficina.js" />
@@ -4425,7 +4425,7 @@
     <Content Include="Views\Shared\_Template.cshtml" />
     <Content Include="Views\Shared\_Theme.cshtml" />
     <Content Include="Views\Enterprise\RegistrarFTP.cshtml" />
-    <Content Include="Views\Enterprise\EjecutarFTP.cshtml" />
+    <Content Include="Views\Enterprise\EjecutarSTT.cshtml" />
     <Content Include="Views\Reporte\ReporteBusiness.cshtml" />
     <Content Include="Views\Mantenimiento\Empresa.cshtml" />
     <Content Include="Views\Mantenimiento\Oficina.cshtml" />

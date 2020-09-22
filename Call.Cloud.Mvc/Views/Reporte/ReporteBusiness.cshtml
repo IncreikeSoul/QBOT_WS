@@ -35,7 +35,7 @@
             <div class="panel-container show">
                 <div class="panel-content">
                     <div class="form-row">
-                        <div class="col-md-2">
+                        <div class="col-md-4 mb-2">
                             @Html.LabelFor(m => lstEnterpriseBE, "Empresa",
                             new { @class = "form-label" })
 
@@ -43,36 +43,42 @@
                             new SelectList(lstEnterpriseBE, "value", "key"),
                             new { @class = "form-control", @id = "slt_empresa_buscar" })
                         </div>
-                        <div class="col-md-2">
-                            <label class="form-label" for="slt_oficina">Oficina</label>
-                            <select id="slt_oficina_buscar" class="form-control">
-                                <option value="0">-Seleccione-</option>
-                            </select>
+                        <div class="col-4 mb-2">
+                            <label for="slt_oficina_buscar">Oficina</label>
+                            <select id="slt_oficina_buscar" class="form-control"><option value="0">-Seleccione-</option><option value="9">OFICINA DE VENTAS</option><option value="10">OFICINA DE TI</option></select>
                         </div>
-                        <div class="col-md-2">
-                            <label class="form-label" for="slt_sub_oficina">Sub Oficina</label>
+                        <div class="col-4 mb-2">
+                            <label for="slt_sub_oficina_buscar">Sub Oficina</label>
                             <select id="slt_sub_oficina_buscar" class="form-control">
                                 <option value="0">-Seleccione-</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <label class="form-label" for="slt_negocio">Negocio</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-3 mb-2">
+                            <label for="slt_negocio_buscar">Negocio</label>
                             <select id="slt_negocio_buscar" class="form-control">
                                 <option value="0">-Seleccione-</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <label class="form-label" for="slt_speech">Speech</label>
+                        <div class="col-4 mb-2">
+                            <label for="slt_speech_buscar">Speech</label>
                             <select id="slt_speech_buscar" class="form-control">
                                 <option value="0">-Seleccione-</option>
                             </select>
                         </div>
-                        <div class="col-md-1 mb-1">
+                        <div class="col-4 mb-2">
+                            <label for="slt_agent_buscar">Agente</label>
+                            <select id="slt_agent_buscar" class="form-control">
+                                <option value="0">-Seleccione-</option>
+                            </select>
+                        </div>
+                        <div class="col-1 mb-1">
                             <label class="form-label">&nbsp;</label>
-                            <button class="btn btn-primary form-control" type="button" id="btn_buscar"><i class="fal fa-search"></i></button>
+                            <button class="btn btn-primary form-control waves-effect waves-themed" type="button" id="btn_buscar"><i class="fal fa-search"></i></button>
                         </div>
                     </div>
-                    <div class="panel-content border-faded align-items-center">
+                    <div class="panel-content border-faded align-items-center" style="margin-top: 25px;">
                         <div class="div-mensaje">
                         </div>
                         <div class="table-responsive-lg" id="div-cuenta-corriente">
@@ -80,11 +86,13 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Negocio</th>
-                                        <th>Speech</th>
-                                        <th>Transcripción</th>
-                                        <th>Porcentaje</th>
-                                        <th></th>
+                                        <th>Fecha Registrada</th>
+                                        <th>Nombre del Archivo</th>
+                                        <th>Duración</th>
+                                        <th>Tamaño del Archivo</th>
+                                        <th>Tamaño Transcrito</th>
+                                        <th>Calificación Total</th>
+                                        <th>Ver Detalle</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -97,186 +105,70 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade modal-3d-slit" id="ModalEvaluacion" aria-hidden="true"
+     aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detalle de evaluación de audios</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding-top: 0 !important;">
+                <table id="tableDetailsSeccion" class="table table-bordered table-hover dt-tabla-sin-filtro table-striped w-100">
+                    <thead>
+                        <tr class="bg-success">
+                            <th colspan="5" style="text-align: center; font-weight: bold;"><h4 style="margin-top: 8px;">Evaluación por secciones</h4></th>
+                        </tr>
+                        <tr class="bg-gray-200">
+                            <th class="text-center"><a class="punteroMouse">#</a></th>
+                            <th class="text-center"><a class="punteroMouse">Nombre</a></th>
+                            <th class="text-center"><a class="punteroMouse">Descripción</a></th>
+                            <th class="text-center"><a class="punteroMouse">Peso</a></th>
+                            <th class="text-center"><a class="punteroMouse">Calificación</a></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <hr />
+                <table id="tableDetailsRule" class="table table-bordered table-hover dt-tabla-sin-filtro table-striped w-100">
+                    <thead>
+                        <tr class="bg-info-400">
+                            <th colspan="5" style="text-align: center; font-weight: bold;"><h4 style="margin-top: 8px;">Evaluación por reglas</h4></th>
+                        </tr>
+                        <tr class="bg-gray-200">
+                            <th class="text-center"><a class="punteroMouse">#</a></th>
+                            <th class="text-center"><a class="punteroMouse">Nombre</a></th>
+                            <th class="text-center"><a class="punteroMouse">Peso</a></th>
+                            <th class="text-center"><a class="punteroMouse">Palabra</a></th>
+                            <th class="text-center"><a class="punteroMouse">Calificación</a></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <hr />
+                <table id="tableDetailsDiccionario" class="table table-bordered table-hover dt-tabla-sin-filtro table-striped w-100">
+                    <thead>
+                        <tr class="bg-secondary">
+                            <th colspan="5" style="text-align: center; font-weight: bold;"><h4 style="margin-top: 8px;">Diccionario</h4></th>
+                        </tr>
+                        <tr class="bg-gray-200">
+                            <th class="text-center"><a class="punteroMouse">#</a></th>
+                            <th class="text-center"><a class="punteroMouse">Sección</a></th>
+                            <th class="text-center"><a class="punteroMouse">Regla</a></th>
+                            <th class="text-center"><a class="punteroMouse">Palabra</a></th>
+                            <th class="text-center"><a class="punteroMouse">Peso</a></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#slt_empresa_buscar").change(cblistarOficinas);
-            $("#slt_oficina_buscar").change(cblistarSubOficinas);
-            //$("#slt_sub_oficina_buscar").change(cblistarNegocios);
-            //$("#slt_negocio_buscar").change(cblistarSpeech);
-            //$("#slt_speech_buscar").change(cblistarSpeech);
-
-            $("#btn_buscar").click(buscar);
-        });
-
-        function cblistarOficinas() {
-            var objOfficeBE = new Object();
-            objOfficeBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
-            Console.log("-->" +objOfficeBE);
-            $.ajax({
-                type: 'POST',
-                url: '/ReporteBusiness/OficinaListarCombos',
-                data: {
-                    objOfficeBE: objOfficeBE
-                },
-                dataType: 'json',
-                success: function (data) {
-                    $("#slt_oficina_buscar").empty();
-                    $("#slt_oficina_buscar").append("<option value='0'>-Seleccione-</option>");
-                    $.each(data, function (i, obj) {
-                        $("#slt_oficina_buscar").append("<option value='" + obj.Pk_Office + "'>" + obj.Name + "</option>");
-                    });
-                }
-            });
-        }
-
-        function cblistarSubOficinas() {
-            var objSubOfficeBE = new Object();
-            objSubOfficeBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
-            objSubOfficeBE.Pk_Office = $("#slt_oficina_buscar").val();
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("ListarSubOficinas", "SubOficinaListarCombos")',
-                data: {
-                    objSubOfficeBE: objSubOfficeBE
-                },
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    $("#slt_sub_oficina").empty();
-                    $("#slt_sub_oficina").append("<option value='0'>-Seleccione-</option>");
-                    $.each(data, function (i, obj) {
-                        $("#slt_sub_oficina").append("<option value='" + obj.Pk_SubOffice + "'>" + obj.nameSubOffice + "</option>");
-                    });
-                }
-            });
-        }
-
-        
-
-        function buscar() {
-            var objSpeechBE = new Object();
-            objSpeechBE.PK_Business = $("#slt_negocio").val();
-            objSpeechBE.PkSpeech = $("#slt_speech").val();
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("ListarAudioSpeech", "Reporte")',
-                data: {
-                    objSpeechBE: objSpeechBE
-                },
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    if (data) {
-                        $("#dt-tabla-reporte").dataTable().fnClearTable();
-
-                        if (data.length > 0) {
-                            $.each(data, function (i, obj) {
-                                var cantPalabras = 30;
-                                var transcripcion = obj.TX_Transcripcion.split(" ");
-                                var htmlTexto = "", palabraInicio = "", palabraFin="";
-                                if (transcripcion.length > cantPalabras) {
-                                    palabraInicio = transcripcion.slice(0, cantPalabras).join(" ");
-                                    palabraFin = transcripcion.slice(cantPalabras + 1, transcripcion.length).join(" ");
-                                } else {
-                                    palabraInicio = obj.TX_Transcripcion;
-                                }
-
-                                htmlTexto = "<span>" + palabraInicio + " </span>" + 
-                                    "<span id='leer_" + obj.PK_audio + "' class='collapse'>" + palabraFin + "</span>" + 
-                                    "<a data-toggle='collapse' data-target='#leer_" + obj.PK_audio + "'> leer mas... </a>";
-
-                                $("#dt-tabla-reporte").dataTable().fnAddData([
-                                    (i + 1),
-                                    obj.TX_Business,
-                                    obj.TX_Speech   ,
-                                    htmlTexto, //obj.TX_Transcripcion,
-                                    obj.NU_WordWeight,
-                                    "<a class='fal fa-plus-square' rel='" + obj.PK_audio + "' onclick='verDetalle(this);'></a>"
-                                ]);
-                            });
-                        }
-                    }
-                    
-                }
-            });
-        }
-
-        function verDetalle(_this) {
-            var _btnDetail = $(_this);
-            var id_audio = _btnDetail.attr("rel");
-            if (_btnDetail.hasClass('fa-plus-square') == true) {
-                _btnDetail.parent().parent().after('<tr><td colspan="6"></td></tr>');
-
-                var objAudio = new Object();
-                objAudio.PK_audio = id_audio;
-                
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("ListarAudioDetalle", "Reporte")',
-                    data: {
-                        objAudio: objAudio
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-            
-                        _btnDetail.removeClass('fa-plus-square').addClass('fa-minus-square');
-
-                        console.log(data);
-
-                        if (data) {
-                            var _strDetalle = '<h5><strong>Transcripción</strong></h5><p>' + data[0].TX_Transcripcion + '</p>';
-
-                            _strDetalle += '<table class="tblLista_det table" width="100%">';
-                            _strDetalle += '<thead>';
-                            _strDetalle += '<tr>';
-                            _strDetalle += '<th>N°</th>';
-                            //_strDetalle += '<th>Speech</th>';
-                            //_strDetalle += '<th>Transcripción</th>';
-                            _strDetalle += '<th>Sección</th>';
-                            _strDetalle += '<th>% Sección</th>';
-                            _strDetalle += '<th>Regla</th>';
-                            _strDetalle += '<th>% Regla</th>';
-                            _strDetalle += '<th>Palabra</th>';
-                            _strDetalle += '<th>Palabra Audio</th>';
-                            _strDetalle += '<th>% Valoración</th>';
-                            _strDetalle += '</tr>';
-                            _strDetalle += '</thead>';
-                            _strDetalle += '<tbody>';
-
-                            $.each(data, function (i, item) {
-                                _strDetalle += '<tr>';
-                                _strDetalle += '<td>' + (i + 1) + '</td>';
-                                //_strDetalle += '<td>' + item.TX_Speech + '</td>';
-                                //_strDetalle += '<td>' + item.TX_Transcripcion + '</td>';
-                                _strDetalle += '<td>' + item.TX_Section + '</td>';
-                                _strDetalle += '<td>' + item.NU_SectionWeight + '</td>';
-                                _strDetalle += '<td>' + item.TX_Rule + '</td>';
-                                _strDetalle += '<td>' + item.NU_RuleWeight + '</td>';
-                                _strDetalle += '<td>' + item.TX_Word + '</td>';
-                                _strDetalle += '<td>' + item.TX_WordAudio + '</td>';
-                                _strDetalle += '<td>' + item.NU_WordWeight + '</td>';
-                                _strDetalle += '</tr>';
-                            });
-
-                            _strDetalle += '</tbody>';
-                            _strDetalle += '</table>';
-
-                            _btnDetail.parent().parent().next().children().html(_strDetalle);
-                        }
-
-                    },
-                    error: function (xhr, status, error) {
-                        //$("#divAlert").dialog('open');
-                        //var err = JSON.parse(xhr.responseText);
-                        //$("#spnAlert").empty().html(err.Message);
-                    }
-                });
-
-            } else {
-                _btnDetail.removeClass('fa-minus-square').addClass('fa-plus-square');
-                _btnDetail.parent().parent().next().hide('slow', function () { $(this).remove(); });
-            }
-        }
-    </script>
+    <script src="~/Scripts/Views/Reporte.js"></script>
 }

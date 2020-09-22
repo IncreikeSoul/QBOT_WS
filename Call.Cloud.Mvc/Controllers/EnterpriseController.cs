@@ -21,7 +21,7 @@ namespace Call.Cloud.Mvc.Controllers
         //    return View();
         //}
 
-        public async Task<ActionResult> EjecutarFTP()
+        public async Task<ActionResult> EjecutarSTT()
         {
             AgentLogica oAgentLogica = new AgentLogica();
             SpeechLogica oSpeechLogica = new SpeechLogica();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Call.Cloud.Logica;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace Call.Cloud.Mvc.Controllers
         // GET: CargaAudio
         public ActionResult CargaAudio()
         {
+            EnterpriseLogica objEnterpriseBL = new EnterpriseLogica();
+            List<KeyValuePair<string, string>> lstEnterpriseBE = objEnterpriseBL.EmpresaListarCombo();
+
+            ViewData["lstEnterpriseBE"] = lstEnterpriseBE;
             return View();
         }
 
@@ -62,6 +67,8 @@ namespace Call.Cloud.Mvc.Controllers
                 return Json(new { Message = "Error in saving file" });
             }
         }
+
+
 
     }
 }

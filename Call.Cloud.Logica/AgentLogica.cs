@@ -192,5 +192,16 @@ namespace Call.Cloud.Logica
             return rpta;
         }
         
+        /*----------------------------------------------------------------------------------------------------------*/
+        public async Task<List<KeyValuePair<string, string>>> AgentListarCombos(Business objNegocioBE)
+        {
+            using (SqlConnection cn = new SqlConnection(this.stringConexion))
+            {
+                await cn.OpenAsync();
+                AgentDatos objAgentDA = new AgentDatos();
+                return await objAgentDA.AgentListarCombos(cn, objNegocioBE);
+            }
+        }
+
     }
 }

@@ -37,5 +37,6 @@ namespace TareaProcesamiento
         public int PK_audio { get; internal set; }
         public decimal NU_WeightSection { get; internal set; }
         public decimal NU_WeightRule { get; internal set; }
+        public decimal NU_WeightWordRule { get; internal set; }
     }
 }

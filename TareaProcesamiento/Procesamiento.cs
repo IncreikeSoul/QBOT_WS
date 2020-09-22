@@ -94,17 +94,20 @@ namespace TareaProcesamiento
                     audio: audio,
                     contentType: "audio/wav",
                     model: "es-PE_NarrowbandModel",
-                    timestamps: true
+                    timestamps: true,
+                    inactivityTimeout: 60000
                     );
 
                 return result.Response;
             }
             catch (ServiceResponseException sex)
             {
+                Console.WriteLine(sex);
                 return sex.Message;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return ex.Message;
             }
         }

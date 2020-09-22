@@ -134,10 +134,10 @@ function listar() {
     objNegocioBE.Pk_Enterprise = $("#slt_empresa_buscar").val();
     objNegocioBE.Pk_SubOffice = $("#slt_sub_oficina_buscar").val();
     objNegocioBE.Pk_Office = $("#slt_oficina_buscar").val();
-    objNegocioBE.PK_Business = $("#slt_oficina_buscar").val();
+    objNegocioBE.PK_Business = $("#slt_negocio_buscar").val();
     objNegocioBE.NameSpeech = $("#txt_speech_buscar").val();
     objNegocioBE.Estado = $("#eventlog-switch").is(":checked") ? 1 : 0;
-
+    
     $.ajax({
         url: '/Mantenimiento/SpeechListar',
         data: JSON.stringify(objNegocioBE),

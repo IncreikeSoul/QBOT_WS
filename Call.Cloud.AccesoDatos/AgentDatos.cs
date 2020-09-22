@@ -381,5 +381,33 @@ namespace Call.Cloud.AccesoDatos
             }
             return oAgent;
         }
+
+        /*---------------------------------------------------------------------------------------------------------------------------------------------*/
+        public async Task<List<KeyValuePair<string, string>>> AgentListarCombos(SqlConnection cn, Business objNegocioBE)
+        {
+            List<KeyValuePair<string, string>> lstOpcionBE = null;
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandText = "SP_AGENT_COMBO",
+                CommandType = CommandType.StoredProcedure,
+                Connection = cn
+            };
+            cmd.Parameters.AddWithValue("@PK_business", objNegocioBE.PK_Business);
+            using (SqlDataReader dtr = await cmd.ExecuteReaderAsync(CommandBehavior.SingleResult))
+            {
+                lstOpcionBE = new List<KeyValuePair<string, string>>();
+                while (await dtr.ReadAsync())
+                {
+                    lstOpcionBE.Add(
+                        new KeyValuePair<string, string>(
+                            dtr.GetString(dtr.GetOrdinal("agent_name")),
+                            Convert.ToString(dtr.GetInt32(dtr.GetOrdinal("PK_Agent")))
+                            )
+                        );
+                }
+            }
+            return lstOpcionBE;
+        }
+
     }
 }

@@ -53,7 +53,7 @@ namespace TareaProcesamiento
     }
 
     public class SincronizarHub : Hub {
-        private string filePath = @"C:\Users\User\Documents\Q-Bot\Call.Cloud.Mvc\assets\Archivos\Audios\loading";
+        private string filePath = @"D:\Repository\QBOT\Call.Cloud.Mvc\assets\Archivos\Audios\loading";
 
         public void listarArchivosFTP(string codigo) {
             try
@@ -132,8 +132,8 @@ namespace TareaProcesamiento
                 fileNameComplete = Path.GetFileName(file);
                 audio = File.ReadAllBytes(file);
 
-                var path_success = new DirectoryInfo(@"C:\Users\User\Documents\Q-Bot\Call.Cloud.Mvc\assets\Archivos\Audios\success");
-                var path_error = new DirectoryInfo(@"C:\Users\User\Documents\Q-Bot\Call.Cloud.Mvc\assets\Archivos\Audios\error");
+                var path_success = new DirectoryInfo(@"D:\Repository\QBOT\Call.Cloud.Mvc\assets\Archivos\Audios\success");
+                var path_error = new DirectoryInfo(@"D:\Repository\QBOT\Call.Cloud.Mvc\assets\Archivos\Audios\error");
                 bool resultTranscription = transcriptionAudio(audio, fileName, codigoNegocio, codigoSpeech, codigoAgente, lstTextoBE);
                 
                 try {
@@ -255,7 +255,7 @@ namespace TareaProcesamiento
             BE_PALABRA objPalabraBE = null;
             Dictionary<string, Object> json_data = (Dictionary<string, Object>)
                             new JavaScriptSerializer().DeserializeObject(resultado);
-           
+
             foreach (KeyValuePair<string, Object> data in json_data)
             {
                 if (data.Key == "results")
@@ -296,10 +296,6 @@ namespace TareaProcesamiento
                                         }
                                     }
                                 }
-                            }
-                            else if (dataResult.Key == "final")
-                            {
-                                break;
                             }
                         }
                     }

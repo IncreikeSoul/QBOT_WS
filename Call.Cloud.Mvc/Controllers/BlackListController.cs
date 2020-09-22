@@ -40,8 +40,7 @@ namespace Call.Cloud.Mvc.Controllers
             if (Item == null)
                   Item = new BlackList();
             var listablack = await blacklogica.Retrieve(Item);
-            var listaEnterprise = await enterlogica.Retrieve(null);
-            return new ListaBlakListVm(Item,listablack, listaEnterprise);
+            return new ListaBlakListVm(Item,listablack);
          }
 
         private async Task<ListaBlakListVm> Busqueda2(BlackList Item = null)
@@ -51,8 +50,7 @@ namespace Call.Cloud.Mvc.Controllers
             if (Item == null)
                 Item = new BlackList();
             var busqueda = await whitelogica.Buscar(Item);
-            var listaEnterprise = await enterlogica.Retrieve(null);
-            return new ListaBlakListVm(Item, busqueda, listaEnterprise);
+            return new ListaBlakListVm(Item, busqueda);
         }
 
 

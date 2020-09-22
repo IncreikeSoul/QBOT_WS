@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleDatos.cs" />
     <Compile Include="SectionDatos.cs" />
+    <Compile Include="AudioDatos.cs" />
     <Compile Include="SpeechDatos.cs" />
     <Compile Include="SubOfficeDatos.cs" />
     <Compile Include="WhiteListDatos.cs" />

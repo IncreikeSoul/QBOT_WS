@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agent.cs" />
+    <Compile Include="Evaluacion.cs" />
+    <Compile Include="AudioEva.cs" />
     <Compile Include="AudioWts.cs" />
     <Compile Include="BlackList.cs" />
     <Compile Include="Boss.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Speech.cs" />
     <Compile Include="SubOffice.cs" />
     <Compile Include="WhiteList.cs" />
+    <Compile Include="WordRule_Details.cs" />
     <Compile Include="WordRule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -79,7 +79,7 @@ namespace TareaProcesamiento
                 cmd.Parameters.AddWithValue("@word", palabra.word);
                 cmd.Parameters.AddWithValue("@sequence", 0);
                 cmd.Parameters.AddWithValue("@time_word", 0);
-                cmd.Parameters.AddWithValue("@weight", palabra.NU_WeightRule * palabra.NU_WeightSection);
+                cmd.Parameters.AddWithValue("@weight", (palabra.NU_WeightRule * palabra.NU_WeightWordRule) * palabra.NU_WeightSection);
                 int nuResult = cmd.ExecuteNonQuery();
                 if (nuResult > 0)
                 {
@@ -124,6 +124,7 @@ namespace TareaProcesamiento
                         objPalabraBE.word = Convert.ToString(sdr["word"]);
                         objPalabraBE.NU_WeightSection = Convert.ToDecimal(sdr["NU_WeightSection"]);
                         objPalabraBE.NU_WeightRule = Convert.ToDecimal(sdr["NU_WeightRule"]);
+                        objPalabraBE.NU_WeightWordRule = Convert.ToDecimal(sdr["NU_WeightWordRule"]);
                         lstPalabraBE.Add(objPalabraBE);
                     }
                 }

@@ -13,11 +13,10 @@ namespace Call.Cloud.Mvc.Models.BlackListVM
         public BlackList Filtro { get; set; }
         public IEnumerable<BlackList> Elementos { get; set; }
         public IEnumerable<SelectListItem> Pkenterprise { get; set; }
-        public ListaBlakListVm(BlackList filtro, IEnumerable<BlackList> lista, IEnumerable<Enterprise> listaPKenterprise)
+        public ListaBlakListVm(BlackList filtro, IEnumerable<BlackList> lista)
         {
             Filtro = filtro;
             Elementos = lista;
-            Pkenterprise = listaPKenterprise.GenerarLista(true);
         }
     }
 }

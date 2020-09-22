@@ -101,6 +101,13 @@ namespace Call.Cloud.Mvc.Controllers
             return Json(lstOpcionBE, JsonRequestBehavior.AllowGet);
         }
 
+        public async Task<JsonResult> AgentListarCombos(Business objNegocioBE)
+        {
+            AgentLogica objAgentBL = new AgentLogica();
+            List<KeyValuePair<string, string>> lstOpcionBE = await objAgentBL.AgentListarCombos(objNegocioBE);
+            return Json(lstOpcionBE, JsonRequestBehavior.AllowGet);
+        }
+
         //Combos Section
         public async Task<JsonResult> SectionListarCombos(Speech objSpeechBE)
         {
