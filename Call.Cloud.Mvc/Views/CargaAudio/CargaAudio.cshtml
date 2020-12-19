@@ -75,69 +75,72 @@
 
 <div class="row">
     <div class="col-xl-12">
+        <!--
         <div id="panel-1" class="panel">
-            <div class="panel-hdr">
-                <h2>Cargar Datos</h2>
-                <div class="panel-toolbar">
-                    <div class="custom-control d-flex custom-switch">
-                        <input id="eventlog-switch" type="checkbox" class="custom-control-input" checked="checked">
-                        <label class="custom-control-label fw-500" for="eventlog-switch">Estado</label>
-                    </div>
-                    &nbsp;&nbsp;
-                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+        <div class="panel-hdr">
+            <h2>Cargar Datos</h2>
+            <div class="panel-toolbar">
+                <div class="custom-control d-flex custom-switch">
+                    <input id="eventlog-switch" type="checkbox" class="custom-control-input" checked="checked">
+                    <label class="custom-control-label fw-500" for="eventlog-switch">Estado</label>
                 </div>
+                &nbsp;&nbsp;
+                <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                <button class="btn btn-panel waves-effect waves-themed" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
             </div>
-            <div class="panel-container show">
-                <div class="panel-content">
-                    <div class="form-row">
-                        <div class="col-md-4 mb-2">
-                            @Html.LabelFor(m => lstEnterpriseBE, "Empresa",
-                            new { @class = "form-label" })
+        </div>
+        <div class="panel-container show">
+            <div class="panel-content">
+                <div class="form-row">
+                    <div class="col-md-4 mb-2">
+                        @Html.LabelFor(m => lstEnterpriseBE, "Empresa",
+                        new { @class = "form-label" })
 
-                            @Html.DropDownListFor(m => lstEnterpriseBE,
-                            new SelectList(lstEnterpriseBE, "value", "key"),
-                            new { @class = "form-control", @id = "slt_empresa_buscar" })
-                        </div>
-                        <div class="col-4 mb-2">
-                            <label for="slt_oficina_buscar">Oficina</label>
-                            <select id="slt_oficina_buscar" class="form-control"><option value="0">-Seleccione-</option><option value="9">OFICINA DE VENTAS</option><option value="10">OFICINA DE TI</option></select>
-                        </div>
-                        <div class="col-4 mb-2">
-                            <label for="slt_sub_oficina_buscar">Sub Oficina</label>
-                            <select id="slt_sub_oficina_buscar" class="form-control">
-                                <option value="0">-Seleccione-</option>
-                            </select>
-                        </div>
+                        @Html.DropDownListFor(m => lstEnterpriseBE,
+                        new SelectList(lstEnterpriseBE, "value", "key"),
+                        new { @class = "form-control", @id = "slt_empresa_buscar" })
                     </div>
-                    <div class="form-row">
-                        <div class="col-3 mb-2">
-                            <label for="slt_negocio_buscar">Negocio</label>
-                            <select id="slt_negocio_buscar" class="form-control">
-                                <option value="0">-Seleccione-</option>
-                            </select>
-                        </div>
-                        <div class="col-4 mb-2">
-                            <label for="slt_speech_buscar">Speech</label>
-                            <select id="slt_speech_buscar" class="form-control">
-                                <option value="0">-Seleccione-</option>
-                            </select>
-                        </div>
-                        <div class="col-4 mb-2">
-                            <label for="slt_agent_buscar">Agente</label>
-                            <select id="slt_agent_buscar" class="form-control">
-                                <option value="0">-Seleccione-</option>
-                            </select>
-                        </div>
-                        <div class="col-1 mb-1">
-                            <label class="form-label">&nbsp;</label>
-                            <button class="btn btn-primary form-control waves-effect waves-themed" type="button" id="btn_buscar"><i class="fal fa-search"></i></button>
-                        </div>
+                    <div class="col-4 mb-2">
+                        <label for="slt_oficina_buscar">Oficina</label>
+                        <select id="slt_oficina_buscar" class="form-control"><option value="0">-Seleccione-</option><option value="9">OFICINA DE VENTAS</option><option value="10">OFICINA DE TI</option></select>
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="slt_sub_oficina_buscar">Sub Oficina</label>
+                        <select id="slt_sub_oficina_buscar" class="form-control">
+                            <option value="0">-Seleccione-</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-3 mb-2">
+                        <label for="slt_negocio_buscar">Negocio</label>
+                        <select id="slt_negocio_buscar" class="form-control">
+                            <option value="0">-Seleccione-</option>
+                        </select>
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="slt_speech_buscar">Speech</label>
+                        <select id="slt_speech_buscar" class="form-control">
+                            <option value="0">-Seleccione-</option>
+                        </select>
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="slt_agent_buscar">Agente</label>
+                        <select id="slt_agent_buscar" class="form-control">
+                            <option value="0">-Seleccione-</option>
+                        </select>
+                    </div>
+                    <div class="col-1 mb-1">
+                        <label class="form-label">&nbsp;</label>
+                        <button class="btn btn-primary form-control waves-effect waves-themed" type="button" id="btn_buscar"><i class="fal fa-search"></i></button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    -->
+
         <div id="panel-2" class="panel">
             <div class="panel-hdr">
                 <h2> Seleccione o arrastre los archivos .wav en el dropzone. </h2>

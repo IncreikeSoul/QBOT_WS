@@ -53,7 +53,7 @@ namespace TareaProcesamiento
     }
 
     public class SincronizarHub : Hub {
-        private string filePath = @"D:\Repository\QBOT\Call.Cloud.Mvc\assets\Archivos\Audios\loading";
+        private string filePath = @"E:\03 Proyectos\Repositories\Q-BOT\Call.Cloud.Mvc\assets\Archivos\Audios\loading";
 
         public void listarArchivosFTP(string codigo) {
             try
@@ -132,14 +132,15 @@ namespace TareaProcesamiento
                 fileNameComplete = Path.GetFileName(file);
                 audio = File.ReadAllBytes(file);
 
-                var path_success = new DirectoryInfo(@"D:\Repository\QBOT\Call.Cloud.Mvc\assets\Archivos\Audios\success");
-                var path_error = new DirectoryInfo(@"D:\Repository\QBOT\Call.Cloud.Mvc\assets\Archivos\Audios\error");
-                bool resultTranscription = transcriptionAudio(audio, fileName, codigoNegocio, codigoSpeech, codigoAgente, lstTextoBE);
+                var path_success = new DirectoryInfo(@"E:\03 Proyectos\Repositories\Q-BOT\Call.Cloud.Mvc\assets\Archivos\Audios\success");
+                var path_error = new DirectoryInfo(@"E:\03 Proyectos\Repositories\Q-BOT\Call.Cloud.Mvc\assets\Archivos\Audios\error");
+                string dirDate = DateTime.Now.ToString("ddMMyyyy");
+                bool resultTranscription = transcriptionAudio(audio, fileName, codigoNegocio, codigoSpeech, codigoAgente, lstTextoBE, dirDate, dirTime);
                 
                 try {
                     if (resultTranscription) {
 
-                        string path_fecha = System.IO.Path.Combine(path_success.ToString(), "" + DateTime.Now.ToString("ddMMyyyy"));
+                        string path_fecha = System.IO.Path.Combine(path_success.ToString(), dirDate);
                         if (!File.Exists(path_fecha)) {
                             System.IO.Directory.CreateDirectory(path_fecha);
                         } 
@@ -221,7 +222,7 @@ namespace TareaProcesamiento
                 //string rutaRegistrarAudio = @"C:\Pase_produccion\csacsa.wav";
                 File.WriteAllBytes(rutaRegistrarAudio, audio);
 
-                bool resultTranscription = transcriptionAudio(audio, objFileBE.FileName, codigoNegocio, codigoSpeech, codigoAgente, lstTextoBE);
+                //bool resultTranscription = transcriptionAudio(audio, objFileBE.FileName, codigoNegocio, codigoSpeech, codigoAgente, lstTextoBE, dirDate, dirTime);
 
                 //StreamReader reader = new StreamReader(responseStream);
                 //Console.WriteLine(resultado);
@@ -231,7 +232,7 @@ namespace TareaProcesamiento
             }
         }
 
-        private bool transcriptionAudio(byte[] audio, string nombreArchivo, string codigoNegocio, string codigoSpeech, string codigoAgente, List<BE_PALABRA> lstTextoBE)
+        private bool transcriptionAudio(byte[] audio, string nombreArchivo, string codigoNegocio, string codigoSpeech, string codigoAgente, List<BE_PALABRA> lstTextoBE, string dirDate, string dirTime)
         {
             BL_AUDIO objAudioBL = new BL_AUDIO();
             BE_TRANSCRIPCION objTranscripcionBE = new BE_TRANSCRIPCION();
@@ -247,7 +248,7 @@ namespace TareaProcesamiento
             Procesamiento objProcesamientoBL = new Procesamiento();
             string resultado = objProcesamientoBL.LeerAudio(audio);
 
-            objTranscripcionBE.RutaCompleta = @"\Content\audios\" + nombreArchivo; // "ftp://" + objFtpBE.Server + "/" + objFileBE.FileName;
+            objTranscripcionBE.RutaCompleta = dirDate + "/" + dirTime + "/"; // "ftp://" + objFtpBE.Server + "/" + objFileBE.FileName;
             objTranscripcionBE.NombreArchivo = nombreArchivo;
             objTranscripcionBE.FechaCreacion = DateTime.Now;
             objTranscripcionBE.TamanoAudio = Convert.ToString(audio.Length);
@@ -366,8 +367,6 @@ namespace TareaProcesamiento
                                 }
                             }
                         }
-
-
 
                         //foreach (BE_PALABRA palabra in objTranscripcionBE.lstPalabraBE)
                         //{

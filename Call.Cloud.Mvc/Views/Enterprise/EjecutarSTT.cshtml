@@ -72,7 +72,7 @@
                             new SelectList(listaAgent, "PkAgent", "FirstName"),
                             new { @class = "form-control", @id = "slt_agent" })
                         </div>
-                        <div class="col-md-2 mb-1 text-center" style="padding-top: 34px;">
+                        <div class="col-md-1 mb-1 text-center" style="padding-top: 34px; margin-left: 15px; margin-right: 15px;">
                             <label for="chk_tipo_carpeta">Carpeta <input type="radio" id="chk_tipo_carpeta" name="chk_tipo" value="carpeta" /></label>
                             <label for="chk_tipo_ftp">FTP <input type="radio" id="chk_tipo_ftp" name="chk_tipo" value="ftp" /></label>
                         </div>
@@ -149,6 +149,7 @@
         $.connection.hub.start();
 
         var contador = 0;
+        
         sincronizacion.client.listarProcesamientoFtp = function (archivoNombre, fecha) {
             $("#dt-tabla-ftp").prepend('<tr>' +
                 '<td>' + (++contador) + '</td>' +
@@ -157,7 +158,7 @@
                 '<td>Pendiente</td>' + 
                 '</tr>');
         }
-        
+
         sincronizacion.client.listarDatosProcesamientoFtp = function (archivoNombre, fecha, tamano, texto, resultado) {
             $("#dt-tabla-procesamiento").prepend('<tr>' +
                 '<td>' + (++contador) + '</td>' +
@@ -202,10 +203,10 @@
             $("#dt-tabla-procesamiento").hide();
 
             var rbDestino = $('input:radio[name=chk_tipo]:checked').val();
+            $("#dt-tabla-ftp tbody").empty();
             if (rbDestino == "ftp") {
                 sincronizacion.server.listarArchivosFTP($("#lst_ftp").val());
-            }
-            if (rbDestino == "carpeta") {
+            } else if (rbDestino == "carpeta") {
                 sincronizacion.server.listarArchivosFile();
             }
         }
@@ -216,7 +217,7 @@
 
             var rbDestino = $('input:radio[name=chk_tipo]:checked').val();
             var today = new Date();
-            var time = today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+            var time = (today.toLocaleTimeString()).replaceAll(":", "");
             switch (rbDestino) {
                 case "ftp": sincronizacion.server.sincronizarFTP($("#lst_ftp").val(), $("#slt_business").val(), $("#slt_speech").val(), $("#slt_agent").val());
                     break;

@@ -9,7 +9,7 @@ namespace Call.Cloud.AccesoDatos
 {
     public class AudioDatos//:IGeneralDatos<AudioEva>
     {
-        public async Task<List<AudioEva>> AudioListar(SqlConnection cn, AudioEva objAudioBE)
+        public async Task<List<AudioEva>> EvaluacionAudioListar(SqlConnection cn, AudioEva objAudioBE)
         {
             List<AudioEva> lstEvaAudioBE = null;
             SqlCommand cmd = new SqlCommand

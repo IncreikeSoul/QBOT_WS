@@ -71,35 +71,26 @@
             <div class="panel-container show">
                 <div class="panel-content">
                     <div class="form-row">
-                        <div class="col-md-2 mb-1">
-                            @Html.Label("PkBusiness", "Business", htmlAttributes: new { @class = "form-label" })
+                        <div class="col-md-3 mb-1">
+                            @Html.Label("PkBusiness", "Negocio", htmlAttributes: new { @class = "form-label" })
                             @Html.DropDownListFor(model => model.Filtro.PK_Business, Model.Business, new { @class = "form-control" })
                         </div>
-                        <div class="col-md-2 mb-1">
-                            @Html.Label("PkBoss", "Boss", htmlAttributes: new { @class = "form-label" })
-                            @Html.DropDownListFor(model => model.Filtro.Fk_Boss, Model.Boss, new { @class = "form-control" })
+                        <div class="col-md-3 mb-2">
+                            <label for="slt_speech_buscar">Speech</label>
+                            <select id="slt_speech_buscar" class="form-control">
+                                <option value="0">-Seleccione-</option>
+                            </select>
                         </div>
-                        <div class="col-md-2 mb-1">
-                            @Html.Label("PkAgent", "Agent", htmlAttributes: new { @class = "form-label" })
-                            @Html.DropDownListFor(model => model.Filtro.PkAgent, Model.Agent, new { @class = "form-control" })
+                        <div class="col-md-3 mb-2">
+                            <label for="slt_agent_buscar">Agente</label>
+                            <select id="slt_agent_buscar" class="form-control">
+                                <option value="0">-Seleccione-</option>
+                            </select>
                         </div>
-                        <div class="col-md-2 mb-1" style="display:none;">
-                            @Html.Label("Placa", "Placa", htmlAttributes: new { @class = "form-label" })
-                            @Html.TextBoxFor(model => model.Filtro.Placa, new { @class = "form-control" })
-                        </div>
-                        <div class="col-md-2 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label class="form-label">&nbsp;</label>
-                            <button id="btnBuscar" class="btn btn-primary form-control" type="button" onclick="">Buscar</button>
+                            <button id="btnBuscar" class="btn btn-primary form-control" type="button">Buscar</button>
                         </div>
-                        <div class="col-md-2 mb-1">
-                            <label class="form-label">&nbsp;</label>
-                            <button id="btnLimpiar" class="btn btn-default form-control" type="button" onclick="">Limpiar</button>
-                        </div>
-
-                        @*<div class="col-md-2 ml-auto">
-                                <label class="form-label">&nbsp;</label>
-                                <button class="btn btn-primary form-control" type="button" data-toggle="modal" data-target="#ModalAgent" data-id="-1">Nuevo</button>
-                            </div>*@
                     </div>
                 </div>
                 <div class="panel-content border-faded align-items-center">
@@ -118,7 +109,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Audios</h4>
+                <h4 class="modal-title">Detalle del Audio</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -135,117 +126,6 @@
         (function () {
             iniciar();
         })();
-
-    </script>
-
-    <!--combo por negocio-->
-    <script type="text/javascript">
-        // Inicialización
-        $(document).ready(function () {
-
-            //alert("mensaje");
-
-            $("#Filtro_PK_Business").change(function () {
-                cambiaElementosByBusi($("#Filtro_PK_Business").val());
-            });
-            cambiaElementosByBusi($("#Filtro_PK_Business").val());
-        });
-        // Carga el desplegable de elementos en función
-        // de la categoría que le llega como parámetro.
-        function cambiaElementosByBusi(pk) {
-            var dd = document.getElementById("Filtro_Fk_Boss");
-
-            dd.options.length = 0;
-            dd.options[0] = new Option("TODOS");
-            dd.selectedIndex = 0;
-            // Control de errores
-            $("#Filtro_Fk_Boss").ajaxError(function (event, request, settings) {
-                dd.options[0] = new Option("Business incorrecta");
-            });
-
-            var urlsupervisor = agent.Urls.findByBusinesstUrl;
-            // Obtenemos los datos...
-
-            $.getJSON(
-                urlsupervisor, // URL a la acción
-                {
-                    pkbusiness: pk
-                },
-
-                // Objeto JSON con parámetros
-                function (data) {                    // Función de retorno exitoso
-                    $.each(data, function (i, item) {
-
-                        dd.options[0] = new Option("TODOS");
-                        for (var i = 0; i < data.length; i++) {
-                            if (data.length >= 0) {
-                                dd.options[0] = new Option("TODOS");
-                                dd.selectedIndex = 0;
-                                dd.options[i + 1] = new Option(data[i].FirstName, data[i].PkAgent);
-
-                            }
-                        }
-                    });
-                    dd.disabled = false;
-
-                });
-        }
-    </script>
-
-    <!--combo por suppervisor-->
-    <script type="text/javascript">
-        // Inicialización
-        $(document).ready(function () {
-            $("#Filtro_Fk_Boss").change(function () {
-
-                cambiaElementosBySup($("#Filtro_Fk_Boss").val());
-
-            });
-            cambiaElementosBySup($("#Filtro_Fk_Boss").val());
-
-        });
-
-        // Carga el desplegable de elementos en función
-        // de la categoría que le llega como parámetro.
-
-        function cambiaElementosBySup(pkb) {
-            var di = document.getElementById("Filtro_PkAgent");
-            di.options.length = 0;
-            di.options[0] = new Option("TODOS");
-            di.selectedIndex = 0;
-
-            // Control de errores
-
-            $("#Filtro_PkAgent").ajaxError(function (event, request, settings) {
-                di.options[0] = new Option("Boss incorrecta");
-
-            });
-
-            var urlagent = agent.Urls.findByBosstUrl;
-            // Obtenemos los datos...
-
-            $.getJSON(
-                urlagent, // URL a la acción
-                {
-                    pkboss: pkb
-                },
-                // Objeto JSON con parámetros
-                function (data) {                    // Función de retorno exitoso
-                    $.each(data, function (i, item) {
-                        di.options[0] = new Option("TODOS");
-                        for (var i = 0; i < data.length; i++) {
-                            if (data.length >= 0) {
-                                di.options[0] = new Option("TODOS");
-                                di.selectedIndex = 0;
-                                di.options[i + 1] = new Option(data[i].FirstName, data[i].PkAgent);
-
-                            }
-                        }
-                    });
-                    di.disabled = false;
-
-                });
-        }
     </script>
 
 }

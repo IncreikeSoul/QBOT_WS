@@ -18,12 +18,11 @@ namespace Call.Cloud.Mvc.Models.AudioVM
         public IEnumerable<SelectListItem> Boss { get; set; }
         public IEnumerable<SelectListItem> Agent { get; set; }
         public IEnumerable<SelectListItem> Business { get; set; }
-        public ListasAudios(AudioVm filtro, IEnumerable<AudioVm> listaAudios,
+        public ListasAudios(AudioVm filtro,
             IEnumerable<Agent> Supervisor, IEnumerable<Agent> Agentes, 
             IEnumerable<Business> Negocio)
         {
             Filtro = filtro;
-            Elementos = listaAudios;
             Boss = Supervisor.GenerarLista(true);
             Agent = Agentes.GenerarLista(true);
             Business = Negocio.GenerarLista(true);

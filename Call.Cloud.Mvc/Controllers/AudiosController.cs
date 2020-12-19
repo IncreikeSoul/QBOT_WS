@@ -89,7 +89,6 @@ namespace Call.Cloud.Mvc.Controllers
             if (Item == null)
                 Item = new AudioVm();           
          
-            var datosAudios = await r.listar_audios(Item);
             var listabusiness = await business.RetrieveActive(new Business());
             var boss = await ol.RetrieveBoss(new Agent());
             var agent = await ol.RetrievAgent(new Agent());
@@ -97,12 +96,14 @@ namespace Call.Cloud.Mvc.Controllers
             Session["mensaje"] = respuesta;
             ViewBag.Mensaje = respuesta;
 
-            return new ListasAudios(Item, datosAudios, boss,agent,listabusiness);
+            return new ListasAudios(Item, boss,agent,listabusiness);
         }
 
-        public async Task<ActionResult> Buscar(AudioVm filtro)
-        {                     
-            return View("Grid", await CrearModelo(filtro));            
+        public async Task<JsonResult> listarAudio(AudioVm objAudioBE)
+        {
+            Audio objAudioBL = new Audio();
+            var resultado = await objAudioBL.listar_audios(objAudioBE);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         private async Task<ListaDetalleVM> CrearModelo1(AudioVm Item = null)

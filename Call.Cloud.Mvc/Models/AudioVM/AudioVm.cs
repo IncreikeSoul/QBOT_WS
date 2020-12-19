@@ -16,6 +16,8 @@ namespace Call.Cloud.Mvc.Models.AudioVM
         public string state { get; set; }
         public int PkAgent { get; set; }
         public int PK_Business { get; set; }
+        public int PK_Speech { get; set; }
+
         public int Fk_Boss { get; set; }
         public string direccionAudio { get; set; }
         public string fileName { get; set; }

@@ -28,7 +28,7 @@ namespace Call.Cloud.Mvc.App_Start.Extenciones
                 SqlParameter param1 = cmd.Parameters.AddWithValue("@pk_business", Item.PK_Business);
                 param1.Direction = ParameterDirection.Input;
 
-                SqlParameter param2 = cmd.Parameters.AddWithValue("@pk_boss", Item.Fk_Boss);
+                SqlParameter param2 = cmd.Parameters.AddWithValue("@pk_speech", Item.PK_Speech);
                 param2.Direction = ParameterDirection.Input;
 
                 SqlParameter param3 = cmd.Parameters.AddWithValue("@pk_agent", Item.PkAgent);

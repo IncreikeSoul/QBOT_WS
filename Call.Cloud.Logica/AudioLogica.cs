@@ -11,13 +11,13 @@ namespace Call.Cloud.Logica
 {
     public class AudioLogica:GeneralLogica<AudioEva>
     {
-        public async Task<List<AudioEva>> AudioListar(AudioEva objAudioBE)
+        public async Task<List<AudioEva>> EvaluacionAudioListar(AudioEva objAudioBE)
         {
             using (SqlConnection cn = new SqlConnection(this.stringConexion))
             {
                 await cn.OpenAsync();
                 AudioDatos objAudioDA = new AudioDatos();
-                return await objAudioDA.AudioListar(cn, objAudioBE);
+                return await objAudioDA.EvaluacionAudioListar(cn, objAudioBE);
             }
         }
 

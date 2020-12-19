@@ -158,15 +158,26 @@ function listarEvalSection(PK_Audio) {
         type: 'POST'
     }).done(function (data, textStatus, jqXhr) {
         $("#tableDetailsSeccion tbody").empty();
-        $.each(data, function (i, obj) {
+        if (data.length === 0) {
             $("#tableDetailsSeccion tbody").append("<tr>" +
+                "<td> - </td>" +
+                "<td> - </td>" +
+                "<td> - </td>" +
+                "<td> - </td>" +
+                "<td> - </td>" +
+                "</tr>");
+        } else {
+            $.each(data, function (i, obj) {
+                $("#tableDetailsSeccion tbody").append("<tr>" +
                 "<td>" + (i + 1) + "</td>" +
                 "<td>" + obj.nom_section + "</td>" +
                 "<td>" + obj.descripcion + "</td>" +
                 "<td>" + obj.weight + "</td>" +
                 "<td>" + obj.porcentaje + "</td>" +
                 "</tr>");
-        });
+            });
+        }
+        
     }).fail(function (data, textStatus, jqXhr) {
         console.log(data);
     });
@@ -183,15 +194,25 @@ function listarEvalRules(PK_Audio) {
         type: 'POST'
     }).done(function (data, textStatus, jqXhr) {
         $("#tableDetailsRule tbody").empty();
-        $.each(data, function (i, obj) {
+        if (data.length === 0) {
             $("#tableDetailsRule tbody").append("<tr>" +
-                "<td>" + (i + 1) + "</td>" +
-                "<td>" + obj.nom_rules + "</td>" +
-                "<td>" + obj.weight + "</td>" +
-                "<td>" + obj.word + "</td>" +
-                "<td>" + obj.porcentaje + "</td>" +
+                "<td> - </td>" +
+                "<td> - </td>" +
+                "<td> - </td>" +
+                "<td> - </td>" +
+                "<td> - </td>" +
                 "</tr>");
-        });
+        } else {
+            $.each(data, function (i, obj) {
+                $("#tableDetailsRule tbody").append("<tr>" +
+                    "<td>" + (i + 1) + "</td>" +
+                    "<td>" + obj.nom_rules + "</td>" +
+                    "<td>" + obj.weight + "</td>" +
+                    "<td>" + obj.word + "</td>" +
+                    "<td>" + obj.porcentaje + "</td>" +
+                    "</tr>");
+            });
+        }
     }).fail(function (data, textStatus, jqXhr) {
         console.log(data);
     });

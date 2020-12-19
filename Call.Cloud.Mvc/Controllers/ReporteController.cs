@@ -26,7 +26,7 @@ namespace Call.Cloud.Mvc.Controllers
         {
             List<AudioEva> resultado = new List<AudioEva>();
             AudioLogica objAudioBL = new AudioLogica();
-            resultado = await objAudioBL.AudioListar(objAudioBE);
+            resultado = await objAudioBL.EvaluacionAudioListar(objAudioBE);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
